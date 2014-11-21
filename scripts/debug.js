@@ -2,12 +2,15 @@
  * Module code goes here. Use 'module.exports' to export things:
  * module.exports = 'a thing';
  *
- * You can import it from another modules like this:
- * var mod = require('debug'); // -> 'a thing'
+ * You can import it in main and use it as follow:
+ * var debug = require('debug');
+ *
+ * debug();
  */
+ var steps = 100;
 
 function printStatus() {
-    if (Game.time % 100 !== 0) {
+    if (Game.time % steps !== 0) {
         return;
     }
 
