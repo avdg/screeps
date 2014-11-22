@@ -48,7 +48,7 @@ var bodyPartCosts = {
     attack: 100,
     ranged_attack: 150,
     heal: 200,
-    though: 5
+    tough: 5
 };
 
 var getCreepCost = function(parts) {
