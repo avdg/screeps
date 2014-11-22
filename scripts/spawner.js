@@ -62,8 +62,9 @@ function spawner(spawn) {
             }
         }
     }
-    
-    createCreep(spawn, 'guard');
+
+    // TODO Insert here what to spawn on default if wanted
+    // createCreep(spawn, 'FOO');
 }
 
 module.exports = function(spawn) {
