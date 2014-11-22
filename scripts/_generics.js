@@ -40,16 +40,7 @@ function generator(options) {
     return name;
 }
 
-// It's a pain to manually type in the costs
-var bodyPartCosts = {
-    move: 50,
-    work: 20,
-    carry: 50,
-    attack: 100,
-    ranged_attack: 150,
-    heal: 200,
-    tough: 5
-};
+var bodyPartCosts = Game.BODYPART_COST;
 
 var getCreepCost = function(parts) {
     var cost = 0;
