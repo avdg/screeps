@@ -13,7 +13,7 @@
  * Spawn: null or spawn
  */
 function spawn(spawn) {
-    return [Game.THOUGH];
+    return [Game.TOUGH];
 }
 
 /**
