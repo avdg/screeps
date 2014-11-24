@@ -7,7 +7,7 @@
  *
  * debug();
  */
- var steps = 100;
+var steps = 100;
 
 function printStatus() {
     if (Game.time % steps !== 0) {
@@ -17,10 +17,10 @@ function printStatus() {
     var msg = '';
     msg += "Number of spawn: " + Object.keys(Game.spawns).length + "\n";
     msg += "Number of creeps: " + Object.keys(Game.creeps).length + "\n";
-    
+
     console.log(msg);
 }
- 
+
 module.exports = function() {
-   printStatus(); 
+    printStatus();
 }

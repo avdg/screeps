@@ -10,14 +10,14 @@ var roles = require('roles');
 module.exports = function() {
     var name;
     for(name in Game.creeps) {
-    	var creep = Game.creeps[name];
+        var creep = Game.creeps[name];
 
-    	if (!creep.my) {
-    	    continue;
-    	}
+        if (!creep.my) {
+            continue;
+        }
 
         if (creep.memory.role) {
-    	    roles[creep.memory.role].turn(creep);
+            roles[creep.memory.role].turn(creep);
         } else {
             console.log('Ant without role');
         }

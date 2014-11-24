@@ -36,7 +36,7 @@ function generator(options) {
     for (; i > 0; i--) {
         name += nameParts[Math.floor(Math.random() * (nameParts.length))];
     }
-    
+
     return name;
 }
 
@@ -44,7 +44,7 @@ var bodyPartCosts = Game.BODYPART_COST;
 
 var getCreepCost = function(parts) {
     var cost = 0;
-    
+
     for (var i = 0; i < parts.length; i++) {
         if (parts[i] in bodyPartCosts) {
             cost += bodyPartCosts[parts[i]];
@@ -53,7 +53,7 @@ var getCreepCost = function(parts) {
             return -1;
         }
     }
-    
+
     return cost;
 }
 

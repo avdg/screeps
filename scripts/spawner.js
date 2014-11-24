@@ -33,29 +33,67 @@ function createCreep(spawn, role) {
         var name = creepNameGenerator(role);
         console.log('Creating ' + role + ' ' + name);
 
-        spawn.createCreep(body, name, {role:role});
+        var result = spawn.createCreep(body, name, {role:role});
+
+        if (result !== name) {
+            console.log('Spawn error: ' + result);
+        }
     } else {
         return -1
     }
 }
 
 function spawner(spawn) {
-    // Find first creep possible to be created
-    if (Memory.spawnQueue && Memory.spawnQueue.length > 0) {
-        var i = 0;
-        while (
-            i < Memory.spawnQueue.length &&
-            generics.getCreepCost(roles[Memory.spawnQueue[i]].spawn()) > spawn.energy
-        ) {
-            i++;
+    var result;
+    var i;
+
+    // First be spawn specific
+    if (Memory.spawns[spawn.name]) {
+
+        // If there is any creep in the priority queue, spawn or abord
+        if (Memory.spawns[spawn.name].spawnPriorityQueue && Memory.spawns[spawn.name].spawnPriorityQueue.length > 0) {
+            if (generics.getCreepCost(roles[Memory.spawns[spawn.name].spawnPriorityQueue[0]].spawn()) <= spawn.energy) {
+                result = createCreep(spawn, Memory.spawns[spawn.name].spawnPriorityQueue[0]);
+
+                if (result == undefined) {
+                    Memory.spawns[spawn.name].spawnPriorityQueue.splice(0, 1);
+                }
+            }
+
+            return;
         }
 
-        if (
-            i < Memory.spawnQueue.length &&
-            generics.getCreepCost(roles[Memory.spawnQueue[i]].spawn()) <= spawn.energy
-        ) {
-            var result = createCreep(spawn, Memory.spawnQueue[i]);
-            
+        // Find first creep possible to be created
+        for (i = 0; i < Memory.spawns[spawn.name].spawnQueue.length; i++) {
+            if (generics.getCreepCost(roles[Memory.spawns[spawn.name].spawnQueue[i]].spawn()) <= spawn.energy) {
+                result = createCreep(spawn, Memory.spawns[spawn.name].spawnQueue[i]);
+
+                if (result == undefined) {
+                    Memory.spawns[spawn.name].spawnQueue.splice(i, 1);
+                    return;
+                }
+            }
+        }
+    }
+
+    // If there is any creep in the priority queue, spawn or abord
+    if (Memory.spawnPriorityQueue.length > 0) {
+        if (generics.getCreepCost(roles[Memory.spawnPriorityQueue[0]].spawn()) <= spawn.energy) {
+            result = createCreep(spawn, Memory.spawnPriorityQueue[0]);
+
+            if (result == undefined) {
+                Memory.spawnPriorityQueue.splice(0, 1);
+            }
+        }
+
+        return;
+    }
+
+    // Find first creep possible to be created
+    for (i = 0; i < Memory.spawnQueue.length; i++) {
+        if (generics.getCreepCost(roles[Memory.spawnQueue[i]].spawn()) <= spawn.energy) {
+            result = createCreep(spawn, Memory.spawnQueue[i]);
+
             if (result == undefined) {
                 Memory.spawnQueue.splice(i, 1);
                 return;
@@ -72,11 +110,11 @@ module.exports = function(spawn) {
     var name;
     for (name in Game.spawns) {
         var spawn = Game.spawns[name];
-    
+
         if (!spawn.my) {
             continue;
         }
-    
+
         if (spawn.spawning == undefined) {
             spawner(spawn);
         }

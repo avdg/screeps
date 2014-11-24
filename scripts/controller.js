@@ -6,13 +6,15 @@
  * var mod = require('controller'); // -> 'a thing'
  */
 
+var settings = require('_settings');
+
 function firstTurn() {
-    // TODO insert first ants to spawn
-    Memory.spawnQueue = ['FOO'];
+    Memory.spawnQueue = settings.spawnQueue;
+    Memory.spawnPriorityQueue = settings.spawnPriorityQueue;
 }
 
 module.exports = function() {
-    if (Memory.spawnQueue === undefined || Game.time === 0) {
+    if (!("spawnQueue" in Memory) || Game.time === 1) {
         firstTurn();
     }
 }

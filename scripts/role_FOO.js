@@ -9,7 +9,7 @@
 
 /**
  * Returns body parts required to build the ant
- * 
+ *
  * Spawn: null or spawn
  */
 function spawn(spawn) {
@@ -20,7 +20,7 @@ function spawn(spawn) {
  * Executed after ant being spawned
  */
 function init(name) {
-    
+
 }
 
 /**
