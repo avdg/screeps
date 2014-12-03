@@ -64,13 +64,15 @@ function spawner(spawn) {
         }
 
         // Find first creep possible to be created
-        for (i = 0; i < Memory.spawns[spawn.name].spawnQueue.length; i++) {
-            if (generics.getCreepCost(roles[Memory.spawns[spawn.name].spawnQueue[i]].spawn()) <= spawn.energy) {
-                result = createCreep(spawn, Memory.spawns[spawn.name].spawnQueue[i]);
+        if (Memory.spawns[spawn.name].spawnQueue) {
+            for (i = 0; i < Memory.spawns[spawn.name].spawnQueue.length; i++) {
+                if (generics.getCreepCost(roles[Memory.spawns[spawn.name].spawnQueue[i]].spawn()) <= spawn.energy) {
+                    result = createCreep(spawn, Memory.spawns[spawn.name].spawnQueue[i]);
 
-                if (result == undefined) {
-                    Memory.spawns[spawn.name].spawnQueue.splice(i, 1);
-                    return;
+                    if (result == undefined) {
+                        Memory.spawns[spawn.name].spawnQueue.splice(i, 1);
+                        return;
+                    }
                 }
             }
         }
@@ -110,10 +112,6 @@ module.exports = function(spawn) {
     var name;
     for (name in Game.spawns) {
         var spawn = Game.spawns[name];
-
-        if (!spawn.my) {
-            continue;
-        }
 
         if (spawn.spawning == undefined) {
             spawner(spawn);
