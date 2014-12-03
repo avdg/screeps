@@ -7,14 +7,33 @@
  */
 
 var settings = require('_settings');
+var units = require('units');
+
+function unitIterator(f) {
+    var unit;
+    for (unit in units) {
+        units[unit][f]();
+    }
+}
 
 function firstTurn() {
     Memory.spawnQueue = settings.spawnQueue;
     Memory.spawnPriorityQueue = settings.spawnPriorityQueue;
 }
 
-module.exports = function() {
-    if (!("spawnQueue" in Memory) || Game.time === 1) {
+function pre() {
+    if (!("spawnQueue" in Memory) || Game.time === 0) {
         firstTurn();
     }
+
+    unitIterator("preController");
 }
+
+function post() {
+    unitIterator("postController");
+}
+
+module.exports = {
+    pre: pre,
+    post: post,
+};

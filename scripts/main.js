@@ -7,9 +7,10 @@ var spawners = require('spawners');
 var settings = require('_settings');
 
 debug();
-controller();
+controller.pre();
 creeps();
 spawners();
+controller.post();
 
 var timerEnd = performance.now();
 var timerDiff = timerEnd - timerStart;
