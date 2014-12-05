@@ -12,7 +12,7 @@
  *
  * Spawn: null or spawn
  */
-function spawn(spawn) {
+function build(spawn) {
     return [Game.TOUGH];
 }
 
@@ -32,7 +32,7 @@ function turn (creep) {
 
 module.exports = {
     role: 'FOO',
-    spawn: spawn,
+    build: build,
     init: init,
     turn: turn,
 };

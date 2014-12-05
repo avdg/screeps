@@ -24,7 +24,7 @@ function creepNameGenerator(prefix) {
  */
 function createCreep(spawn, role) {
     if (role in roles) {
-        var body = roles[role].spawn();
+        var body = roles[role].build();
 
         if (generics.getCreepCost(body) > spawn.energy) {
             return -2;
@@ -52,7 +52,7 @@ function spawner(spawn) {
 
         // If there is any creep in the priority queue, spawn or abord
         if (Memory.spawns[spawn.name].spawnPriorityQueue && Memory.spawns[spawn.name].spawnPriorityQueue.length > 0) {
-            if (generics.getCreepCost(roles[Memory.spawns[spawn.name].spawnPriorityQueue[0]].spawn()) <= spawn.energy) {
+            if (generics.getCreepCost(roles[Memory.spawns[spawn.name].spawnPriorityQueue[0]].build()) <= spawn.energy) {
                 result = createCreep(spawn, Memory.spawns[spawn.name].spawnPriorityQueue[0]);
 
                 if (result == undefined) {
@@ -66,7 +66,7 @@ function spawner(spawn) {
         // Find first creep possible to be created
         if (Memory.spawns[spawn.name].spawnQueue) {
             for (i = 0; i < Memory.spawns[spawn.name].spawnQueue.length; i++) {
-                if (generics.getCreepCost(roles[Memory.spawns[spawn.name].spawnQueue[i]].spawn()) <= spawn.energy) {
+                if (generics.getCreepCost(roles[Memory.spawns[spawn.name].spawnQueue[i]].build()) <= spawn.energy) {
                     result = createCreep(spawn, Memory.spawns[spawn.name].spawnQueue[i]);
 
                     if (result == undefined) {
@@ -80,7 +80,7 @@ function spawner(spawn) {
 
     // If there is any creep in the priority queue, spawn or abord
     if (Memory.spawnPriorityQueue.length > 0) {
-        if (generics.getCreepCost(roles[Memory.spawnPriorityQueue[0]].spawn()) <= spawn.energy) {
+        if (generics.getCreepCost(roles[Memory.spawnPriorityQueue[0]].build()) <= spawn.energy) {
             result = createCreep(spawn, Memory.spawnPriorityQueue[0]);
 
             if (result == undefined) {
@@ -93,7 +93,7 @@ function spawner(spawn) {
 
     // Find first creep possible to be created
     for (i = 0; i < Memory.spawnQueue.length; i++) {
-        if (generics.getCreepCost(roles[Memory.spawnQueue[i]].spawn()) <= spawn.energy) {
+        if (generics.getCreepCost(roles[Memory.spawnQueue[i]].build()) <= spawn.energy) {
             result = createCreep(spawn, Memory.spawnQueue[i]);
 
             if (result == undefined) {
