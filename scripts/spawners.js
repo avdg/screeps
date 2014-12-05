@@ -31,12 +31,12 @@ function createCreep(spawn, role) {
         }
 
         var name = creepNameGenerator(role);
-        console.log('Creating ' + role + ' ' + name);
+        console.log('Spawner: Creating ' + role + ' ' + name);
 
         var result = spawn.createCreep(body, name, {role:role});
 
         if (result !== name) {
-            console.log('Spawn error: ' + result);
+            console.log('Spawner: Spawn error: ' + result);
         }
     } else {
         return -1

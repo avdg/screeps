@@ -16,5 +16,5 @@ var timerEnd = performance.now();
 var timerDiff = timerEnd - timerStart;
 
 if (timerDiff > settings.roundTimeLimit) {
-    console.log('Round ' + Game.time + ' took ' + timerDiff + ' ms to complete');
+    console.log('Warning: Round ' + Game.time + ' took ' + timerDiff + ' ms to complete');
 }

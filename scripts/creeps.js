@@ -19,7 +19,7 @@ module.exports = function() {
         if ("role" in creep.memory) {
             roles[creep.memory.role].turn(creep);
         } else {
-            console.log('Ant without role');
+            console.log('Warning: Ant without role');
         }
     }
 }
