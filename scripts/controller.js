@@ -17,6 +17,17 @@ function unitIterator(f) {
 }
 
 function firstTurn() {
+    console.log('Controller: Memory reset');
+    for (var item in Memory) {
+        if (item == "creeps" && Memory.creeps) {
+            for (var sub in Memory.creeps) {
+                delete Memory.creeps[sub];
+            }
+            continue;
+        }
+        delete Memory[item];
+    }
+
     Memory.spawnQueue = settings.spawnQueue;
     Memory.spawnPriorityQueue = settings.spawnPriorityQueue;
 }
