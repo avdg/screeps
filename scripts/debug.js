@@ -7,16 +7,18 @@
  *
  * debug();
  */
-var steps = 100;
+var settings = require('_settings');
 
 function printStatus() {
-    if (Game.time % steps !== 0) {
+    if (Game.time % settings.statusFrequency !== 0) {
         return;
     }
 
     var msg = '';
+    msg += "***** Round " + Game.time + " *****" + "\n\n";
     msg += "Number of spawn: " + Object.keys(Game.spawns).length + "\n";
     msg += "Number of creeps: " + Object.keys(Game.creeps).length + "\n";
+    msg += "Number of flags: " + Object.keys(Game.flags).length + "\n";
 
     console.log(msg);
 }

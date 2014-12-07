@@ -10,4 +10,5 @@ module.exports = {
     'roundTimeLimit': 75,
     'spawnQueue': ['FOO'],
     'spawnPriorityQueue': [],
+    'statusFrequency': 100,
 }
