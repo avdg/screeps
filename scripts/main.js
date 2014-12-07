@@ -1,10 +1,11 @@
 var timerStart = performance.now();
 
-var debug = require('debug');
-var controller = require('controller');
-var creeps = require('creeps');
-var spawners = require('spawners');
 var settings = require('_settings');
+
+var controller = require('controller');
+var debug = require('stage_debug');
+var creeps = require('stage_creeps');
+var spawners = require('stage_spawners');
 
 debug();
 controller.pre();
