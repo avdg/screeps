@@ -2,7 +2,7 @@ var timerStart = performance.now();
 
 var settings = require('_settings');
 
-var controller = require('controller');
+var controller = require('stage_controller');
 var debug = require('stage_debug');
 var creeps = require('stage_creeps');
 var spawners = require('stage_spawners');
