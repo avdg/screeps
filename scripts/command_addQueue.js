@@ -30,5 +30,6 @@ function command(flag, parameters) {
 module.exports = {
     exec: command,
     command: "addQueue",
+    help: 'Description:\n- Adds an ant to a spawnQueue\n\nUsage:\n- addQueue &lt;role&gt;',
     addQueue: addQueue,
 };

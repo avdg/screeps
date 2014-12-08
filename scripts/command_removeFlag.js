@@ -6,4 +6,5 @@ function command(flag, parameters) {
 module.exports = {
     exec: command,
     command: "removeFlag",
+    help: 'Description:\n- Removes its own flag\n\nUsage:\n- removeFlag',
 };

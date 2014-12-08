@@ -1,7 +1,8 @@
+var generics = require('_generics');
 var commands = require('commands');
 
 function parseFlag(flag) {
-    var parameters = flag.name.split(" ");
+    var parameters = generics.parseCommand(flag.name);
 
     if (parameters[0] in commands) {
         commands[parameters[0]].exec(flag, parameters);
