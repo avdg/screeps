@@ -39,69 +39,53 @@ function createCreep(spawn, role) {
             console.log('Spawner: Spawn error: ' + result);
         }
     } else {
-        return -1
+        return -1;
+    }
+}
+
+/**
+ * Attempts to spawn a creep from spawner
+ *
+ * Non-priority mode: spawns first possible creep
+ * Priority mode: spawns first or fails
+ *
+ * @param spawn spawn
+ * @param array queue
+ * @param bool  priority
+ *
+ * Returns undefined when queue is empty
+ * Returns true when a creep could be spawned
+ * Returns false when no creep could be spawned
+ */
+function spawnAttempt(spawn, queue, priority) {
+    if (!queue) return;
+
+    for (var max = priority ? 1 : queue.length, i = 0, result; i < max; i++) {
+        result = createCreep(spawn, queue[i]);
+
+        if (result == undefined) {
+            queue.splice(0, 1);
+            return true;
+        }
+    }
+
+    if (i === queue.length || (i > 0 && priority)) {
+        return false;
     }
 }
 
 function spawner(spawn) {
-    var result;
-    var i;
+    // Note: when priorityQueue has items and can't spawn, spawning ends immediately
 
-    // First be spawn specific
+    // Spawn specific
     if (Memory.spawns[spawn.name]) {
-
-        // If there is any creep in the priority queue, spawn or abord
-        if (Memory.spawns[spawn.name].spawnPriorityQueue && Memory.spawns[spawn.name].spawnPriorityQueue.length > 0) {
-            if (generics.getCreepCost(roles[Memory.spawns[spawn.name].spawnPriorityQueue[0]].build()) <= spawn.energy) {
-                result = createCreep(spawn, Memory.spawns[spawn.name].spawnPriorityQueue[0]);
-
-                if (result == undefined) {
-                    Memory.spawns[spawn.name].spawnPriorityQueue.splice(0, 1);
-                }
-            }
-
-            return;
-        }
-
-        // Find first creep possible to be created
-        if (Memory.spawns[spawn.name].spawnQueue) {
-            for (i = 0; i < Memory.spawns[spawn.name].spawnQueue.length; i++) {
-                if (generics.getCreepCost(roles[Memory.spawns[spawn.name].spawnQueue[i]].build()) <= spawn.energy) {
-                    result = createCreep(spawn, Memory.spawns[spawn.name].spawnQueue[i]);
-
-                    if (result == undefined) {
-                        Memory.spawns[spawn.name].spawnQueue.splice(i, 1);
-                        return;
-                    }
-                }
-            }
-        }
+        if (spawnAttempt(spawn, Memory.spawns[spawn.name].spawnPriorityQueue, true) !== undefined) return;
+        if (spawnAttempt(spawn, Memory.spawns[spawn.name].spawnQueue, false)) return;
     }
 
-    // If there is any creep in the priority queue, spawn or abord
-    if (Memory.spawnPriorityQueue.length > 0) {
-        if (generics.getCreepCost(roles[Memory.spawnPriorityQueue[0]].build()) <= spawn.energy) {
-            result = createCreep(spawn, Memory.spawnPriorityQueue[0]);
-
-            if (result == undefined) {
-                Memory.spawnPriorityQueue.splice(0, 1);
-            }
-        }
-
-        return;
-    }
-
-    // Find first creep possible to be created
-    for (i = 0; i < Memory.spawnQueue.length; i++) {
-        if (generics.getCreepCost(roles[Memory.spawnQueue[i]].build()) <= spawn.energy) {
-            result = createCreep(spawn, Memory.spawnQueue[i]);
-
-            if (result == undefined) {
-                Memory.spawnQueue.splice(i, 1);
-                return;
-            }
-        }
-    }
+    // Global
+    if (spawnAttempt(spawn, Memory.spawnPriorityQueue, true) !== undefined) return;
+    if (spawnAttempt(spawn, Memory.spawnQueue, false)) return;
 
     // TODO Insert here what to spawn on default if wanted
     // createCreep(spawn, 'FOO');
