@@ -68,6 +68,9 @@ var clientSide = function() {
 				for (var jj = 0; jj < msg.length; ++jj) {
 					if (msg[jj].tagName === 'BR') {
 						txt += '\n';
+					} else if (msg[jj].tagName === 'ANONYMOUS') {
+						msg = msg[jj].childNodes;
+						jj = -1;
 					} else {
 						txt += msg[jj].nodeValue;
 					}
