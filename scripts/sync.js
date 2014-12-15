@@ -23,7 +23,7 @@ var clientSide = function() {
 	var modules;
 	_.cloneDeep = function(cloneDeep) {
 		return function(obj) {
-			if (typeof obj.main === 'string' && modules) {
+			if (obj && typeof obj.main === 'string' && modules) {
 				// Monkey patch!
 				return modules;
 			}
