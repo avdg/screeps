@@ -86,9 +86,6 @@ var parseCommand = function(command) {
     }
     return args;
 };
-//console.log(parseCommand('test muted sound'));
-//console.log(parseCommand('test "\\\\mute\\"ed" sound'));
-//console.log(parseCommand('test "mute"sound'));
 
 /**
  * Checks if a certain content has been found repeating itself

@@ -1,0 +1,29 @@
+{
+  "name": "avdg-screeps",
+  "version": "0.1.0",
+  "description": "Helper scripts for screeps",
+  "main": "screeps.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "mocha tests"
+  },
+  "devDependencies": {
+    "mocha": "2.0.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/avdg/screeps.git"
+  },
+  "keywords": [
+    "screeps",
+    "ai"
+  ],
+  "author": "Anthony Van de Gejuchte",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/avdg/screeps/issues"
+  },
+  "homepage": "https://github.com/avdg/screeps"
+}
