@@ -45,6 +45,7 @@ var commands = {
     addPriorityQueue: require('command_addPriorityQueue'),
     addQueue:         require('command_addQueue'),
     camp:             require('command_camp'),
+    killAll:          require('command_killAll'),
     removeFlag:       require('command_removeFlag'),
 };
 
