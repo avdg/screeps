@@ -6,6 +6,7 @@
  * var mod = require('controller'); // -> 'a thing'
  */
 
+var generics = require('_generics');
 var settings = require('_settings');
 var units = require('units');
 
@@ -27,13 +28,14 @@ function firstTurn() {
         }
         delete Memory[item];
     }
+    console.log('Controller: Memory reset');
 
     Memory.spawnQueue = settings.spawnQueue;
     Memory.spawnPriorityQueue = settings.spawnPriorityQueue;
 }
 
 function pre() {
-    if (!("spawnQueue" in Memory) || Game.time === 0) {
+    if (generics.isFirstTurn()) {
         firstTurn();
     }
 
