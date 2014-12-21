@@ -3,6 +3,9 @@
 
 The main goal of this repo is to provide a flexible framework for the ai.
 
+### Status
+[![Build Status](https://travis-ci.org/avdg/screeps.svg)](https://travis-ci.org/avdg/screeps)
+
 ### Ai rules / Ai constrains
 - All creeps must have a role
 
