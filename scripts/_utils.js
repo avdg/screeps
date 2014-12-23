@@ -10,7 +10,7 @@ var exec = function() {
 
     var cmd = arguments[0];
 
-    if (cmd in commands && native in commands[cmd]) {
+    if (cmd in commands && "native" in commands[cmd]) {
         return commands[cmd].native.apply(null, arguments);
     } else {
         throw 'Command not found';
