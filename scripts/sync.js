@@ -56,34 +56,33 @@ var clientSide = function() {
 		var nodes = sconsole.getElementsByClassName('console-message');
 		var messages = [];
 		var found = false;
-		for (var ii = 0; ii < nodes.length; ++ii) {
+		for (var ii = nodes.length - 1; ii >= 0; --ii) {
 			var el = nodes[ii];
-			if (el.innerHTML === lastMessage) {
-				found = true;
-			} else if (found) {
-				var ts = el.getElementsByClassName('timestamp')[0];
-				ts = ts && ts.firstChild.nodeValue;
-				var msg = el.getElementsByTagName('span')[0].childNodes;
-				var txt = '';
-				for (var jj = 0; jj < msg.length; ++jj) {
-					if (msg[jj].tagName === 'BR') {
-						txt += '\n';
-					} else if (msg[jj].tagName === 'ANONYMOUS') {
-						msg = msg[jj].childNodes;
-						jj = -1;
-					} else {
-						txt += msg[jj].nodeValue;
-					}
+			var ts = el.getElementsByClassName('timestamp')[0];
+			ts = ts && ts.firstChild.nodeValue;
+			var msg = el.getElementsByTagName('span')[0].childNodes;
+			var txt = '';
+			for (var jj = 0; jj < msg.length; ++jj) {
+				if (msg[jj].tagName === 'BR') {
+					txt += '\n';
+				} else if (msg[jj].tagName === 'ANONYMOUS') {
+					msg = msg[jj].childNodes;
+					jj = -1;
+				} else {
+					txt += msg[jj].nodeValue;
 				}
-				messages.push([ts, txt]);
 			}
+			if (lastMessage && txt === lastMessage[1] && ts === lastMessage[0]) {
+				break;
+			}
+			messages.push([ts, txt]);
 		}
 		if (messages.length) {
 			var req = new XMLHttpRequest;
-			req.open('GET', 'http://localhost:9090/log?log='+ encodeURIComponent(JSON.stringify(messages)), true);
+			req.open('GET', 'http://localhost:9090/log?log='+ encodeURIComponent(JSON.stringify(messages.reverse())), true);
 			req.send();
+			lastMessage = messages[messages.length - 1];
 		}
-		lastMessage = nodes.length && nodes[nodes.length - 1].innerHTML;
 	}, 100);
 };
 
@@ -133,7 +132,20 @@ var server = http.createServer(function(req, res) {
 			res.end();
 			var messages = JSON.parse(path.query.log);
 			for (var ii = 0; ii < messages.length; ++ii) {
-				console.log(messages[ii][0], messages[ii][1]);
+				if (messages[ii][0]) {
+					var prefix = ' ';
+					for (var jj = messages[ii][0].length; jj > 0; --jj) {
+						prefix += ' ';
+					}
+					console.log(
+						messages[ii][0],
+						messages[ii][1].split(/\n/g).map(function(line, ii) {
+							return (ii ? prefix : '')+ line;
+						}).join('\n')
+					);
+				} else {
+					console.log(messages[ii][1]);
+				}
 			}
 			break;
 
