@@ -9,7 +9,7 @@ var exec = function() {
     }
 
     if (!commands) {
-        command = require('commands');
+        commands = require('commands');
     }
 
     var cmd = arguments[0];
