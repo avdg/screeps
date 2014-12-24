@@ -46,7 +46,7 @@ There is no template for `stages_*.js`, just make it fit in `main.js`
 - `stage_*.js` Runs a main stage of the ai **called manually by main.js**
 
 ##### Unit
-*sets up and shuts down ai components, data and settings - called from stage_controller*
+*Sets up and shuts down ai components, data and settings - called from stage_controller*
 - `unit_*.js` Runs a unit to manage a certain resource or task
 - `units.js` A dictionary of active units **activate your units here**
 
@@ -70,6 +70,6 @@ There is no template for `stages_*.js`, just make it fit in `main.js`
 
 #### `Stage_controller`
 ```
- `- runs preController or postController function of unit controllers (unit_*.js)
+ `- Runs preController or postController function of unit controllers (unit_*.js)
      `- unit_flag.pre() Plays with commands from command_*.js when needed
 ```
