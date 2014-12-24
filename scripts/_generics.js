@@ -40,23 +40,6 @@ var generator = function(options) {
     return name;
 }
 
-var bodyPartCosts = Game.BODYPART_COST;
-
-var getCreepCost = function(parts) {
-    var cost = 0;
-
-    for (var i = 0; i < parts.length; i++) {
-        if (parts[i] in bodyPartCosts) {
-            cost += bodyPartCosts[parts[i]];
-        }
-        else {
-            return -1;
-        }
-    }
-
-    return cost;
-}
-
 var parseCommand = function(command) {
     var args = [];
     var pos = 0;
@@ -150,7 +133,6 @@ var isFirstTurn = function() {
 
 module.exports = {
     generator: generator,
-    getCreepCost: getCreepCost,
     parseCommand: parseCommand,
     dontRepeat: dontRepeat,
     logOnce: logOnce,

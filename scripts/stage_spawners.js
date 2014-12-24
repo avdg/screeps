@@ -7,6 +7,7 @@
  */
 var _ = require('lodash');
 var generics = require('_generics');
+var utils = require('_utils');
 var roles = require('roles');
 
 function creepNameGenerator(prefix) {
@@ -43,7 +44,7 @@ function createCreep(spawn, creep) {
     if (memory.role in roles) {
         var body = roles[memory.role].build();
 
-        if (generics.getCreepCost(body) > spawn.energy) {
+        if (utils.getCreepCost(body) > spawn.energy) {
             return -2;
         }
 
