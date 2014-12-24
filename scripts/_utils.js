@@ -15,8 +15,20 @@ var exec = function() {
     } else {
         throw 'Command not found';
     }
-}
+};
+
+/**
+ * Get some temporal storage
+ */
+var getTmp = function() {
+    if (!Game.tmp) {
+        Game.tmp = {};
+    }
+
+    return tmp;
+};
 
 module.exports = {
     exec: exec,
+    getTmp: getTmp,
 };
