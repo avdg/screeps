@@ -44,6 +44,7 @@ var commands = {
     // FOO:           require('command_FOO'),
     addPriorityQueue: require('command_addPriorityQueue'),
     addQueue:         require('command_addQueue'),
+    creepClone:       require('command_creepClone'),
     camp:             require('command_camp'),
     killAll:          require('command_killAll'),
     removeFlag:       require('command_removeFlag'),

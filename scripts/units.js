@@ -1,4 +1,5 @@
 module.exports = {
     // FOO: require('unit_FOO'),
-    flags:  require('unit_flags'),
+    deathChecker: require('unit_deathChecker'),
+    flags:        require('unit_flags'),
 };
