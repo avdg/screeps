@@ -9,4 +9,4 @@ function postController() {
 module.exports = {
     preController: preController,
     postController: postController
-}
+};

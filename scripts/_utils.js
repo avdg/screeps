@@ -4,7 +4,7 @@ var commands;
  * Usage Calls command command_<parameter1> to execute its native property if available
  */
 var exec = function() {
-    if (arguments.length == 0) {
+    if (arguments.length === 0) {
         throw 'Expected at least 1 parameter to execute a function';
     }
 

@@ -25,4 +25,4 @@ function printStatus() {
 
 module.exports = function() {
     printStatus();
-}
+};

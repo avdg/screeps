@@ -123,14 +123,14 @@ function spawner(spawn) {
     // createCreep(spawn, 'FOO');
 }
 
-module.exports = function(spawn) {
+module.exports = function() {
 
-    var name;
-    for (name in Game.spawns) {
-        var spawn = Game.spawns[name];
+    var spawn;
+    for (var name in Game.spawns) {
+        spawn = Game.spawns[name];
 
         if (spawn.spawning == undefined) {
             spawner(spawn);
         }
     }
-}
+};

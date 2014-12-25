@@ -28,4 +28,4 @@ module.exports = function() {
             roles[role].endTurn();
         }
     }
-}
+};
