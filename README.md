@@ -47,7 +47,7 @@ There is no template for `stages_*.js`, just make it fit in `main.js`
 - `roles.js` A dictionary of active roles **activate your roles here**
 
 ##### Commands
-*Executes flag commands - called by unit_flags*
+*Executes flag commands - called by unit_flags or `require('_utils').exec(<command>, ...)`*
 - `commmand_*.js` Runs user commands (might also contain useful scripts)
 - `commands.js` A dictionary of active commands **activate your commands here**
 
