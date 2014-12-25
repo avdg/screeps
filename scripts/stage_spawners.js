@@ -76,14 +76,28 @@ function createCreep(spawn, creep) {
  * Returns false when no creep could be spawned
  */
 function spawnAttempt(spawn, queue, priority) {
-    if (!queue) return;
+    if (queue === undefined || queue.length < 1) return;
 
     for (var max = priority ? 1 : queue.length, i = 0, result; i < max; i++) {
         result = createCreep(spawn, queue[i]);
 
-        if (result == undefined) {
+        if (result === undefined) {
             queue.splice(i, 1);
             return true;
+        } else if (result === -1) {
+            console.log('Spawner: Cannot find creep type with parameter' +
+                JSON.stringify(queue[i])
+            );
+        } else if (result === -2) {
+            // Be patient, we just don't have the energy to do great things
+        } else if (result === -3) {
+            console.log('Spawner: Failed to spawn creep due to parameter error with ' +
+                JSON.stringify(queue[i])
+            );
+        } else {
+            console.log('Spawner: Unknown error ' + result + ' for creep ' +
+                JSON.stringify(queue[i])
+            );
         }
     }
 

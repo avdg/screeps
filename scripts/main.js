@@ -14,6 +14,7 @@ try {
     spawners();
     controller.post();
 } catch (e) {
+    console.log('Caught exception:');
     if (typeof e === "object") {
         if (e.stack) {
             if (e.name && e.message) {
@@ -21,7 +22,7 @@ try {
             }
             console.log(e.stack);
         } else {
-            console.log(JSON.stringify(e));
+            console.log(e, JSON.stringify(e));
         }
     } else {
         console.log(e);
