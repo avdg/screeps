@@ -8,7 +8,6 @@ try {
     var creeps = require('stage_creeps');
     var spawners = require('stage_spawners');
 
-    debug();
     controller.pre();
     creeps();
     spawners();
