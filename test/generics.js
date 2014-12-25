@@ -24,15 +24,3 @@ describe('parseCommand', function() {
         );
     });
 });
-
-describe('isFirstTurn', function() {
-    it("Should return true if turn equals to zero", function() {
-        assert.strictEqual(true, generics.isFirstTurn());
-    });
-
-    it("Should return false if turn not equals zero or ai has state", function() {
-        Memory.spawnQueue = []; // Memory reset
-        Game.time++;
-        assert.strictEqual(false, generics.isFirstTurn());
-    });
-});

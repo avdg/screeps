@@ -6,7 +6,7 @@
  * var mod = require('controller'); // -> 'a thing'
  */
 
-var generics = require('_generics');
+var utils = require('_utils');
 var settings = require('_settings');
 var units = require('units');
 
@@ -35,7 +35,7 @@ function firstTurn() {
 }
 
 function pre() {
-    if (generics.isFirstTurn()) {
+    if (utils.isFirstTurn()) {
         firstTurn();
     }
 

@@ -107,10 +107,15 @@ var logOnce = function(msg, warn) {
     return result;
 };
 
+var isFirstTurn = function() {
+    return !("spawnQueue" in Memory) || Game.time === 0;
+};
+
 module.exports = {
     exec: exec,
     getTmp: getTmp,
     getCreepCost: getCreepCost,
     dontRepeat: dontRepeat,
     logOnce: logOnce,
+    isFirstTurn: isFirstTurn,
 };

@@ -70,12 +70,7 @@ var parseCommand = function(command) {
     return args;
 };
 
-var isFirstTurn = function() {
-    return !("spawnQueue" in Memory) || Game.time === 0;
-}
-
 module.exports = {
     generator: generator,
     parseCommand: parseCommand,
-    isFirstTurn: isFirstTurn,
 };

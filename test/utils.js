@@ -48,3 +48,15 @@ describe('dontRepeat', function() {
 describe('logOnce', function() {
     // No testing unless we can mock console
 });
+
+describe('isFirstTurn', function() {
+    it("Should return true if turn equals to zero", function() {
+        assert.strictEqual(true, utils.isFirstTurn());
+    });
+
+    it("Should return false if turn not equals zero or ai has state", function() {
+        Memory.spawnQueue = []; // Memory reset
+        Game.time++;
+        assert.strictEqual(false, utils.isFirstTurn());
+    });
+});
