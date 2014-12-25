@@ -17,6 +17,7 @@ Main.js should be the script called first by the ai-runner
 
 #### Special files
 - `_generic.js` Contains main library functions
+- `_utils.js` Contains library functions that reads from or uses the screeps api
 - `_settings.js` Drain for global settings
 
 #### Templates

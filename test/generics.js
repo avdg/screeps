@@ -25,41 +25,6 @@ describe('parseCommand', function() {
     });
 });
 
-describe('dontRepeat', function() {
-    it('Should return false if message is unique', function() {
-        assert.strictEqual(true, generics.dontRepeat('Spam!', 'test'));
-    });
-
-    it('Should return undefined if message is send twice in same round', function() {
-        // ... continues from previous test .... we already spammed once
-        assert.strictEqual(undefined, generics.dontRepeat('Spam!', 'test'));
-        assert.strictEqual(undefined, generics.dontRepeat('Spam!', 'test'));
-    });
-
-    it('Should return true if message was send previous round', function() {
-        // ... continues from previous test .... we already spammed, but we enter a new tick
-        Game.time++;
-
-        assert.strictEqual(false,     generics.dontRepeat('Spam!', 'test'));
-        assert.strictEqual(undefined, generics.dontRepeat('Spam!', 'test'));
-        assert.strictEqual(undefined, generics.dontRepeat('Spam!', 'test'));
-    });
-
-    it('Should forget the message after 2 turns', function() {
-        // ... Continues from previous test ... we already spammed, but we are 2 ticks further
-        Game.time++;
-        Game.time++;
-
-        assert.strictEqual(true,      generics.dontRepeat('Spam!', 'test'));
-        assert.strictEqual(undefined, generics.dontRepeat('Spam!', 'test'));
-        assert.strictEqual(undefined, generics.dontRepeat('Spam!', 'test'));
-    });
-});
-
-describe('logOnce', function() {
-    // No testing unless we can mock console
-});
-
 describe('isFirstTurn', function() {
     it("Should return true if turn equals to zero", function() {
         assert.strictEqual(true, generics.isFirstTurn());
