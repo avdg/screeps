@@ -32,16 +32,6 @@ There is no template for `stages_*.js`, just make it fit in `main.js`
 *Bootstrap file - executes stages keeps track of time*
 - `main.js` Main ai script
 
-##### Commands
-*Executes flag commands - called by unit_flags*
-- `commmand_*.js` Runs user commands (might also contain useful scripts)
-- `commands.js` A dictionary of active commands **activate your commands here**
-
-##### Roles
-*Creep's given policy on what to do with their role - called by stage_creeps*
-- `role_*.js` Run's creeps with fitting role
-- `roles.js` A dictionary of active roles **activate your roles here**
-
 ##### Stage
 *Main stages of the ai - called from main*
 - `stage_*.js` Runs a main stage of the ai **called manually by main.js**
@@ -50,6 +40,16 @@ There is no template for `stages_*.js`, just make it fit in `main.js`
 *Sets up and shuts down ai components, data and settings - called from stage_controller*
 - `unit_*.js` Runs a unit to manage a certain resource or task
 - `units.js` A dictionary of active units **activate your units here**
+
+##### Roles
+*Creep's given policy on what to do with their role - called by stage_creeps*
+- `role_*.js` Run's creeps with fitting role
+- `roles.js` A dictionary of active roles **activate your roles here**
+
+##### Commands
+*Executes flag commands - called by unit_flags*
+- `commmand_*.js` Runs user commands (might also contain useful scripts)
+- `commands.js` A dictionary of active commands **activate your commands here**
 
 #### Tools
 *Should make writing ai's a little bit easier*
