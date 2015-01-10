@@ -129,7 +129,7 @@ module.exports = function() {
     for (var name in Game.spawns) {
         spawn = Game.spawns[name];
 
-        if (spawn.spawning == undefined) {
+        if (!spawn.spawning) {
             spawner(spawn);
         }
     }

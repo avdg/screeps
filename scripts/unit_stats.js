@@ -2,7 +2,7 @@ var settings = require('_settings');
 
 var storeStats = function(time, stats) {
 
-    var keys = Object.keys(Memory.statsHistory), i, value, tmp;
+    var i, value, tmp;
     for (i in Memory.statsHistory) {
         value = i in stats ? stats[i] : NaN;
 
