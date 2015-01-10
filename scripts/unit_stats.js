@@ -1,5 +1,44 @@
 var settings = require('_settings');
 
+var storeStats = function(time, stats) {
+
+    var keys = Object.keys(Memory.statsHistory), i, value, tmp;
+    for (i in Memory.statsHistory) {
+        value = i in stats ? stats[i] : NaN;
+
+        // Grab previous value
+        tmp = Memory.statsHistory[i][Memory.statsHistory[i].length - 1];
+
+        // Value is same
+        if (tmp.type === undefined && tmp.value === value && tmp.last === (time - 1)) {
+            tmp.last = time;
+
+        // Value is counting up
+        } else if (tmp.last === (time - 1) && tmp.value === (value - 1) &&
+            (tmp.type === "countUp" || tmp.start === tmp.last)
+        ) {
+            if (tmp.start === tmp.last) {
+                tmp.type = "countUp";
+                tmp.startValue = tmp.value;
+            }
+
+            tmp.last = time;
+            tmp.value = value;
+
+        // Default case
+        } else {
+            Memory.statsHistory[i].push({start: time, last: time, value: stats[i]});
+        }
+    }
+
+    // Check for new statistics
+    for (i in stats) {
+        if (!(i in Memory.statsHistory)) {
+            Memory.statsHistory[i] = [{start: time, last: time, value: stats[i]}];
+        }
+    }
+};
+
 var updateStats = function() {
     var addStatWithMax = function(entry, n) {
         Memory.stats[entry] = n;
@@ -9,7 +48,7 @@ var updateStats = function() {
 
     var previous;
     if (Memory.stats) {
-        Memory.statsHistory[Memory.stats.time] = Memory.stats;
+        storeStats(Memory.stats.time, Memory.stats);
         previous = Memory.stats;
 
     } else {
