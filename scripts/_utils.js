@@ -5,7 +5,7 @@ var commands;
  */
 var exec = function() {
     if (arguments.length === 0) {
-        throw 'Expected at least 1 parameter to execute a function';
+        throw new Error('Expected at least 1 parameter to execute a function');
     }
 
     if (!commands) {
@@ -17,7 +17,7 @@ var exec = function() {
     if (cmd in commands && "native" in commands[cmd]) {
         return commands[cmd].native.apply(null, arguments);
     } else {
-        throw 'Command not found';
+        throw new Error('Command not found');
     }
 };
 
