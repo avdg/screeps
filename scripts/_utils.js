@@ -108,7 +108,17 @@ var logOnce = function(msg, warn) {
 };
 
 var isFirstTurn = function() {
-    return !("spawnQueue" in Memory) || Game.time === 0;
+    if (Memory.firstTurn && Memory.firstTurn === Game.time) return true;
+    if (Memory.permanent === undefined) Memory.permanent = {};
+
+    var rooms = Object.keys(Game.rooms);
+    if (Game.time === 0 || Memory.permanent.mainRoom === undefined || Game.rooms[Memory.permanent.mainRoom] === undefined) {
+        Memory.permanent.firstTurn = Game.time;
+        Memory.permanent.mainRoom = rooms[0];
+        return true;
+    }
+
+    return false;
 };
 
 module.exports = {

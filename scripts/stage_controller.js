@@ -20,12 +20,13 @@ function unitIterator(f) {
 function firstTurn() {
     console.log('Controller: Memory reset');
     for (var item in Memory) {
-        if (item == "creeps" && Memory.creeps) {
+        if (item === "creeps" && Memory.creeps) {
             for (var sub in Memory.creeps) {
                 delete Memory.creeps[sub];
             }
             continue;
         }
+        if (item === "permanent") continue;
         delete Memory[item];
     }
     console.log('Controller: Memory reset');
