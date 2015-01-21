@@ -1,4 +1,4 @@
-var timerStart = performance.now();
+var timerStart = new Date().getTime();
 
 try {
     var settings = require('_settings');
@@ -27,8 +27,8 @@ try {
     }
 }
 
-var timerEnd = performance.now();
-var timerDiff = timerEnd - timerStart;
+var timerEnd = new Date().getTime();
+var timerDiff = Math.round(timerEnd - timerStart);
 
 if (timerDiff > settings.roundTimeLimit) {
     console.log('Warning: Round ' + Game.time + ' took ' + timerDiff + ' ms to complete');
