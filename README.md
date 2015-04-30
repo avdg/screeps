@@ -4,6 +4,7 @@
 The main goal of this repo is to provide a flexible framework for the ai.
 
 ### Status
+[![Dependency Status](https://gemnasium.com/avdg/screeps.svg)](https://gemnasium.com/avdg/screeps)
 [![Build Status](https://travis-ci.org/avdg/screeps.svg)](https://travis-ci.org/avdg/screeps)
 [![Coverage Status](https://coveralls.io/repos/avdg/screeps/badge.png?branch=master)](https://coveralls.io/r/avdg/screeps?branch=master)
 
