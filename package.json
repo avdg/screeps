@@ -10,7 +10,7 @@
     "test": "mocha -s 20"
   },
   "devDependencies": {
-    "mocha": "2.0.x"
+    "mocha": "2.2.x"
   },
   "repository": {
     "type": "git",
