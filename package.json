@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "grunt": "0.4.5",
-    "grunt-mocha-test": "0.12.x"
+    "grunt-mocha-test": "0.12.x",
+    "grunt-screeps": "1.0.x"
   },
   "devDependencies": {
     "mocha": "2.2.x"
