@@ -1,12 +1,12 @@
 `>_` Screeps ai
 ===============
 
-The main goal of this repo is to provide a flexible framework for the ai.
-
-### Status
-[![Dependency Status](https://gemnasium.com/avdg/screeps.svg)](https://gemnasium.com/avdg/screeps)
+[![Dev dependency Status](https://david-dm.org/avdg/screeps.svg)](https://david-dm.org/avdg/screeps)
+[![Dev dependency Status](https://david-dm.org/avdg/screeps/dev-status.svg)](https://david-dm.org/avdg/screeps#info=devDependencies)
 [![Build Status](https://travis-ci.org/avdg/screeps.svg)](https://travis-ci.org/avdg/screeps)
 [![Coverage Status](https://coveralls.io/repos/avdg/screeps/badge.png?branch=master)](https://coveralls.io/r/avdg/screeps?branch=master)
+
+> The main goal of this repo is to provide a flexible framework for the ai.
 
 ### Ai rules / Ai constrains
 - All creeps must have a role
