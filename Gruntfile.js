@@ -55,6 +55,10 @@ module.exports = function(grunt) {
         }
     });
 
+    grunt.task.registerTask('check', [
+        'mochaTest:test'
+    ]);
+
     grunt.task.registerTask('test', [
         'blanket',
         'copy',
