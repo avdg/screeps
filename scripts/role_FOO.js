@@ -13,7 +13,7 @@
  * Spawn: null or spawn
  */
 function build(spawn) {
-    return [Game.TOUGH];
+    return [TOUGH];
 }
 
 /**
