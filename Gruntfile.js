@@ -18,6 +18,11 @@ module.exports = function(grunt) {
                 expand: true,
                 src: ['test/**', 'lib/mocks/**'],
                 dest: 'lib-cov/'
+            },
+            deploy: {
+                expand: true,
+                src: ['scripts/**'],
+                dest: 'build/deploy'
             }
         },
         coveralls: {
@@ -50,7 +55,7 @@ module.exports = function(grunt) {
                 password: null
             },
             dist: {
-                src: ['scripts/*.js']
+                src: ['build/deploy/*.js']
             }
         }
     });
@@ -59,9 +64,14 @@ module.exports = function(grunt) {
         'mochaTest:test'
     ]);
 
+    grunt.task.registerTask('deploy', [
+        'copy:deploy',
+        'screeps'
+    ]);
+
     grunt.task.registerTask('test', [
         'blanket',
-        'copy',
+        'copy:coverage',
         'mochaTest',
         'coveralls'
     ]);
