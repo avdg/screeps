@@ -48,6 +48,14 @@ module.exports = function(grunt) {
                     quiet: true,
                     captureFile: 'coverage/lcov.info'
                 }
+            },
+            'html-coverage': {
+                src: 'lib-cov/test/**/*.js',
+                options: {
+                    reporter: 'html-cov',
+                    quiet: true,
+                    captureFile: 'coverage/coverage.html'
+                }
             }
         },
         screeps: {
