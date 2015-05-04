@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
     // FOO: require('unit_FOO'),
     deathChecker: require('unit_deathChecker'),

@@ -1,3 +1,5 @@
+'use strict';
+
 function command(flag, parameters) {
     flag.remove();
     console.log('Flag command removeFlag: removed ' + flag.name);

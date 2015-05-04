@@ -1,3 +1,5 @@
+'use strict';
+
 var timerStart = new Date().getTime();
 
 var settings = require('_settings');

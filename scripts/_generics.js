@@ -1,10 +1,4 @@
-/*
- * Module code goes here. Use 'module.exports' to export things:
- * module.exports = 'a thing';
- *
- * You can import it from another modules like this:
- * var mod = require('_generics'); // -> 'a thing'
- */
+'use strict';
 
 // Just using Japanese romaji characters as building blocks :-)
 var nameParts = [

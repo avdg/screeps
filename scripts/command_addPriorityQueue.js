@@ -1,3 +1,5 @@
+'use strict';
+
 var addQueue = require('command_addQueue').addQueue;
 
 function command(flag, parameters) {

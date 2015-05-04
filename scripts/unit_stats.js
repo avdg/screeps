@@ -1,3 +1,5 @@
+'use strict';
+
 var settings = require('_settings');
 
 var storeStats = function(time, stats) {

@@ -1,3 +1,5 @@
+'use strict';
+
 function command(flag, parameters) {
     for (var creep in Game.creeps) {
         Game.creeps[creep].suicide();

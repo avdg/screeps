@@ -1,3 +1,5 @@
+'use strict';
+
 var roles = require('roles');
 
 function addQueue(queue, flag, parameters) {

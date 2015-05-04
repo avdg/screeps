@@ -1,3 +1,5 @@
+'use strict';
+
 var generics = require('_generics');
 var commands = require('commands');
 

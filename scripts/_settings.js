@@ -1,10 +1,4 @@
-/*
- * Module code goes here. Use 'module.exports' to export things:
- * module.exports = 'a thing';
- *
- * You can import it from another modules like this:
- * var mod = require('_settings'); // -> 'a thing'
- */
+'use strict';
 
 module.exports = {
     'roundTimeLimit': 75,

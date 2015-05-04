@@ -1,11 +1,4 @@
-/*
- * Module code goes here. Use 'module.exports' to export things:
- * module.exports = 'a thing';
- *
- * You can import it from another modules like this:
- * var mod = require('role_FOO'); // -> 'a thing'
- */
-
+'use strict';
 
 /**
  * Returns body parts required to build the ant

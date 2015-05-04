@@ -1,10 +1,5 @@
-/*
- * Module code goes here. Use 'module.exports' to export things:
- * module.exports = 'a thing';
- *
- * You can import it from another modules like this:
- * var mod = require('spawners'); // -> 'a thing'
- */
+'use strict';
+
 var _ = require('lodash');
 var generics = require('_generics');
 var utils = require('_utils');

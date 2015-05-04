@@ -1,3 +1,5 @@
+'use strict';
+
 function helpCommand(flag, parameters) {
     var commandFilter = function(input) {
         return function(command) {
