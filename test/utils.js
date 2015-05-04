@@ -10,12 +10,34 @@ reset();
 var utils = require('../scripts/_utils');
 beforeEach(reset); // resets once before every global describe
 
+describe('exec', function() {
+    it('Should fail when no arguments are passed', function() {
+        var executeWithoutParameters = function() {
+            utils.exec();
+        };
+
+        var errorValidator = function(e) {
+            return e instanceof Error &&
+                e.message === "Expected at least 1 parameter to execute a function"
+        };
+
+        assert.throws(executeWithoutParameters, errorValidator);
+    });
+});
+
 describe('getCreepCost', function() {
     it('Should return a number higher than 0 when giving an array of body parts', function() {
         var result = utils.getCreepCost([TOUGH]);
 
         assert.equal("number", typeof result);
         assert.equal(true,     result > 0);
+    });
+
+    it('Should return -1 when invalid parts are passed', function() {
+        var result = utils.getCreepCost(["foo"]);
+
+        assert.equal("number", typeof result);
+        assert.equal(true,     result === -1);
     });
 });
 
