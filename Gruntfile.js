@@ -21,6 +21,7 @@ module.exports = function(grunt) {
             },
             deploy: {
                 expand: true,
+                flatten: true,
                 src: ['scripts/**'],
                 dest: 'build/deploy'
             }
