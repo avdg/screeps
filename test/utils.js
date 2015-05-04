@@ -18,7 +18,7 @@ describe('exec', function() {
 
         var errorValidator = function(e) {
             return e instanceof Error &&
-                e.message === "Expected at least 1 parameter to execute a function"
+                e.message === "Expected at least 1 parameter to execute a function";
         };
 
         assert.throws(executeWithoutParameters, errorValidator);
