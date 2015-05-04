@@ -9,8 +9,11 @@ var utils = require('../scripts/_utils');
 beforeEach(reset); // resets once before every global describe
 
 describe('getCreepCost', function() {
-    it('Should return an number when giving an array of body parts', function() {
-        assert.equal("number", typeof utils.getCreepCost([Game.TOUGH]));
+    it('Should return a number higher than 0 when giving an array of body parts', function() {
+        var result = utils.getCreepCost([TOUGH]);
+
+        assert.equal("number", typeof result);
+        assert.equal(true,     result > 0);
     });
 });
 

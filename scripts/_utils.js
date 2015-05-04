@@ -39,8 +39,8 @@ var getCreepCost = function(parts) {
     var cost = 0;
 
     for (var i = 0; i < parts.length; i++) {
-        if (parts[i] in Game.BODYPART_COST) {
-            cost += Game.BODYPART_COST[parts[i]];
+        if (parts[i] in BODYPART_COST) {
+            cost += BODYPART_COST[parts[i]];
         }
         else {
             return -1;
