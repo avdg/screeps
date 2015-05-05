@@ -24,17 +24,6 @@ var exec = function() {
 };
 
 /**
- * Get some temporal storage
- */
-var getTmp = function() {
-    if (!Game.tmp) {
-        Game.tmp = {};
-    }
-
-    return tmp;
-};
-
-/**
  * Get the cost for building a creep
  */
 var getCreepCost = function(parts) {
@@ -50,6 +39,17 @@ var getCreepCost = function(parts) {
     }
 
     return cost;
+};
+
+/**
+ * Get some temporal storage
+ */
+var getTmp = function() {
+    if (!Game.tmp) {
+        Game.tmp = {};
+    }
+
+    return Game.tmp;
 };
 
 /**

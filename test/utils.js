@@ -40,6 +40,25 @@ describe('getCreepCost', function() {
     });
 });
 
+describe('getTmp', function() {
+    it('Should return an empty object', function() {
+        assert.deepEqual({}, utils.getTmp());
+    });
+
+    it('Should remember set values', function() {
+        var tmp = utils.getTmp();
+        assert.deepEqual({}, tmp);
+
+        tmp.foo = "bar";
+        assert.deepEqual(tmp,          utils.getTmp());
+        assert.deepEqual({foo: "bar"}, utils.getTmp());
+    });
+
+    it('Should be empty on the next round', function() {
+        assert.deepEqual({}, utils.getTmp());
+    });
+});
+
 describe('dontRepeat', function() {
     it('Should return false if message is unique', function() {
         assert.strictEqual(true, utils.dontRepeat('Spam!', 'test'));
