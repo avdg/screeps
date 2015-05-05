@@ -55,7 +55,7 @@ There is no template for `stages_*.js`, just make it fit in `main.js`
 
 #### Tools
 *Should make writing ai's a little bit easier*
-- `sync.js` A tool to sync local files up to the browser running creeps
+- Use `grunt deploy` to send code to the screeps simulator
 
 ### Call hierarchy
 
