@@ -3,9 +3,8 @@
 var assert = require('assert');
 
 function reset() {
-    require('../lib/mocks/gameStateStart');
+    require('../lib/mocks/gameStateStart')();
 }
-reset();
 
 var utils = require('../scripts/_utils');
 beforeEach(reset); // resets once before every global describe
@@ -47,13 +46,15 @@ describe('dontRepeat', function() {
     });
 
     it('Should return undefined if message is send twice in same round', function() {
-        // ... continues from previous test .... we already spammed once
+        assert.strictEqual(true,      utils.dontRepeat('Spam!', 'test'));
         assert.strictEqual(undefined, utils.dontRepeat('Spam!', 'test'));
         assert.strictEqual(undefined, utils.dontRepeat('Spam!', 'test'));
     });
 
     it('Should return true if message was send previous round', function() {
-        // ... continues from previous test .... we already spammed, but we enter a new tick
+        assert.strictEqual(true, utils.dontRepeat('Spam!', 'test'));
+
+        // Enter new game tick
         Game.time++;
 
         assert.strictEqual(false,     utils.dontRepeat('Spam!', 'test'));
@@ -62,7 +63,9 @@ describe('dontRepeat', function() {
     });
 
     it('Should forget the message after 2 turns', function() {
-        // ... Continues from previous test ... we already spammed, but we are 2 ticks further
+        assert.strictEqual(true, utils.dontRepeat('Spam!', 'test'));
+
+        // Move 2 game ticks further
         Game.time++;
         Game.time++;
 
@@ -82,7 +85,9 @@ describe('isFirstTurn', function() {
     });
 
     it("Should return false if turn not equals zero or ai has state", function() {
-        Memory.spawnQueue = []; // Memory reset
+        assert.strictEqual(true, utils.isFirstTurn());
+
+        // Enter a new game tick
         Game.time++;
         assert.strictEqual(false, utils.isFirstTurn());
     });
