@@ -2,7 +2,7 @@
 
 var assert = require('assert');
 
-var generics = require('../scripts/_generics');
+var generics = require('../../scripts/_generics');
 
 describe('generator', function() {
     it('Should return a string', function() {

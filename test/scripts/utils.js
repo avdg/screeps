@@ -1,13 +1,13 @@
 'use strict';
 
 var assert = require('assert');
+var utils = require('../../scripts/_utils');
 
 function reset() {
-    require('../lib/mocks/gameStateStart')();
+    require('../../lib/mocks/gameStateStart')();
 }
 
-var utils = require('../scripts/_utils');
-beforeEach(reset); // resets once before every global describe
+beforeEach(reset);
 
 describe('exec', function() {
     it('Should fail when no arguments are passed', function() {
