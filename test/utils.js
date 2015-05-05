@@ -60,7 +60,7 @@ describe('getTmp', function() {
 });
 
 describe('dontRepeat', function() {
-    it('Should return false if message is unique', function() {
+    it('Should return true if message is unique', function() {
         assert.strictEqual(true, utils.dontRepeat('Spam!', 'test'));
     });
 
@@ -70,7 +70,7 @@ describe('dontRepeat', function() {
         assert.strictEqual(undefined, utils.dontRepeat('Spam!', 'test'));
     });
 
-    it('Should return true if message was send previous round', function() {
+    it('Should return false if message was send previous round', function() {
         assert.strictEqual(true, utils.dontRepeat('Spam!', 'test'));
 
         // Enter new game tick
