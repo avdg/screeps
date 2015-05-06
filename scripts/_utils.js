@@ -101,7 +101,7 @@ var dontRepeat = function(msg, namespace) {
 var logOnce = function(msg, warn) {
     var result = dontRepeat(msg, 'log');
 
-    if (undefined === result && false !== warn)
+    if (undefined === result && true === warn)
         console.log('Warning: reusing message "' + msg + '" in same round');
     else if (result)
         console.log(msg);

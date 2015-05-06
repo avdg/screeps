@@ -2,6 +2,7 @@
 
 var assert = require('assert');
 
+var generics = require('../../scripts/_generics.js');
 var utils = require('../../scripts/_utils');
 
 function reset() {
@@ -97,7 +98,58 @@ describe("Scripts: _utils", function() {
     });
 
     describe('logOnce', function() {
-        // No testing unless we can mock console
+        it('Should only only produce 1 message if repeated in same round', function() {
+            var buffer = [];
+            var f = function() {
+                utils.logOnce("Test");
+                utils.logOnce("Test");
+            };
+
+            assert.equal(undefined, generics.bufferConsole(f, buffer));
+            assert.deepEqual([["Test"]], buffer);
+        });
+
+        it('Should give warnings if requested', function() {
+            var buffer = [];
+            var f = function() {
+                utils.logOnce("Test", true);
+                utils.logOnce("Test", true);
+            };
+
+            assert.equal(undefined, generics.bufferConsole(f, buffer));
+            assert.deepEqual(
+                [["Test"], ["Warning: reusing message \"Test\" in same round"]],
+                buffer
+            );
+        });
+
+        it('Should ignore messages repeated in the next round', function() {
+            var buffer = [];
+            var f = function() {
+                utils.logOnce("Test");
+
+                // Enter new game tick
+                Game.time++;
+                utils.logOnce("Test");
+            };
+
+            assert.equal(undefined, generics.bufferConsole(f, buffer));
+            assert.deepEqual([["Test"]], buffer);
+        });
+
+        it('Should not warn about ignored messages in next round', function() {
+            var buffer = [];
+            var f = function() {
+                utils.logOnce("Test", true);
+
+                // Enter new game tick
+                Game.time++;
+                utils.logOnce("Test", true);
+            };
+
+            assert.equal(undefined, generics.bufferConsole(f, buffer));
+            assert.deepEqual([["Test"]], buffer);
+        });
     });
 
     describe('isFirstTurn', function() {
