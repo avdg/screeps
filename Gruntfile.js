@@ -10,9 +10,13 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
         blanket: {
-            coverage: {
+            coverage1: {
                 src: ['scripts/'],
                 dest: 'lib-cov/scripts/'
+            },
+            coverage2: {
+                src: ['lib/codegen'],
+                dest: 'lib-cov/lib/codegen'
             }
         },
         copy: {
