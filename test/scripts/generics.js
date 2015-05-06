@@ -13,8 +13,8 @@ describe("Scripts: _generics", function() {
             };
             var buffer = [];
 
-            assert.equal("foo", generics.bufferConsole(f, buffer));
-            assert.deepEqual([["Hello world!"]], buffer);
+            assert.equal(generics.bufferConsole(f, buffer), "foo");
+            assert.deepEqual(buffer, [["Hello world!"]]);
         });
 
         it('Should expect to be given a buffer', function() {
@@ -36,23 +36,23 @@ describe("Scripts: _generics", function() {
 
     describe('generator', function() {
         it('Should return a string', function() {
-            assert.equal("string", typeof generics.generator());
+            assert.equal(typeof generics.generator(), "string");
         });
     });
 
     describe('parseCommand', function() {
         it('Should parse these given commands without problems', function() {
             assert.deepEqual(
-                ['test', 'muted', 'sound'],
-                generics.parseCommand('test muted sound')
+                generics.parseCommand('test muted sound'),
+                ['test', 'muted', 'sound']
             );
             assert.deepEqual(
-                ['test', '\\mute"ed', 'sound'],
-                generics.parseCommand('test "\\\\mute\\"ed" sound')
+                generics.parseCommand('test "\\\\mute\\"ed" sound'),
+                ['test', '\\mute"ed', 'sound']
             );
             assert.deepEqual(
-                ['test', 'mute', 'sound'],
-                generics.parseCommand('test "mute"sound')
+                generics.parseCommand('test "mute"sound'),
+                ['test', 'mute', 'sound']
             );
         });
     });

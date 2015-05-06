@@ -31,69 +31,69 @@ describe("Scripts: _utils", function() {
         it('Should return a number higher than 0 when giving an array of body parts', function() {
             var result = utils.getCreepCost([TOUGH]);
 
-            assert.equal("number", typeof result);
-            assert.equal(true,     result > 0);
+            assert.equal(typeof result, "number");
+            assert.equal(result > 0,    true);
         });
 
         it('Should return -1 when invalid parts are passed', function() {
             var result = utils.getCreepCost(["foo"]);
 
-            assert.equal("number", typeof result);
-            assert.equal(true,     result === -1);
+            assert.equal(typeof result, "number");
+            assert.equal(result === -1, true);
         });
     });
 
     describe('getTmp', function() {
         it('Should return an empty object', function() {
-            assert.deepEqual({}, utils.getTmp());
+            assert.deepEqual(utils.getTmp(), {});
         });
 
         it('Should remember set values', function() {
             var tmp = utils.getTmp();
-            assert.deepEqual({}, tmp);
+            assert.deepEqual(tmp, {});
 
             tmp.foo = "bar";
-            assert.deepEqual(tmp,          utils.getTmp());
-            assert.deepEqual({foo: "bar"}, utils.getTmp());
+            assert.deepEqual(utils.getTmp(), tmp);
+            assert.deepEqual(utils.getTmp(), {foo: "bar"});
         });
 
         it('Should be empty on the next round', function() {
-            assert.deepEqual({}, utils.getTmp());
+            assert.deepEqual(utils.getTmp(), {});
         });
     });
 
     describe('dontRepeat', function() {
         it('Should return true if message is unique', function() {
-            assert.strictEqual(true, utils.dontRepeat('Spam!', 'test'));
+            assert.strictEqual(utils.dontRepeat('Spam!', 'test'), true);
         });
 
         it('Should return undefined if message is send twice in same round', function() {
-            assert.strictEqual(true,      utils.dontRepeat('Spam!', 'test'));
-            assert.strictEqual(undefined, utils.dontRepeat('Spam!', 'test'));
-            assert.strictEqual(undefined, utils.dontRepeat('Spam!', 'test'));
+            assert.strictEqual(utils.dontRepeat('Spam!', 'test'), true);
+            assert.strictEqual(utils.dontRepeat('Spam!', 'test'), undefined);
+            assert.strictEqual(utils.dontRepeat('Spam!', 'test'), undefined);
         });
 
         it('Should return false if message was send previous round', function() {
-            assert.strictEqual(true, utils.dontRepeat('Spam!', 'test'));
+            assert.strictEqual(utils.dontRepeat('Spam!', 'test'), true);
 
             // Enter new game tick
             Game.time++;
 
-            assert.strictEqual(false,     utils.dontRepeat('Spam!', 'test'));
-            assert.strictEqual(undefined, utils.dontRepeat('Spam!', 'test'));
-            assert.strictEqual(undefined, utils.dontRepeat('Spam!', 'test'));
+            assert.strictEqual(utils.dontRepeat('Spam!', 'test'), false);
+            assert.strictEqual(utils.dontRepeat('Spam!', 'test'), undefined);
+            assert.strictEqual(utils.dontRepeat('Spam!', 'test'), undefined);
         });
 
         it('Should forget the message after 2 turns', function() {
-            assert.strictEqual(true, utils.dontRepeat('Spam!', 'test'));
+            assert.strictEqual(utils.dontRepeat('Spam!', 'test'), true);
 
             // Move 2 game ticks further
             Game.time++;
             Game.time++;
 
-            assert.strictEqual(true,      utils.dontRepeat('Spam!', 'test'));
-            assert.strictEqual(undefined, utils.dontRepeat('Spam!', 'test'));
-            assert.strictEqual(undefined, utils.dontRepeat('Spam!', 'test'));
+            assert.strictEqual(utils.dontRepeat('Spam!', 'test'), true);
+            assert.strictEqual(utils.dontRepeat('Spam!', 'test'), undefined);
+            assert.strictEqual(utils.dontRepeat('Spam!', 'test'), undefined);
         });
     });
 
@@ -105,8 +105,8 @@ describe("Scripts: _utils", function() {
                 utils.logOnce("Test");
             };
 
-            assert.equal(undefined, generics.bufferConsole(f, buffer));
-            assert.deepEqual([["Test"]], buffer);
+            assert.equal(generics.bufferConsole(f, buffer), undefined);
+            assert.deepEqual(buffer, [["Test"]]);
         });
 
         it('Should give warnings if requested', function() {
@@ -116,10 +116,10 @@ describe("Scripts: _utils", function() {
                 utils.logOnce("Test", true);
             };
 
-            assert.equal(undefined, generics.bufferConsole(f, buffer));
+            assert.equal(generics.bufferConsole(f, buffer), undefined);
             assert.deepEqual(
-                [["Test"], ["Warning: reusing message \"Test\" in same round"]],
-                buffer
+                buffer,
+                [["Test"], ["Warning: reusing message \"Test\" in same round"]]
             );
         });
 
@@ -133,8 +133,8 @@ describe("Scripts: _utils", function() {
                 utils.logOnce("Test");
             };
 
-            assert.equal(undefined, generics.bufferConsole(f, buffer));
-            assert.deepEqual([["Test"]], buffer);
+            assert.equal(generics.bufferConsole(f, buffer), undefined);
+            assert.deepEqual(buffer, [["Test"]]);
         });
 
         it('Should not warn about ignored messages in next round', function() {
@@ -147,22 +147,22 @@ describe("Scripts: _utils", function() {
                 utils.logOnce("Test", true);
             };
 
-            assert.equal(undefined, generics.bufferConsole(f, buffer));
-            assert.deepEqual([["Test"]], buffer);
+            assert.equal(generics.bufferConsole(f, buffer), undefined);
+            assert.deepEqual(buffer, [["Test"]]);
         });
     });
 
     describe('isFirstTurn', function() {
         it("Should return true if turn equals to zero", function() {
-            assert.strictEqual(true, utils.isFirstTurn());
+            assert.strictEqual(utils.isFirstTurn(), true);
         });
 
         it("Should return false if turn not equals zero or ai has state", function() {
-            assert.strictEqual(true, utils.isFirstTurn());
+            assert.strictEqual(utils.isFirstTurn(), true);
 
             // Enter a new game tick
             Game.time++;
-            assert.strictEqual(false, utils.isFirstTurn());
+            assert.strictEqual(utils.isFirstTurn(), false);
         });
     });
 });
