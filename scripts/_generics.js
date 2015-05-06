@@ -1,5 +1,31 @@
 'use strict';
 
+var bufferConsole = function(f, buffer) {
+    if (!Array.isArray(buffer)) {
+        throw new Error("Invalid buffer given");
+    }
+
+    // Set up console replacement
+    var tmp = console.log;
+    console.log = function() {
+        var arr = [];
+
+        for (var i = 0; i < arguments.length; i++) {
+            arr[arr.length] = arguments[i];
+        }
+
+        buffer[buffer.length] = arr;
+    };
+
+    // Do the actual work
+    var result = f();
+
+    // Reset console
+    console.log = tmp;
+
+    return result;
+};
+
 // Just using Japanese romaji characters as building blocks :-)
 var nameParts = [
      'a',  'e',  'u',  'i',  'o',
@@ -65,6 +91,7 @@ var parseCommand = function(command) {
 };
 
 module.exports = {
+    bufferConsole: bufferConsole,
     generator: generator,
     parseCommand: parseCommand,
 };

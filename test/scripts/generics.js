@@ -5,6 +5,35 @@ var assert = require('assert');
 var generics = require('../../scripts/_generics');
 
 describe("Scripts: _generics", function() {
+    describe("bufferConsole", function() {
+        it('Should buffer console output', function() {
+            var f = function () {
+                console.log("Hello world!");
+                return "foo";
+            };
+            var buffer = [];
+
+            assert.equal("foo", generics.bufferConsole(f, buffer));
+            assert.deepEqual([["Hello world!"]], buffer);
+        });
+
+        it('Should expect to be given a buffer', function() {
+            var f = function() {
+                console.log("Hello world!");
+                return "foo";
+            };
+            var executeWithoutBuffer = function() {
+                generics.bufferConsole(f);
+            };
+            var check = function(e) {
+                return e instanceof Error &&
+                    e.message === "Invalid buffer given";
+            };
+
+            assert.throws(executeWithoutBuffer, check);
+        });
+    });
+
     describe('generator', function() {
         it('Should return a string', function() {
             assert.equal("string", typeof generics.generator());
