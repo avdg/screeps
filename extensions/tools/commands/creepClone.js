@@ -13,7 +13,7 @@ var duplicateCreep = function (creep, priority) {
     }
 
     if ((typeof spawn) !== 'string' && creep.pos) {
-        spawn = creep.pos.findClosest(GAME.MY_SPAWNS).name;
+        spawn = creep.pos.findClosest(FIND_MY_SPAWNS).name;
     } else {
         Memory[priority].push({
             role: creep.role, memory: _.cloneDeep(creep.memory)
