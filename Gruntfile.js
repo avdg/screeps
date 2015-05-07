@@ -100,7 +100,8 @@ module.exports = function(grunt) {
         'clean:test',
         'blanket',
         'copy:coverage',
-        'mochaTest',
+        'mochaTest:test',
+        'mochaTest:coverage',
         'coveralls'
     ]);
 
