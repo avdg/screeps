@@ -50,7 +50,7 @@ There is no template for `stages_*.js`, just make it fit in `main.js`
 
 ##### Commands
 *Executes flag commands - called by unit_flags or `require('_utils').exec(<command>, ...)`*
-- Command extensions can be found in `extensions/<any directory>/commands`
+- Command extensions can be found in `extensions/<any directory>/commands/`
 
 #### Tools
 *Should make writing ai's a little bit easier*
@@ -73,5 +73,5 @@ There is no template for `stages_*.js`, just make it fit in `main.js`
 #### `Stage_controller`
 ```
  `- Runs preController or postController function of unit controllers (unit_*.js)
-     `- unit_flag.pre() Plays with commands from command_*.js when needed
+     `- unit_flag.pre() Plays with commands from `extensions/<any directory>/commands/` when needed
 ```
