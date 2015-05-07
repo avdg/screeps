@@ -11,16 +11,41 @@
 ### Ai rules / Ai constrains
 - All creeps must have a role
 
+## Installing
+
+- Make sure you've installed [node](https://nodejs.org/) 0.12 (0.10 should currently work fine too).
+- Open a terminal and install grunt with [npm](https://www.npmjs.com/) like this: `npm install -g grunt-cli`.
+- Make now sure the terminal is pointing to this project. Then run `npm install` to install dependencies.
+
+### Configuring
+- Open `Gruntfile.js` in an editor, look for `screeps: {`, fill in the options and save the file.
+- In a terminal open in a copy of this project: type `grunt deploy`
+- If done properly, this should push the code to screeps.com succesfully.
+
+### Some tricks
+
+- `grunt deploy`: Pushes code to screeps.com
+- `grunt test`: To make sure that the code is passing the checks
+- `grunt` is currently set to `grunt test`
+
 ## `Code` structure
 
-Main.js should be the script called first by the ai-runner
+`scripts/main.js` is the boot file, its being executed once a tick in the screeps sandbox.
+Please note that not all code of my current ai are included in this repo.
 
-### Files in `script/`
+### Files in `scripts/`
 
 #### Special files
 - `_generic.js` Contains main library functions
 - `_utils.js` Contains library functions that reads from or uses the screeps api
 - `_settings.js` Drain for global settings
+
+When using `grunt deploy`, the command will copy the content of `scripts/` to
+`build/deploy`, `_generated.js` will be automagically be generated and be put in
+the `build/deploy` folder as well.
+
+`_generated.js` contains generated code. The code contains code from extensions
+and some more stuff may be added to it in the future.
 
 #### Templates
 - `command_FOO.js` Flag command template
