@@ -4,6 +4,7 @@ module.exports = function(grunt) {
 
     grunt.loadTasks('tasks');
     grunt.loadNpmTasks('grunt-blanket');
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-coveralls');
     grunt.loadNpmTasks('grunt-mocha-test');
@@ -19,6 +20,10 @@ module.exports = function(grunt) {
                 src: ['lib/codegen'],
                 dest: 'lib-cov/lib/codegen'
             }
+        },
+        clean: {
+            deploy: ['build'],
+            test: ['coverage', 'lib-cov'],
         },
         copy: {
             coverage: {
@@ -85,12 +90,14 @@ module.exports = function(grunt) {
     ]);
 
     grunt.task.registerTask('deploy', [
+        'clean:deploy',
         'copy:deploy',
         'codegen',
         'screeps'
     ]);
 
     grunt.task.registerTask('test', [
+        'clean:test',
         'blanket',
         'copy:coverage',
         'mochaTest',
