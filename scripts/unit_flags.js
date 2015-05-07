@@ -1,7 +1,7 @@
 'use strict';
 
 var generics = require('_generics');
-var commands = require('commands');
+var commands = Game.extensions.commands;
 
 function parseFlag(flag) {
     var parameters = generics.parseCommand(flag.name);

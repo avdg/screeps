@@ -1,7 +1,5 @@
 'use strict';
 
-var commands;
-
 /**
  * Usage Calls command command_<parameter1> to execute its native property if available
  */
@@ -10,9 +8,7 @@ var exec = function() {
         throw new Error('Expected at least 1 parameter to execute a function');
     }
 
-    if (!commands) {
-        commands = require('commands');
-    }
+    var commands = Game.extensions.commands;
 
     var cmd = arguments[0];
 

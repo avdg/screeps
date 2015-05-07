@@ -1,9 +1,7 @@
 'use strict';
 
-var addQueue = require('command_addQueue').addQueue;
-
 function command(flag, parameters) {
-    addQueue("spawnPriorityQueue", flag, parameters);
+    Game.extensions.commands.addQueue("spawnPriorityQueue", flag, parameters);
 }
 
 module.exports = {

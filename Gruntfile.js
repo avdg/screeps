@@ -2,6 +2,7 @@
 
 module.exports = function(grunt) {
 
+    grunt.loadTasks('tasks');
     grunt.loadNpmTasks('grunt-blanket');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-coveralls');
@@ -75,12 +76,17 @@ module.exports = function(grunt) {
         }
     });
 
+    grunt.task.registerTask('codegen', [
+        'screepsParseAiExtensions'
+    ]);
+
     grunt.task.registerTask('check', [
         'mochaTest:test'
     ]);
 
     grunt.task.registerTask('deploy', [
         'copy:deploy',
+        'codegen',
         'screeps'
     ]);
 

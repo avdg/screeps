@@ -1,6 +1,7 @@
 'use strict';
 
 function helpCommand(flag, parameters) {
+    var commands = Game.extensions.commands;
     var commandFilter = function(input) {
         return function(command) {
             return command.indexOf(input) !== -1 || input.indexOf(command) !== -1;
@@ -42,20 +43,8 @@ function helpCommand(flag, parameters) {
     console.log('Flag command help:\n=== ' + parameters[1] + ' ===\n' + commands[parameters[1]].help);
 }
 
-var commands = {
-    // FOO:           require('command_FOO'),
-    addPriorityQueue: require('command_addPriorityQueue'),
-    addQueue:         require('command_addQueue'),
-    creepClone:       require('command_creepClone'),
-    camp:             require('command_camp'),
-    killAll:          require('command_killAll'),
-    removeFlag:       require('command_removeFlag'),
-};
-
-commands.help = {
+module.exports = {
     exec: helpCommand,
     command: "help",
     help: "Description:\n- Shows users how to use a command\n\nUsages:\n- help [&lt;command&gt;]",
 };
-
-module.exports = commands;
