@@ -50,8 +50,7 @@ There is no template for `stages_*.js`, just make it fit in `main.js`
 
 ##### Commands
 *Executes flag commands - called by unit_flags or `require('_utils').exec(<command>, ...)`*
-- `commmand_*.js` Runs user commands (might also contain useful scripts)
-- `commands.js` A dictionary of active commands **activate your commands here**
+- Command extensions can be found in `extensions/<any directory>/commands`
 
 #### Tools
 *Should make writing ai's a little bit easier*
