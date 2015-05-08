@@ -17,8 +17,14 @@ var bufferConsole = function(f, buffer) {
         buffer[buffer.length] = arr;
     };
 
-    // Do the actual work
-    var result = f();
+    // Catch errors so console.log still has its original value when leaving this function
+    var result;
+    try {
+        result = f(); // Do the actual work and store result
+    } catch (e) {
+        console.log = tmp;
+        throw e;
+    }
 
     // Reset console
     console.log = tmp;

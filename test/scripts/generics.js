@@ -32,6 +32,25 @@ describe("Scripts: _generics", function() {
 
             assert.throws(executeWithoutBuffer, check);
         });
+
+        it('Should catch errors and rethrow to avoid console.log dereferences', function() {
+            var backup = console.log;
+            var buffer = [];
+            var f = function() {
+                throw Error("Error!");
+            };
+            var executeBufferConsole = function() {
+                generics.bufferConsole(f, buffer);
+            };
+            var check = function(e) {
+                return e instanceof Error &&
+                    e.message === "Error!";
+            };
+
+            assert.throws(executeBufferConsole, check);
+            assert.strictEqual(console.log, backup);
+            assert.deepEqual(buffer, []);
+        });
     });
 
     describe('generator', function() {
