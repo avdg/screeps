@@ -12,10 +12,14 @@ var exec = function() {
 
     var cmd = arguments[0];
 
-    if (cmd in commands && "native" in commands[cmd]) {
+    if (commands[cmd] === undefined) {
+        throw new Error("Command " + cmd + " doesn't exist");
+    }
+
+    if (commands[cmd].native !== undefined && typeof commands[cmd].native === "function") {
         return commands[cmd].native.apply(null, arguments);
     } else {
-        throw new Error('Command not found');
+        throw new Error("Can't execute command " + cmd + " natively");
     }
 };
 
