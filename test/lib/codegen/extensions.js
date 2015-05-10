@@ -11,7 +11,7 @@ var generics = require('../../../scripts/_generics');
 var extensionMockLocation = path.join(__dirname, "../../../lib/mocks/extensions/");
 var extensionLocation = path.join(extensionMockLocation, "demo/commands/test.js");
 var extensionContent = "'use strict';\n\nfunction command(flag, parameters) {\n    console.log(\"Hello world\");\n}\n\nmodule.exports = {\n    exec: command,\n    command: \"test\",\n    native: null, // require('_utils').exec('command');\n    help: 'Description:\\n- Executes Test\\n\\nUsage:\\n- Test',\n};";
-var codegen = "(function(){\nGame.extensions = {\ncommands: {\ntest: (function(){\nvar module = {};(function(){\n\'use strict\';\n\nfunction command(flag, parameters) {\n    console.log(\"Hello world\");\n}\n\nmodule.exports = {\n    exec: command,\n    command: \"test\",\n    native: null, \/\/ require(\'_utils\').exec(\'command\');\n    help: \'Description:\\n- Executes Test\\n\\nUsage:\\n- Test\',\n};\n}());\n\nreturn module.exports;\n}()),\n},\n};\n}());\n\n";
+var codegen = "function(){\nGame.extensions = {\ncommands: {\ntest: (function(){\nvar module = {};(function(){\n\'use strict\';\n\nfunction command(flag, parameters) {\n    console.log(\"Hello world\");\n}\n\nmodule.exports = {\n    exec: command,\n    command: \"test\",\n    native: null, \/\/ require(\'_utils\').exec(\'command\');\n    help: \'Description:\\n- Executes Test\\n\\nUsage:\\n- Test\',\n};\n}());\n\nreturn module.exports;\n}()),\n},\n};\n}";
 
 describe('CodeGen: extensions', function() {
     describe('check', function() {
@@ -217,7 +217,7 @@ describe('CodeGen: extensions', function() {
     describe('parse', function() {
         it('Should read the extensions/ folder and return code', function() {
             var result = extensionsCodegen.parse({
-                src: extensionMockLocation
+                extensions: extensionMockLocation
             });
 
             assert.equal(result, codegen);
