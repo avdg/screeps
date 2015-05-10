@@ -80,21 +80,12 @@ There is no template for `stages_*.js`, just make it fit in `main.js`
 - Use `grunt deploy` to send code to the screeps simulator
 
 ### Call hierarchy
-
-#### `Main`
 ```
  `- Start timer
  `- Run stage controllers (stage_*.js)
- |   `- stage_controller.pre() (see section stage_controller)
- |   `- stage_creeps()
- |   |    `- Runs roles (role_*.js)
- |   `- stage_spawners()
- |   `- stage_controller.post() (see section stage_controller)
+ |   `- stage_controller.pre() Setup and triggers preControllers in unit extensions
+ |   `- stage_creeps() Iterates over every creep (give orders)
+ |   `- stage_spawners() Iterates over every spawner (give spawn jobs)
+ |   `- stage_controller.post() Shutdown and triggers postController in unit extensions
  `- Stop timer
-```
-
-#### `Stage_controller`
-```
- `- Runs preController or postController function of unit controllers (unit_*.js)
-     `- unit_flag.pre() Plays with commands from `extensions/<any directory>/commands/` when needed
 ```
