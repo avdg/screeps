@@ -17,7 +17,7 @@
 - Open a terminal and install grunt with [npm](https://www.npmjs.com/) like this: `npm install -g grunt-cli`.
 - Make now sure the terminal is pointing to this project. Then run `npm install` to install dependencies.
 
-### Configuring
+### Build configuration
 - Open `Gruntfile.js` in an editor, look for `screeps: {`, fill in the options and save the file.
 - In a terminal open in a copy of this project: type `grunt deploy`
 - If done properly, this should push the code to screeps.com succesfully.
