@@ -3,7 +3,7 @@
 var _ = require('lodash');
 var generics = require('_generics');
 var utils = require('_utils');
-var roles = require('roles');
+var roles = Game.extensions.roles;
 
 function creepNameGenerator(prefix) {
     var name;

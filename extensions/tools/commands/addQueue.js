@@ -1,8 +1,8 @@
 'use strict';
 
-var roles = require('roles');
-
 function addQueue(queue, flag, parameters) {
+    var roles = Game.extensions.roles;
+
     if (parameters.length < 2) {
         console.log('Flag command addQueue: addQueue command has not enough parameters');
         flag.remove();

@@ -1,13 +1,12 @@
 'use strict';
 
 var generics = require('_generics');
-var commands = Game.extensions.commands;
 
 function parseFlag(flag) {
     var parameters = generics.parseCommand(flag.name);
 
-    if (parameters[0] in commands) {
-        commands[parameters[0]].exec(flag, parameters);
+    if (parameters[0] in Game.extensions.commands) {
+        Game.extensions.commands[parameters[0]].exec(flag, parameters);
     }
 }
 

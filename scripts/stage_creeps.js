@@ -1,6 +1,6 @@
 'use strict';
 
-var roles = require('roles');
+var roles = Game.extensions.roles;
 
 module.exports = function() {
     var name, role;

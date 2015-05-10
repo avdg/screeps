@@ -38,5 +38,5 @@ module.exports = {
     build: build,
     init: init,
     turn: turn,
-    endTurn: endTrun,
+    endTurn: endTurn,
 };

@@ -70,8 +70,7 @@ There is no template for `stages_*.js`, just make it fit in `main.js`
 
 ##### Roles
 *Creep's given policy on what to do with their role - called by stage_creeps*
-- `role_*.js` Run's creeps with fitting role
-- `roles.js` A dictionary of active roles **activate your roles here**
+- Role extensions can be found in `extensions/<any directory>/roles/`
 
 ##### Commands
 *Executes flag commands - called by unit_flags or `require('_utils').exec(<command>, ...)`*
