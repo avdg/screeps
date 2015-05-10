@@ -65,8 +65,7 @@ There is no template for `stages_*.js`, just make it fit in `main.js`
 
 ##### Unit
 *Sets up and shuts down ai components, data and settings - called from stage_controller*
-- `unit_*.js` Runs a unit to manage a certain resource or task
-- `units.js` A dictionary of active units **activate your units here**
+- Unit extensions can be found in `extensions/<any directory>/roles/`
 
 ##### Roles
 *Creep's given policy on what to do with their role - called by stage_creeps*

@@ -2,7 +2,7 @@
 
 var utils = require('_utils');
 var settings = require('_settings');
-var units = require('units');
+var units = Game.extensions.units;
 
 function unitIterator(f) {
     var unit;
@@ -27,6 +27,8 @@ function firstTurn() {
 
     Memory.spawnQueue = settings.spawnQueue;
     Memory.spawnPriorityQueue = settings.spawnPriorityQueue;
+    Memory.spawns = {};
+    Memory.sources = {};
 }
 
 function pre() {
