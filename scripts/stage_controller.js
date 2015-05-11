@@ -1,8 +1,7 @@
 'use strict';
 
-var utils = require('_utils');
 var settings = require('_settings');
-var units = Game.extensions.units;
+var units = AI.extensions.units;
 
 function unitIterator(f) {
     var unit;
@@ -32,7 +31,7 @@ function firstTurn() {
 }
 
 function pre() {
-    if (utils.isFirstTurn()) {
+    if (AI.isFirstTurn()) {
         firstTurn();
     }
 

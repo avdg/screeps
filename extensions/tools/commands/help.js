@@ -1,7 +1,7 @@
 'use strict';
 
 function helpCommand(flag, parameters) {
-    var commands = Game.extensions.commands;
+    var commands = AI.extensions.commands;
     var commandFilter = function(input) {
         return function(command) {
             return command.indexOf(input) !== -1 || input.indexOf(command) !== -1;

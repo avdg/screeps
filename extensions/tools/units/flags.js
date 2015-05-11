@@ -1,12 +1,10 @@
 'use strict';
 
-var generics = require('_generics');
-
 function parseFlag(flag) {
-    var parameters = generics.parseCommand(flag.name);
+    var parameters = AI.parseCommand(flag.name);
 
-    if (parameters[0] in Game.extensions.commands) {
-        Game.extensions.commands[parameters[0]].exec(flag, parameters);
+    if (parameters[0] in AI.extensions.commands) {
+        AI.extensions.commands[parameters[0]].exec(flag, parameters);
     }
 }
 

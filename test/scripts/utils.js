@@ -9,16 +9,16 @@ function reset() {
     require('../../lib/mocks/gameStateStart')();
 }
 
+function includeGenerated() {
+    assert.equal(typeof AI === "object" && AI.extensions === "object", false);
+
+    require('../../lib/mocks/deploy/_generated.js')();
+}
+
 describe("Scripts: _utils", function() {
     beforeEach(reset);
 
     describe('exec', function() {
-        function includeGenerated() {
-            assert.equal(Game.extensions, undefined);
-
-            require('../../lib/mocks/deploy/_generated.js')();
-        }
-
         beforeEach(includeGenerated);
 
         it('Should fail when no arguments are passed', function() {
@@ -95,6 +95,8 @@ describe("Scripts: _utils", function() {
     });
 
     describe('getTmp', function() {
+        beforeEach(includeGenerated);
+
         it('Should return an empty object', function() {
             assert.deepEqual(utils.getTmp(), {});
         });

@@ -1,14 +1,12 @@
 'use strict';
 
 var _ = require('lodash');
-var generics = require('_generics');
-var utils = require('_utils');
-var roles = Game.extensions.roles;
+var roles = AI.extensions.roles;
 
 function creepNameGenerator(prefix) {
     var name;
     do {
-        name = prefix + ' ' + generics.generator();
+        name = prefix + ' ' + AI.generator();
     } while (name in Game.creeps);
 
     return name;
@@ -39,7 +37,7 @@ function createCreep(spawn, creep) {
     if (memory.role in roles) {
         var body = roles[memory.role].build();
 
-        if (utils.getCreepCost(body) > spawn.energy) {
+        if (AI.getCreepCost(body) > spawn.energy) {
             return -2;
         }
 

@@ -1,6 +1,6 @@
 'use strict';
 
-var roles = Game.extensions.roles;
+var roles = AI.extensions.roles;
 
 module.exports = function() {
     var name, role;

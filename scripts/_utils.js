@@ -8,7 +8,7 @@ var exec = function() {
         throw new Error('Expected at least 1 parameter to execute a function');
     }
 
-    var commands = Game.extensions.commands;
+    var commands = AI.extensions.commands;
 
     var cmd = arguments[0];
 
@@ -45,11 +45,11 @@ var getCreepCost = function(parts) {
  * Get some temporal storage
  */
 var getTmp = function() {
-    if (!Game.tmp) {
-        Game.tmp = {};
+    if (!AI.tmp) {
+        AI.tmp = {};
     }
 
-    return Game.tmp;
+    return AI.tmp;
 };
 
 /**

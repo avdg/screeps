@@ -5,7 +5,7 @@ var path = require('path');
 var codeGenerator = require('../lib/codegen/generator');
 
 module.exports = function(grunt) {
-    grunt.registerTask('screepsParseAiExtensions', 'Generates code from extensions and put them in Game.extensions', function() {
+    grunt.registerTask('screepsParseAiExtensions', 'Generates code from extensions and put them in Game.extensions (deprecated) and AI.extensions', function() {
         var options = this.options({
             'extensions': path.join(__dirname, "../extensions"),
             'output': path.join(__dirname, "../build/deploy/_generated.js")

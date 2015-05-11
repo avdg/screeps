@@ -1,7 +1,6 @@
 'use strict';
 
 var settings = require('_settings');
-var utils = require('_utils');
 
 // Required settings:
 // deathChecker.ignore = ['FOO'] Roles in this array shouldn't be replaced
@@ -31,7 +30,7 @@ var deathChecker = function() {
             removeQueue.push(i);
         } else if (settings.deathChecker.copy.indexOf(Memory.creeps[i].role) !== -1) {
             console.log('Unit deathChecker: Found dead creep ' + i + '. Copying...');
-            utils.exec('creepClone', {
+            AI.exec('creepClone', {
                 /* Fake creep object*/
                 role: Memory.creeps[i].role,
                 memory: Memory.creeps[i]
