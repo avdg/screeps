@@ -25,6 +25,7 @@
 ### Some tricks
 
 - `grunt deploy`: Pushes code to screeps.com
+- `grunt codegen`: Generates `_generated` and puts it in `build/deploy/`
 - `grunt test`: To make sure that the code is passing the checks
 - `grunt` is currently set to `grunt test`
 
@@ -33,46 +34,53 @@
 `scripts/main.js` is the boot file, its being executed once a tick in the screeps sandbox.
 Please note that not all code of my current ai are included in this repo.
 
-### Files in `scripts/`
+### AI script files
 
-#### Special files
-- `_generic.js` and `_utils.js` Are library function and their functions are
-  accessible through the AI object after `_generated` has been included.
-  While `_utils` uses the screeps api for its functons,
-  `_generic` uses only javascript functions as building blocks.
 - `_settings.js` Drain for global settings.
+- `_generic.js` Functions that only uses javascript features
+- `_utils.js` Functions using the screeps API
 
-When using `grunt deploy`, the command will copy the content of `scripts/` to
-`build/deploy`, `_generated.js` will be automagically be generated and be put in
-the `build/deploy` folder as well.
+#### AI Object
 
-`_generated.js` contains generated code. The code contains code from extensions
-and some more stuff may be added to it in the future.
+When including `_generated` it will expose the AI global.
+
+The AI object has `_generic` and `_utils` included, so there is no need to include these files.
+Simply use the AI object to access their functions.
+It also includes code from extensions accessible from `AI.extensions`.
+
+`_generated` is a generated file that only exists in the `build/deploy`
+folder when using `grunt deploy` or `grunt codegen`
+
+### Extensions
+
+After using `require('_generated')` it will expose the extensions as
+`AI.extensions.<type>.<plugin>`
+
+These files are coming from the `extensions/` directory with a structure as
+`extensions/<package>/<type>/<plugin>`
+
+When generating the extensions, all packages are virtually merged into a single package.
+This is how it ends up using the `AI.extensions.<type>.<plugin>` format.
+
+Current extension types are:
+- commands
+   - Located at `extensions/<any directory>/commands/`
+   - Executes flag commands
+   - Used when called by unit_flags or `AI.exec(<command>, ...)`
+- roles
+   - Located at `extensions/<any directory>/roles/`
+   - Gives creeps orders
+   - Called by stage_creeps, the plugin with the corresponding `Creep.memory.role` will be executed
+- units (soon renamed to hooks)
+   - Located at `extensions/<any directory>/units/`
+   - To be moved soon to `extensions/<any directory>/hooks/`
+   - Events when hooks are called (see `scripts/stage_controller`):
+     - preController: Called before giving spawns and creepers orders
+     - postController: Called before shutting down the AI
 
 #### Ai code
-##### Main
-*Bootstrap file - executes stages keeps track of time*
-- `main.js` Main ai script
-
-##### Stage
-*Main stages of the ai - called from main*
-- `stage_*.js` Runs a main stage of the ai **called manually by main.js**
-
-##### Unit
-*Sets up and shuts down ai components, data and settings - called from stage_controller*
-- Unit extensions can be found in `extensions/<any directory>/roles/`
-
-##### Roles
-*Creep's given policy on what to do with their role - called by stage_creeps*
-- Role extensions can be found in `extensions/<any directory>/roles/`
-
-##### Commands
-*Executes flag commands - called by unit_flags or `require('_utils').exec(<command>, ...)`*
-- Command extensions can be found in `extensions/<any directory>/commands/`
-
-#### Tools
-*Should make writing ai's a little bit easier*
-- Use `grunt deploy` to send code to the screeps simulator
+`scripts/main` is the boot file. From there it includes other files in the `script/` directory.
+Most of these scripts (called stages) utilizes code from extensions.
 
 ### Call hierarchy
 ```
