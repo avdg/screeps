@@ -36,9 +36,11 @@ Please note that not all code of my current ai are included in this repo.
 ### Files in `scripts/`
 
 #### Special files
-- `_generic.js` Contains main library functions
-- `_utils.js` Contains library functions that reads from or uses the screeps api
-- `_settings.js` Drain for global settings
+- `_generic.js` and `_utils.js` Are library function and their functions are
+  accessible through the Game object after `_generated` has been included.
+  While `_utils` uses the screeps api for its functons,
+  `_generic` uses only javascript functions as building blocks.
+- `_settings.js` Drain for global settings.
 
 When using `grunt deploy`, the command will copy the content of `scripts/` to
 `build/deploy`, `_generated.js` will be automagically be generated and be put in
