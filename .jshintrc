@@ -3,6 +3,8 @@
     "node": true,
     "mocha": true,
     "predef": [
+        "AI",
+
         "Game", "Memory", "console", "require",
 
         "FIND_EXIT_TOP", "FIND_EXIT_RIGHT", "FIND_EXIT_BOTTOM", "FIND_EXIT_LEFT",
