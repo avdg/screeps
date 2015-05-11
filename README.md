@@ -49,13 +49,6 @@ the `build/deploy` folder as well.
 `_generated.js` contains generated code. The code contains code from extensions
 and some more stuff may be added to it in the future.
 
-#### Templates
-- `command_FOO.js` Flag command template
-- `role_FOO.js` Creep's role template
-- `unit_FOO.js` Resource/task unit template
-
-There is no template for `stages_*.js`, just make it fit in `main.js`
-
 #### Ai code
 ##### Main
 *Bootstrap file - executes stages keeps track of time*
