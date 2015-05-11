@@ -37,7 +37,7 @@ Please note that not all code of my current ai are included in this repo.
 
 #### Special files
 - `_generic.js` and `_utils.js` Are library function and their functions are
-  accessible through the Game object after `_generated` has been included.
+  accessible through the AI object after `_generated` has been included.
   While `_utils` uses the screeps api for its functons,
   `_generic` uses only javascript functions as building blocks.
 - `_settings.js` Drain for global settings.
