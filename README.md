@@ -44,7 +44,8 @@ Please note that not all code of my current ai are included in this repo.
 
 When including `_generated` it will expose the AI global.
 
-The AI object has `_generic` and `_utils` included, so there is no need to include these files.
+The AI object has `_generic`, `_utils` and `_settings` included,
+so there is no need to include these files.
 Simply use the AI object to access their functions.
 It also includes code from extensions accessible from `AI.extensions`.
 
