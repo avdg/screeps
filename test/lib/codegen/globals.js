@@ -7,7 +7,7 @@ var globalsCodegen = require('../../../lib/codegen/globals');
 describe('Codegen: globals', function() {
     describe('generate', function() {
         it('Should generate code', function() {
-            var result = "function() {\n    _.merge(AI, require('_generics'));\n    _.merge(AI, require('_utils'));\n}";
+            var result = "function() {\n    _.merge(AI, require('_generics'));\n    _.merge(AI, require('_utils'));\n    _.merge(AI, require('_settings'));\n}";
 
             assert.equal(globalsCodegen.generate(), result);
         });

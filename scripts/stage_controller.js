@@ -1,7 +1,5 @@
 'use strict';
 
-var settings = require('_settings');
-
 function unitIterator(f) {
     var hook;
     for (hook in AI.extensions.hooks) {
@@ -23,8 +21,8 @@ function firstTurn() {
     }
     console.log('Controller: Memory reset');
 
-    Memory.spawnQueue = settings.spawnQueue;
-    Memory.spawnPriorityQueue = settings.spawnPriorityQueue;
+    Memory.spawnQueue = AI.settings.spawnQueue;
+    Memory.spawnPriorityQueue = AI.settings.spawnPriorityQueue;
     Memory.spawns = {};
     Memory.sources = {};
 }

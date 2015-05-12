@@ -1,7 +1,5 @@
 'use strict';
 
-var settings = require('_settings');
-
 var storeStats = function(time, stats) {
 
     var i, value, tmp;
@@ -97,7 +95,7 @@ var updateStats = function() {
 };
 
 var printStatus = function() {
-   if (Game.time % settings.statusFrequency !== 0) {
+   if (Game.time % AI.settings.statusFrequency !== 0) {
        return;
    }
 

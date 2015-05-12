@@ -1,7 +1,5 @@
 'use strict';
 
-var settings = require('_settings');
-
 // Required settings:
 // deathChecker.ignore = ['FOO'] Roles in this array shouldn't be replaced
 // deathChecker.copy = ['BAR'] Roles in this array should be replaced
@@ -23,12 +21,12 @@ var deathChecker = function() {
             continue; // Ignore when creep is found alive
         }
 
-        if (settings.deathChecker.ignore.indexOf(Memory.creeps[i].role) !== -1 ||
+        if (AI.settings.deathChecker.ignore.indexOf(Memory.creeps[i].role) !== -1 ||
             ("copyOnDeath" in Memory.creeps[i] && Memory.creeps[i].copyOnDeath === false)
         ) {
             console.log('Unit deathChecker: Found dead creep ' + i + '. Deleting...');
             removeQueue.push(i);
-        } else if (settings.deathChecker.copy.indexOf(Memory.creeps[i].role) !== -1) {
+        } else if (AI.settings.deathChecker.copy.indexOf(Memory.creeps[i].role) !== -1) {
             console.log('Unit deathChecker: Found dead creep ' + i + '. Copying...');
             AI.exec('creepClone', {
                 /* Fake creep object*/
