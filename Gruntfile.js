@@ -82,7 +82,7 @@ module.exports = function(grunt) {
     });
 
     grunt.task.registerTask('codegen', [
-        'screepsParseAiExtensions'
+        'screepsCodeGenerator'
     ]);
 
     grunt.task.registerTask('check', [
@@ -94,6 +94,10 @@ module.exports = function(grunt) {
         'copy:deploy',
         'codegen',
         'screeps'
+    ]);
+
+    grunt.task.registerTask('setup', [
+        'codegen'
     ]);
 
     grunt.task.registerTask('test', [

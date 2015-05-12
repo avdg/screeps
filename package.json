@@ -7,9 +7,11 @@
     "test": "tests"
   },
   "scripts": {
+    "install": "grunt setup",
     "test": "grunt test"
   },
   "dependencies": {
+    "grunt": "0.4.x",
     "grunt-cli": "0.1.x",
     "grunt-blanket": "0.0.8",
     "grunt-contrib-clean": "0.6.x",
