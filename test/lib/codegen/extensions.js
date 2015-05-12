@@ -10,8 +10,8 @@ var generics = require('../../../scripts/_generics');
 
 var extensionMockLocation = path.join(__dirname, "../../../lib/mocks/extensions/");
 var extensionLocation = path.join(extensionMockLocation, "demo/commands/test.js");
-var extensionContent = "'use strict';\n\nfunction command(flag, parameters) {\n    console.log(\"Hello world\");\n}\n\nmodule.exports = {\n    exec: command,\n    command: \"test\",\n    native: null, // require('_utils').exec('command');\n    help: 'Description:\\n- Executes Test\\n\\nUsage:\\n- Test',\n};";
-var codegen = "function(){\nGame.extensions = AI.extensions = {\ncommands: {\ntest: (function(){\nvar module = {};(function(){\n\'use strict\';\n\nfunction command(flag, parameters) {\n    console.log(\"Hello world\");\n}\n\nmodule.exports = {\n    exec: command,\n    command: \"test\",\n    native: null, \/\/ require(\'_utils\').exec(\'command\');\n    help: \'Description:\\n- Executes Test\\n\\nUsage:\\n- Test\',\n};\n}());\n\nreturn module.exports;\n}()),\n},\n};\n}";
+var extensionContentParsed = "function command(flag, parameters) {\n    console.log(\"Hello world\");\n}\n\nmodule.exports = {\n    exec: command,\n    command: \"test\",\n    native: null, // require('_utils').exec('command');\n    help: 'Description:\\n- Executes Test\\n\\nUsage:\\n- Test',\n};";
+var codegen = "function(){\nGame.extensions = AI.extensions = {\ncommands: {\ntest: (function(){\nvar module = {};(function(){\nfunction command(flag, parameters) {\n    console.log(\"Hello world\");\n}\n\nmodule.exports = {\n    exec: command,\n    command: \"test\",\n    native: null, \/\/ require(\'_utils\').exec(\'command\');\n    help: \'Description:\\n- Executes Test\\n\\nUsage:\\n- Test\',\n};\n}());\n\nreturn module.exports;\n}()),\n},\n};\n}";
 
 describe('CodeGen: extensions', function() {
     describe('check', function() {
@@ -234,7 +234,7 @@ describe('CodeGen: extensions', function() {
                         extensionMockLocation
                     );
                 }, buffer),
-                {commands: {test: extensionContent}}
+                {commands: {test: extensionContentParsed}}
             );
 
             assert.deepEqual(buffer, []);
@@ -247,7 +247,7 @@ describe('CodeGen: extensions', function() {
                 extensionsCodegen.test.readExtensionPacket(
                     path.join(extensionMockLocation, "demo/")
                 ),
-                {commands: {test: extensionContent}}
+                {commands: {test: extensionContentParsed}}
             );
         });
     });
@@ -258,7 +258,7 @@ describe('CodeGen: extensions', function() {
                 extensionsCodegen.test.readExtensionSubPacket(
                     path.join(extensionMockLocation, "demo/commands")
                 ),
-                {test: extensionContent}
+                {test: extensionContentParsed}
             );
         });
     });
@@ -267,7 +267,7 @@ describe('CodeGen: extensions', function() {
         it('Should read the test extension', function() {
             assert.equal(
                 extensionsCodegen.test.readExtension(extensionLocation),
-                extensionContent
+                extensionContentParsed
             );
         });
     });
