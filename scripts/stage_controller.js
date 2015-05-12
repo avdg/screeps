@@ -1,12 +1,11 @@
 'use strict';
 
 var settings = require('_settings');
-var units = AI.extensions.units;
 
 function unitIterator(f) {
-    var unit;
-    for (unit in units) {
-        units[unit][f]();
+    var hook;
+    for (hook in AI.extensions.hooks) {
+        AI.extensions.hooks[hook][f]();
     }
 }
 

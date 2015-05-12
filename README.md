@@ -71,9 +71,8 @@ Current extension types are:
    - Located at `extensions/<any directory>/roles/`
    - Gives creeps orders
    - Called by stage_creeps, the plugin with the corresponding `Creep.memory.role` will be executed
-- units (soon renamed to hooks)
-   - Located at `extensions/<any directory>/units/`
-   - To be moved soon to `extensions/<any directory>/hooks/`
+- hooks (replaced units)
+   - Located at `extensions/<any directory>/hooks/`
    - Events when hooks are called (see `scripts/stage_controller`):
      - preController: Called before giving spawns and creepers orders
      - postController: Called before shutting down the AI
