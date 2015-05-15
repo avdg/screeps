@@ -59,6 +59,16 @@ describe("Scripts: _generics", function() {
         });
     });
 
+    describe('getTimeDiff', function() {
+        it('Should return a difference', function() {
+            assert.equal(generics.getTimeDiff(1, 11), 10);
+        });
+
+        it ('Should cut off decimals to 2 digits precision', function() {
+            assert.equal(generics.getTimeDiff(1.12345678, 12.23456789), 11.11);
+        });
+    });
+
     describe('parseCommand', function() {
         it('Should parse these given commands without problems', function() {
             assert.deepEqual(

@@ -66,6 +66,18 @@ var generator = function(options) {
     return name;
 };
 
+/**
+ * Calculates and formats the time difference between two measurements
+ *
+ * @param start Number Time measurement on start
+ * @param stop  Number Time measurement on stop
+ *
+ * @return Number Time difference
+ */
+var getTimeDiff = function(start, stop) {
+    return Math.round((stop - start) * 100) / 100;
+};
+
 var parseCommand = function(command) {
     var args = [];
     var pos = 0;
@@ -99,5 +111,6 @@ var parseCommand = function(command) {
 module.exports = {
     bufferConsole: bufferConsole,
     generator: generator,
+    getTimeDiff: getTimeDiff,
     parseCommand: parseCommand,
 };
