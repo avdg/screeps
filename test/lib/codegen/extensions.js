@@ -16,27 +16,34 @@ var codegen = "function(){\nGame.extensions = AI.extensions = {\ncommands: {\nte
 describe('CodeGen: extensions', function() {
     describe('check', function() {
         it('Should not give warnings if there are no conflicts', function() {
-            assert.deepEqual(
-                extensionsCodegen.test.check(
+            var errors = [];
+            var check = function() {
+                return extensionsCodegen.test.check(
                     [
                         {foo: 'bar'},
                         {foobar: 'baz'}
                     ],
                     ['a', 'b']
-                ),
-                []
-            );
+                );
+            };
+
+            assert.deepEqual(generics.bufferConsole(check, errors), []);
+            assert.deepEqual(errors, []);
         });
 
         it('Should warn about merge conflicts in trees', function() {
-            assert.deepEqual(
-                extensionsCodegen.test.check(
+            var errors = [];
+            var check = function() {
+                return extensionsCodegen.test.check(
                     [
                         {foo: 'bar', hello: "world"},
                         {foo: 'baz'},
                         {}
                     ], ['a', 'b', 'c']
-                ),
+                );
+            };
+
+            assert.deepEqual(generics.bufferConsole(check, errors),
                 [
                     {
                         error: "Found foo in a and b, picking content from b",
@@ -46,18 +53,24 @@ describe('CodeGen: extensions', function() {
                     }
                 ]
             );
+            assert.deepEqual(errors, []);
         });
 
         it('Should warn about merge conflicts in deep trees', function() {
-            assert.deepEqual(
-                extensionsCodegen.test.check(
+            var errors = [];
+            var check = function() {
+                return extensionsCodegen.test.check(
                     [
                         {foo: {foobar: 'bar'}},
                         {foo: {foobar: 'baz'}},
                         {foo: {hello: "world"}},
                         {hello: "world"}
                     ], ['a', 'b', 'c', 'd']
-                ), [
+                );
+            };
+
+            assert.deepEqual(generics.bufferConsole(check, errors),
+                [
                     {
                         error: "Found foo.foobar in a and b, picking content from b",
                         type: "Conflict",
@@ -66,17 +79,23 @@ describe('CodeGen: extensions', function() {
                     }
                 ]
             );
+            assert.deepEqual(errors, []);
         });
         it('Should warn about invalid object in trees', function() {
-            assert.deepEqual(
-                extensionsCodegen.test.check(
+            var errors = [];
+            var check = function() {
+                return extensionsCodegen.test.check(
                     [
                         {foo: {foobar: 'bar'}},
                         {foo: {hello: "world"}},
                         {hello: "world"},
                         {'a': 0}
                     ], ['a', 'b', 'c', 'd']
-                ), [
+                );
+            };
+
+            assert.deepEqual(generics.bufferConsole(check, errors),
+                [
                     {
                         error: "Found invalid type for a",
                         type: "Unexpected type",
@@ -84,6 +103,33 @@ describe('CodeGen: extensions', function() {
                     }
                 ]
             );
+            assert.deepEqual(errors, []);
+        });
+        it('Should output errors in console when setting the verbose parameter to true', function() {
+            var errors = [];
+            var check = function() {
+                return extensionsCodegen.test.check(
+                    [
+                        {foo: {foobar: 'bar'}},
+                        {foo: {hello: "world"}},
+                        {hello: "world"},
+                        {'a': 0}
+                    ], ['a', 'b', 'c', 'd'], null, true
+                );
+            };
+
+            assert.deepEqual(generics.bufferConsole(check, errors),
+                [
+                    {
+                        error: "Found invalid type for a",
+                        type: "Unexpected type",
+                        path: ["a"]
+                    }
+                ]
+            );
+            assert.deepEqual(errors, [
+                ["Warning: Found invalid type for a"]
+            ]);
         });
     });
 
