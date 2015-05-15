@@ -55,10 +55,13 @@ folder when using `grunt deploy` or `grunt codegen`
 ### Extensions
 
 After using `require('_generated')` it will expose the extensions as
-`AI.extensions.<type>.<plugin>`
+`AI.extensions.<type>.<plugin>`.
 
 These files are coming from the `extensions/` directory with a structure as
-`extensions/<package>/<type>/<plugin>`
+`extensions/<package>/<type>/<plugin>`.
+
+These include all files ending with `.js`, excluding the files starting with a `.`
+like `.thisFileWillBeIgnoredAnyway.js`.
 
 When generating the extensions, all packages are virtually merged into a single package.
 This is how it ends up using the `AI.extensions.<type>.<plugin>` format.
