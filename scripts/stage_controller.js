@@ -3,11 +3,15 @@
 function unitIterator(f) {
     var hook;
     for (hook in AI.extensions.hooks) {
-        AI.extensions.hooks[hook][f]();
+        if (typeof AI.extensions.hooks[hook][f] === "function") {
+            AI.extensions.hooks[hook][f]();
+        }
     }
 }
 
 function firstTurn() {
+    unitIterator("firstTurn");
+
     console.log('Controller: Memory reset');
     for (var item in Memory) {
         if (item === "creeps" && Memory.creeps) {
