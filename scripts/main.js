@@ -29,7 +29,7 @@ if (timerEnd > AI.settings.roundTimeLimit) {
     message += Game.cpuLimit === Infinity ? "" : (Math.round(timerEnd / Game.cpuLimit * 100) + "% of cpu budget used.\n");
     message += "Currently " + AI.getTimeDiff(0, timerEnd) + " ms used";
     message += Game.cpuLimit === Infinity ? "\n" : " (of " + Game.cpuLimit + " ms available)\n";
-    message += "Start           " + Math.floor(timerStart * 100) / 100 + " ms\n";
+    message += "Start           " + AI.getTimeDiff(0, timerStart) + " ms\n";
     message += "Requiring       " + AI.getTimeDiff(timerStart, timerRequire) + " ms\n";
     message += "Pre controller  " + AI.getTimeDiff(timerRequire, timerPreController) + " ms\n";
     message += "Creeps          " + AI.getTimeDiff(timerPreController, timerCreeps) + " ms\n";
