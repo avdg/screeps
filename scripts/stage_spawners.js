@@ -56,8 +56,8 @@ function createCreep(spawn, creep) {
 
 function newSpawn(spawn) {
     Memory.spawns[spawn.name] = {};
-    Memory.spawns[spawn.name].spawnPriorityQueue = {};
-    Memory.spawns[spawn.name].spawnQueue = {};
+    Memory.spawns[spawn.name].spawnPriorityQueue = [];
+    Memory.spawns[spawn.name].spawnQueue = [];
 }
 
 /**
