@@ -54,6 +54,12 @@ function createCreep(spawn, creep) {
     }
 }
 
+function newSpawn(spawn) {
+    Memory.spawns[spawn.name] = {};
+    Memory.spawns[spawn.name].spawnPriorityQueue = {};
+    Memory.spawns[spawn.name].spawnQueue = {};
+}
+
 /**
  * Attempts to spawn a creep from spawner
  *
@@ -106,6 +112,9 @@ function spawner(spawn) {
     if (Memory.spawns[spawn.name]) {
         if (spawnAttempt(spawn, Memory.spawns[spawn.name].spawnPriorityQueue, true) !== undefined) return;
         if (spawnAttempt(spawn, Memory.spawns[spawn.name].spawnQueue, false)) return;
+
+    } else {
+        newSpawn(spawn);
     }
 
     // Global
