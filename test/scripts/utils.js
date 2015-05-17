@@ -218,4 +218,18 @@ describe("Scripts: _utils", function() {
             assert.strictEqual(utils.isFirstTurn(), false);
         });
     });
+
+    describe('distance formulas', function() {
+        describe('distance', function() {
+            it('Should return the birth distance', function() {
+                assert.equal(utils.distance(1, 2, 4, 6), 5);
+            });
+        });
+
+        describe('manhatten', function() {
+            it('Should return square distances', function() {
+                assert.equal(utils.manhattenDistance(1, 2, 3, 4), 4);
+            });
+        });
+    });
 });
