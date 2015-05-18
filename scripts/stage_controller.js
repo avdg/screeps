@@ -29,6 +29,12 @@ function firstTurn() {
     Memory.spawnPriorityQueue = AI.settings.spawnPriorityQueue;
     Memory.spawns = {};
     Memory.sources = {};
+
+    for (var spawn in Game.spawns) {
+        Memory.spawns[spawn] = {};
+        Memory.spawns[spawn].spawnPriorityQueue = [];
+        Memory.spawns[spawn].spawnQueue = [];
+    }
 }
 
 function pre() {
