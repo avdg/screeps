@@ -101,11 +101,12 @@ var printStatus = function() {
 
    var msg = '';
    msg += "***** Round " + Game.time + " *****" + "\n\n";
-   msg += "Number of creeps in global queue: " + Memory.stats.globalQueue + "\n";
-   msg += "Number of creeps in global priorityQueue: " + Memory.stats.globalPriorityQueue + "\n";
-   msg += "Number of own spawn: " + Memory.stats.mySpawns + "\n";
-   msg += "Number of own creeps: " + Memory.stats.myCreeps + "\n";
-   msg += "Number of flags: " + Memory.stats.myFlags + "\n";
+   msg += "♘ in global queue: " + Memory.stats.globalQueue + "\n";
+   msg += "♘ in global priorityQueue: " + Memory.stats.globalPriorityQueue + "\n";
+
+   msg += "🏠 " + Memory.stats.mySpawns;
+   msg += " - ♘ " + Memory.stats.myCreeps;
+   msg += " - 🚩 " + Memory.stats.myFlags + "\n";
 
    console.log(msg);
 };
