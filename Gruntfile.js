@@ -104,6 +104,13 @@ module.exports = function(grunt) {
         'clean:test',
         'blanket',
         'copy:coverage',
+        'mochaTest',
+    ]);
+
+    grunt.task.registerTask('travis', [
+        'clean:test',
+        'blanket',
+        'copy:coverage',
         'mochaTest:test',
         'mochaTest:coverage',
         'coveralls'

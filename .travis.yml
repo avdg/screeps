@@ -11,3 +11,5 @@ node_js:
 
 before_install:
   - npm install -g grunt-cli
+
+script: grunt travis
