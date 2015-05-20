@@ -71,7 +71,7 @@ Current extension types are:
 - commands
    - Located at `extensions/<any directory>/commands/`
    - Executes flag commands
-   - Used when called by unit_flags or `AI.exec(<command>, ...)`
+   - Used when called by `extensions/tools/hooks/flags` or `AI.exec(<command>, ...)`
 - roles
    - Located at `extensions/<any directory>/roles/`
    - Gives creeps orders
@@ -90,9 +90,10 @@ Most of these scripts (called stages) utilizes code from extensions.
 ```
  `- Start timer
  `- Run stage controllers (stage_*.js)
- |   `- stage_controller.pre() Setup and triggers preControllers in unit extensions
+ |   `- stage_setup Prepares game state for AI
+ |   `- stage_controller.pre() Triggers firstTurn (if needed) and preControllers in hook extensions
  |   `- stage_creeps() Iterates over every creep (give orders)
  |   `- stage_spawners() Iterates over every spawner (give spawn jobs)
- |   `- stage_controller.post() Shutdown and triggers postController in unit extensions
+ |   `- stage_controller.post() Shutdown and triggers postController in hook extensions
  `- Stop timer
 ```
