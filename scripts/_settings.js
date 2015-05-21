@@ -10,6 +10,7 @@ var settings = {
     'deathChecker': {
         'ignore': ['FOO'],
         'copy': [],
+        'copyPriority': [],
     },
 };
 

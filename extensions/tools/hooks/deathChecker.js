@@ -24,10 +24,18 @@ var deathChecker = function() {
         if (AI.settings.deathChecker.ignore.indexOf(Memory.creeps[i].role) !== -1 ||
             ("copyOnDeath" in Memory.creeps[i] && Memory.creeps[i].copyOnDeath === false)
         ) {
-            console.log('Unit deathChecker: Found dead creep ' + i + '. Deleting...');
+            console.log('Hook deathChecker: Found dead creep ' + i + '. Deleting...');
             removeQueue.push(i);
         } else if (AI.settings.deathChecker.copy.indexOf(Memory.creeps[i].role) !== -1) {
-            console.log('Unit deathChecker: Found dead creep ' + i + '. Copying...');
+            console.log('Hook deathChecker: Found dead creep ' + i + '. Copying to queue...');
+            AI.exec('creepClone', {
+                /* Fake creep object*/
+                role: Memory.creeps[i].role,
+                memory: Memory.creeps[i]
+            }, false);
+            removeQueue.push(i);
+        } else if (AI.settings.deathChecker.copyPriority.indexOf(Memory.creeps[i].role) !== -1) {
+            console.log('Hook deathChecker: Found dead creep ' + i + '. Copying to priority queue...');
             AI.exec('creepClone', {
                 /* Fake creep object*/
                 role: Memory.creeps[i].role,
@@ -35,7 +43,7 @@ var deathChecker = function() {
             }, true);
             removeQueue.push(i);
         } else {
-            console.log('Unit deathChecker: Found dead creep ' + i + '. Dunno what to do...');
+            console.log('Hook deathChecker: Found dead creep ' + i + '. Dunno what to do...');
         }
     }
 
