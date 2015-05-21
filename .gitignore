@@ -1,4 +1,6 @@
+# Generated build files
 build/
+.eslintrc
 
 # Logs
 logs
