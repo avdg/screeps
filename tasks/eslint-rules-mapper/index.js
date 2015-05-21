@@ -12,12 +12,7 @@ function map(jshintConf) {
 
   var enforceAll = jshintConf.enforceall;
 
-  var result = {
-      globals: _.compact(jshintConf.global).concat
-        (
-          _.compact(jshintConf.predef)
-        )
-    };
+  var result = {globals: jshintConf.globals};
 
    _.reduce(rulesMap, mapJsHintRulesToEsLintRules, result);
 
