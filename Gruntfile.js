@@ -19,6 +19,10 @@ module.exports = function(grunt) {
             coverage2: {
                 src: ['lib/codegen'],
                 dest: 'lib-cov/lib/codegen'
+            },
+            coverage3: {
+                src: ['extensions'],
+                dest: 'lib-cov/extensions'
             }
         },
         clean: {

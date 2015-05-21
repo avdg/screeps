@@ -221,7 +221,7 @@ describe("Scripts: _utils", function() {
 
     describe('distance formulas', function() {
         describe('distance', function() {
-            it('Should return the birth distance', function() {
+            it('Should return the bird distance', function() {
                 assert.equal(utils.distance(1, 2, 4, 6), 5);
             });
         });
