@@ -1,0 +1,1 @@
+Source files in this map are borrowed from https://github.com/valorkin/eslint-rules-mapper

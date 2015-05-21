@@ -86,7 +86,8 @@ module.exports = function(grunt) {
     });
 
     grunt.task.registerTask('codegen', [
-        'screepsCodeGenerator'
+        'screepsCodeGenerator',
+        'eslint-mapper'
     ]);
 
     grunt.task.registerTask('check', [
