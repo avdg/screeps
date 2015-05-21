@@ -3,6 +3,7 @@
 // Required settings:
 // deathChecker.ignore = ['FOO'] Roles in this array shouldn't be replaced
 // deathChecker.copy = ['BAR'] Roles in this array should be replaced
+// deathChecker.copyPriority = ['FOOBAR'] Roles in this array should be replaced quickly
 //
 // Notes:
 // - If a role has been found death and has not been found in either arrays
