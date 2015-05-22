@@ -1,6 +1,6 @@
 'use strict';
 
-function unitIterator(f) {
+function hookIterator(f) {
     for (var hook in AI.extensions.hooks) {
         if (typeof AI.extensions.hooks[hook][f] === "function") {
             AI.extensions.hooks[hook][f]();
@@ -10,14 +10,14 @@ function unitIterator(f) {
 
 function pre() {
     if (AI.isFirstTurn()) {
-        unitIterator("firstTurn");
+        hookIterator("firstTurn");
     }
 
-    unitIterator("preController");
+    hookIterator("preController");
 }
 
 function post() {
-    unitIterator("postController");
+    hookIterator("postController");
 }
 
 module.exports = {
