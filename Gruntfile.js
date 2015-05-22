@@ -86,6 +86,8 @@ module.exports = function(grunt) {
     });
 
     grunt.task.registerTask('codegen', [
+        'clean:deploy',
+        'copy:deploy',
         'screepsCodeGenerator',
         'eslint-mapper'
     ]);
@@ -95,11 +97,21 @@ module.exports = function(grunt) {
     ]);
 
     grunt.task.registerTask('deploy', [
-        'clean:deploy',
-        'copy:deploy',
         'codegen',
         'screeps'
     ]);
+
+    grunt.task.registerTask('run', 'Dry running a bot', function() {
+        var result = require('child_process').execSync('node lib\\simulator\\run.js', {
+            encoding: 'utf-8'
+        });
+
+        if (typeof result === "object") {
+            console.log(Object.keys(result), JSON.stringify(result.error), result.file, result.stdout);
+        } else {
+            console.log(result);
+        }
+    });
 
     grunt.task.registerTask('setup', [
         'codegen'
@@ -118,7 +130,8 @@ module.exports = function(grunt) {
         'copy:coverage',
         'mochaTest:test',
         'mochaTest:coverage',
-        'coveralls'
+        'coveralls',
+        'run'
     ]);
 
     grunt.task.registerTask('default', [
