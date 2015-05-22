@@ -206,15 +206,38 @@ describe("Scripts: _utils", function() {
     });
 
     describe('isFirstTurn', function() {
+        beforeEach(function() {
+            utils.test.firstTurnCache = undefined;
+        });
+
         it("Should return true if turn equals to zero", function() {
             assert.strictEqual(utils.isFirstTurn(), true);
+            assert.strictEqual(Array.isArray(Memory.permanent.spawnIds), true);
         });
 
         it("Should return false if turn not equals zero or ai has state", function() {
             assert.strictEqual(utils.isFirstTurn(), true);
+            assert.strictEqual(Array.isArray(Memory.permanent.spawnIds), true);
 
             // Enter a new game tick
             Game.time++;
+            utils.test.firstTurnCache = undefined; // Reset turnly reset cache
+            assert.strictEqual(utils.isFirstTurn(), false);
+        });
+
+        it("Should restart if different it can't find old spawns", function() {
+            assert.strictEqual(utils.isFirstTurn(), true);
+            assert.strictEqual(Array.isArray(Memory.permanent.spawnIds), true);
+
+            // Enter a new game tick with a different spawn
+            Game.time++;
+            Game.spawns.Spawn1.id += "-changed";
+            utils.test.firstTurnCache = undefined; // Reset turnly reset cache
+            assert.strictEqual(utils.isFirstTurn(), true);
+
+            // Enter a new game tick
+            Game.time++;
+            utils.test.firstTurnCache = undefined; // Reset turnly reset cache
             assert.strictEqual(utils.isFirstTurn(), false);
         });
     });

@@ -1,5 +1,7 @@
 'use strict';
 
+var _ = require('lodash');
+
 /**
  * Usage Calls command command_<parameter1> to execute its native property if available
  */
@@ -109,18 +111,48 @@ var logOnce = function(msg, warn) {
     return result;
 };
 
+var firstTurnCache;
 var isFirstTurn = function() {
-    if (Memory.firstTurn && Memory.firstTurn === Game.time) return true;
-    if (Memory.permanent === undefined) Memory.permanent = {};
+    // Check for cache hits
+    if (firstTurnCache !== undefined)
+        return firstTurnCache;
 
-    var rooms = Object.keys(Game.rooms);
-    if (Game.time === 0 || Memory.permanent.mainRoom === undefined || Game.rooms[Memory.permanent.mainRoom] === undefined) {
+    // Make sure memory is set
+    if (Memory.permanent === undefined)
+        Memory.permanent = { restarts : [] }; // Log restarts for debugging
+
+    // Get spawns to compare later
+    var oldSpawnIds = Memory.permanent.spawnIds;
+    Memory.permanent.spawnIds = Object.keys(Game.spawns).map(
+        function(s) {
+            return Game.spawns[s].id;
+        }
+    ).sort();
+
+    // In case the old value isn't an array
+    if (!Array.isArray(oldSpawnIds)) {
         Memory.permanent.firstTurn = Game.time;
-        Memory.permanent.mainRoom = rooms[0];
-        return true;
+        Memory.permanent.restarts.push([Game.time, Memory.permanent.spawnIds]);
+        return (firstTurnCache = true);
     }
 
-    return false;
+    // Check for spawn matches
+    var hasSpawnId = false;
+    for (var i = oldSpawnIds.length; i >= 0; i--) {
+        if (Memory.permanent.spawnIds.indexOf(oldSpawnIds[i]) > -1) {
+            hasSpawnId = true;
+        }
+    }
+
+    // Not the first turn if at least one spawn matches
+    if (hasSpawnId) {
+        return (firstTurnCache = false);
+    }
+
+    // We seem to be reset, we have to start from scratch!
+    Memory.permanent.firstTurn = Game.time;
+    Memory.permanent.restarts.push([Game.time, Memory.permanent.spawnIds]);
+    return (firstTurnCache = true);
 };
 
 // Distance
@@ -175,4 +207,9 @@ module.exports = {
     isFirstTurn: isFirstTurn,
     logOnce: logOnce,
     manhattenDistance: manhattenDistance,
+
+    test: {
+        set firstTurnCache (value) { firstTurnCache = value; },
+        get firstTurnCache () { return firstTurnCache; }
+    }
 };
