@@ -131,7 +131,6 @@ module.exports = function(grunt) {
         'mochaTest:test',
         'mochaTest:coverage',
         'coveralls',
-        'run'
     ]);
 
     grunt.task.registerTask('default', [
