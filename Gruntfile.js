@@ -4,7 +4,7 @@ module.exports = function(grunt) {
 
     grunt.loadTasks('tasks');
     grunt.loadNpmTasks('grunt-blanket');
-    grunt.loadNpmTasks('grunt-codeclimate');
+    grunt.loadNpmTasks('grunt-codeclimate-reporter');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-coveralls');
