@@ -105,7 +105,7 @@ module.exports = function(grunt) {
         var child = require('child_process');
 
         if (typeof child.execSync !== "function") {
-            console.log("Skipping - no child_process.execSync found");
+            console.log("Skipping - no child_process.execSync found - available in node 0.12+");
             return;
         }
 
