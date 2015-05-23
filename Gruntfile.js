@@ -4,6 +4,7 @@ module.exports = function(grunt) {
 
     grunt.loadTasks('tasks');
     grunt.loadNpmTasks('grunt-blanket');
+    grunt.loadNpmTasks('grunt-codeclimate');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-coveralls');
@@ -28,6 +29,9 @@ module.exports = function(grunt) {
         clean: {
             deploy: ['build'],
             test: ['coverage', 'lib-cov'],
+        },
+        codeclimate: {
+            src: 'coverage/lcov.info'
         },
         copy: {
             coverage: {
@@ -138,6 +142,7 @@ module.exports = function(grunt) {
         'mochaTest:test',
         'mochaTest:coverage',
         'coveralls',
+        'codeclimate',
         'run'
     ]);
 
