@@ -72,15 +72,19 @@ Current extension types are:
    - Located at `extensions/<any directory>/commands/`
    - Executes flag commands
    - Used when called by `extensions/tools/hooks/flags` or `AI.exec(<command>, ...)`
-- roles
-   - Located at `extensions/<any directory>/roles/`
-   - Gives creeps orders
-   - Called by stage_creeps, the plugin with the corresponding `Creep.memory.role` will be executed
 - hooks (replaced units)
    - Located at `extensions/<any directory>/hooks/`
    - Events when hooks are called (see `scripts/stage_controller`):
      - preController: Called before giving spawns and creepers orders
      - postController: Called before shutting down the AI
+- roles
+   - Located at `extensions/<any directory>/roles/`
+   - Gives creeps orders
+   - Called by stage_creeps, the plugin with the corresponding `Creep.memory.role` will be executed
+- targets
+   - Collects or filters to get certain type of objects
+   - Usable by AI.get(target, options) Room.get(target, options) for getting
+   - target.filter contains customizable filters
 
 #### Ai code
 `scripts/main` is the boot file. From there it includes other files in the `script/` directory.
