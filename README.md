@@ -83,8 +83,8 @@ Current extension types are:
    - Called by stage_creeps, the plugin with the corresponding `Creep.memory.role` will be executed
 - targets
    - Collects or filters to get certain type of objects
-   - Usable by AI.get(target, options) Room.get(target, options) for getting
-   - target.filter contains customizable filters
+   - Usable by `AI.get(target, options)` or `Room.get(target, options)` for getting objects
+   - `AI.extensions.target.filter` contains customizable filters
 
 #### Ai code
 `scripts/main` is the boot file. From there it includes other files in the `script/` directory.
