@@ -8,10 +8,10 @@ function getCache(room) {
         all = [];
         for (var i in Game.creeps) {
             if (!Game.creeps.spawning) {
-                if (cache[Game.creeps[i].room] === undefined) {
-                    cache[Game.creeps[i].room] = [Game.creeps[i]];
+                if (cache[Game.creeps[i].room.name] === undefined) {
+                    cache[Game.creeps[i].room.name] = [Game.creeps[i]];
                 } else {
-                    cache[Game.creeps[i].room].push(Game.creeps[i]);
+                    cache[Game.creeps[i].room.name].push(Game.creeps[i]);
                 }
             }
             all.push(Game.creeps[i]);
@@ -20,6 +20,10 @@ function getCache(room) {
 
     if (room === undefined) {
         return all;
+    }
+
+    if (room instanceof Room) {
+        room = room.name;
     }
 
     if (cache[room] === undefined) {
