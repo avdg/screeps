@@ -2,18 +2,23 @@
 
 var all = false;
 var cache = {};
+var spawning = [];
 
+// Note: contains spawning creeps
 function getCache(room) {
     if (all === false) {
         all = [];
         for (var i in Game.creeps) {
-            if (!Game.creeps.spawning) {
-                if (cache[Game.creeps[i].room.name] === undefined) {
-                    cache[Game.creeps[i].room.name] = [Game.creeps[i]];
-                } else {
-                    cache[Game.creeps[i].room.name].push(Game.creeps[i]);
-                }
+            if (cache[Game.creeps[i].room.name] === undefined) {
+                cache[Game.creeps[i].room.name] = [Game.creeps[i]];
+            } else {
+                cache[Game.creeps[i].room.name].push(Game.creeps[i]);
             }
+
+            if (Game.creeps[i].spawning) {
+                spawning.push(Game.creeps[i]);
+            }
+
             all.push(Game.creeps[i]);
         }
     }
