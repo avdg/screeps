@@ -102,7 +102,7 @@ module.exports = function(grunt) {
     ]);
 
     grunt.task.registerTask('run', 'Dry running a bot', function() {
-        var result = require('child_process').execSync('node lib\\simulator\\run.js', {
+        var result = require('child_process').execSync('node lib/simulator/run.js', {
             encoding: 'utf-8'
         });
 
