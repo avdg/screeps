@@ -132,7 +132,7 @@ var isFirstTurn = function() {
     // In case the old value isn't an array
     if (!Array.isArray(oldSpawnIds)) {
         Memory.permanent.firstTurn = Game.time;
-        Memory.permanent.restarts.push([Game.time, Memory.permanent.spawnIds]);
+        Memory.permanent.restarts.push({start: Game.time, spawns: Memory.permanent.spawnIds});
         return (firstTurnCache = true);
     }
 
