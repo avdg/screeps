@@ -1,7 +1,8 @@
 'use strict';
 
-function filter(creep, opts) {
-    opts = opts || {};
+// Filtering done relative to given object
+function filter(creep, options) {
+    options = options || {};
 
     return {
         filter: function(target) {
@@ -10,12 +11,25 @@ function filter(creep, opts) {
     };
 }
 
+// Filtering done on global level
+function find(options) {
+    options = options || {};
+
+    return {
+        filter: function(target) {
+
+        }
+    };
+}
+
 // Room === undefined -> get all
+// Otherwise, only get result from given room
 function get(room, option) {
 
 }
 
 module.exports = {
     filter: filter,
+    find: find,
     get: get
 };
