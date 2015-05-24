@@ -31,7 +31,9 @@ module.exports = function(grunt) {
             test: ['coverage', 'lib-cov'],
         },
         codeclimate: {
-            src: 'coverage/lcov.info'
+            options: {
+                src: 'coverage/lcov.info'
+            }
         },
         copy: {
             coverage: {
