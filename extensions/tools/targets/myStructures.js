@@ -6,13 +6,15 @@ var cache = {};
 function getCache(room) {
     if (all === false) {
         all = [];
-        for (var i in Game.structures) {
-            if (cache[Game.structures[i].room.name] === undefined) {
-                cache[Game.structures[i].room.name] = [Game.structures[i]];
-            } else {
-                cache[Game.structures[i].room.name].push(Game.structures[i]);
+        for (var i = 0, data = [Game.structures, Game.spawns]; i < data.length; i++) {
+            for (var j in data[i]) {
+                if (cache[data[i][j].room.name] === undefined) {
+                    cache[data[i][j].room.name] = [data[i][j]];
+                } else {
+                    cache[data[i][j].room.name].push(data[i][j]);
+                }
+                all.push(data[i][j]);
             }
-            all.push(Game.structures[i]);
         }
     }
 
