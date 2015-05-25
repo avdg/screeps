@@ -28,7 +28,7 @@ function getCache(room) {
     }
 
     if (room instanceof Room) {
-        room = room.roomName;
+        room = room.name;
     }
 
     if (cache[room] === undefined) {
