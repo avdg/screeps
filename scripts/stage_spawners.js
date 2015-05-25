@@ -35,7 +35,7 @@ function createCreep(spawn, creep) {
     }
 
     if (memory.role in roles) {
-        var body = roles[memory.role].build();
+        var body = roles[memory.role].build(spawn, memory);
 
         if (AI.getCreepCost(body) > spawn.energy) {
             return -2;
