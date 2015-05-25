@@ -23,7 +23,7 @@ function getCache(room) {
     }
 
     if (room instanceof Room) {
-        room = room.name;
+        room = room.roomName;
     }
 
     if (cache[room] === undefined) {
@@ -41,7 +41,7 @@ function get(room, options) {
     return getCache(room);
 }
 
-function filter(structure, options) {
+function find(structure, options) {
     options = options || {};
 
     return {
@@ -61,5 +61,5 @@ function filter(structure, options) {
 
 module.exports = {
     get: get,
-    filter: filter
+    find: find
 };
