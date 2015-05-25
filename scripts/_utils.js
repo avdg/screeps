@@ -150,8 +150,24 @@ var isFirstTurn = function() {
     }
 
     // We seem to be reset, we have to start from scratch!
+
+    // False positive check to avoid memory being filled with restarts
+    if ((Memory.permanent.firstTurn - Game.time) < 10) {
+        if (Memory.permanent.restartedSince === undefined) {
+            Memory.permanent.restartedSince = Memory.permanent.firstTurn;
+        }
+
+        Memory.permanent.firstTurn = Game.time;
+        return (firstTurnCache = true);
+    }
+
+    var data = [Memory.permanent.firstTurn, Memory.permanent.spawnIds];
+    if (Memory.permanent.restartedSince !== undefined) {
+        data.push(Memory.restartedSince);
+    }
+
     Memory.permanent.firstTurn = Game.time;
-    Memory.permanent.restarts.push([Game.time, Memory.permanent.spawnIds]);
+    Memory.permanent.restarts.push(data);
     return (firstTurnCache = true);
 };
 
