@@ -4,25 +4,25 @@ var assert = require('assert');
 var simple = require('simple-mock');
 
 var generic = require("../../../../scripts/_generics");
-var hookFlags = require('../../../../extensions/tools/hooks/flags');
+var hookFlags = require("../../../../extensions/tools/hooks/flags");
 
-var commandRemoveFlag = require("../../../../extensions/tools/commands/removeFlag");
+var commandCamp = require("../../../../extensions/tools/commands/camp");
 
 function reset() {
     global.AI = {
         extensions: {
             commands: {
-                removeFlag: commandRemoveFlag
+                camp: commandCamp
             }
         },
         parseCommand: generic.parseCommand
     };
 }
 
-describe('Tool extensions: Command removeFlag', function() {
+describe('Tool extensions: Command camp', function() {
     beforeEach(reset);
 
-    it('Should remove its own flag when being called', function() {
+    it('Should do nothing', function() {
         var flag = {
             name: 'removeFlag',
             remove: function() {}
@@ -32,11 +32,11 @@ describe('Tool extensions: Command removeFlag', function() {
         var buffer = [];
 
         generic.bufferConsole(
-            function() { hookFlags.test.parseFlag(flag); },
+            function() {hookFlags.test.parseFlag(flag); },
             buffer
         );
 
-        assert.equal(fn.callCount, 1);
-        assert.deepEqual([['Flag command removeFlag: removed removeFlag']], buffer);
+        assert.equal(fn.callCount, 0);
+        assert.deepEqual([], buffer);
     });
 });
