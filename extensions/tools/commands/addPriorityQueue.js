@@ -1,7 +1,7 @@
 'use strict';
 
 function command(flag, parameters) {
-    AI.extensions.commands.addQueue("spawnPriorityQueue", flag, parameters);
+    AI.extensions.commands.addQueue.addQueue("spawnPriorityQueue", flag, parameters);
 }
 
 module.exports = {
