@@ -4,13 +4,13 @@ function addQueue(queue, flag, parameters) {
     var roles = AI.extensions.roles;
 
     if (parameters.length < 2) {
-        console.log('Flag command addQueue: addQueue command has not enough parameters');
+        console.log('Flag command ' + parameters[0] + ': addQueue command has not enough parameters');
         flag.remove();
         return;
     }
 
     if (!(parameters[1] in roles)) {
-        console.log('Flag command addQueue: can not find role ' + parameters[1]);
+        console.log('Flag command ' + parameters[0] + ': can not find role ' + parameters[1]);
         flag.remove();
         return;
     }
@@ -21,7 +21,7 @@ function addQueue(queue, flag, parameters) {
         Memory[queue][Memory[queue].length] = parameters[1];
     }
 
-    console.log('Flag command addQueue: added ' + parameters[1] + " to " + queue);
+    console.log('Flag command ' + parameters[0] + ': added ' + parameters[1] + " to " + queue);
     flag.remove();
 }
 
