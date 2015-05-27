@@ -67,7 +67,10 @@ function newSpawn(spawn) {
 function spawnAttempt(spawn, queue, priority) {
     if (queue === undefined || queue.length < 1) return;
 
-    for (var max = priority ? 1 : queue.length, i = 0, result; i < max; i++) {
+    // Only go 1 deep if priority matters
+    var max = priority ? 1 : queue.length;
+
+    for (var i = 0, result; i < max; i++) {
         result = createCreep(spawn, queue[i]);
 
         switch (result) {
