@@ -25,33 +25,29 @@ function createCreep(spawn, creep) {
         memory.role = creep;
 
     } else if (typeof creep === "object") {
-        if (!creep.role) return -3;
+        if (!creep.role) return ERR_INVALID_ARGS;
         if (creep.memory && typeof creep.memory === "object")
             memory = _.cloneDeep(creep.memory);
         memory.role = creep.role;
 
     } else {
-        return -3;
+        return ERR_INVALID_ARGS;
     }
 
-    if (memory.role in roles) {
-        var body = roles[memory.role].build(spawn, memory);
+    if (!(memory.role in roles)) {
+        return ERR_INVALID_ARGS;
+    }
 
-        if (AI.getCreepCost(body) > spawn.energy) {
-            return -2;
-        }
+    var body = roles[memory.role].build(spawn, memory);
+    var name = creepNameGenerator(memory.role);
 
-        var name = creepNameGenerator(memory.role);
+    var result = spawn.createCreep(body, name, memory);
+
+    if (result === OK) {
         console.log('Spawner: Creating ' + name);
-
-        var result = spawn.createCreep(body, name, memory);
-
-        if (result !== name) {
-            console.log('Spawner: Spawn error: ' + result);
-        }
-    } else {
-        return -1;
     }
+
+    return result;
 }
 
 function newSpawn(spawn) {
@@ -80,23 +76,24 @@ function spawnAttempt(spawn, queue, priority) {
     for (var max = priority ? 1 : queue.length, i = 0, result; i < max; i++) {
         result = createCreep(spawn, queue[i]);
 
-        if (result === undefined) {
-            queue.splice(i, 1);
-            return true;
-        } else if (result === -1) {
-            console.log('Spawner: Cannot find creep type with parameter' +
-                JSON.stringify(queue[i])
-            );
-        } else if (result === -2) {
-            // Be patient, we just don't have the energy to do great things
-        } else if (result === -3) {
-            console.log('Spawner: Failed to spawn creep due to parameter error with ' +
-                JSON.stringify(queue[i])
-            );
-        } else {
-            console.log('Spawner: Unknown error ' + result + ' for creep ' +
-                JSON.stringify(queue[i])
-            );
+        switch (result) {
+            case OK:
+                queue.splice(i, 1);
+                return true;
+
+            case ERR_INVALID_ARGS:
+                console.log('Spawner: Cannot find creep type with parameter' +
+                    JSON.stringify(queue[i])
+                );
+                break;
+
+            case ERR_NOT_ENOUGH_ENERGY:
+                break; // Be patient, we just don't have the energy to do great things yet
+
+            default:
+                console.log('Spawner: Unknown error ' + result + ' for creep ' +
+                    JSON.stringify(queue[i])
+                );
         }
     }
 
