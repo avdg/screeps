@@ -12,12 +12,6 @@ function creepNameGenerator(prefix) {
     return name;
 }
 
-/*
- * Error codes:
- * -1: Creep not found
- * -2: Not enough energy to spawn creep
- * -3: Invalid parameters
- */
 function createCreep(spawn, creep) {
     var memory = {};
 
