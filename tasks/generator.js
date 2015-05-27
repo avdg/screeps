@@ -12,6 +12,7 @@ function uglify(src) {
 
         },
         output: {
+            indent_level: 2,
             beautify: true,
             max_line_len: 100
         }
