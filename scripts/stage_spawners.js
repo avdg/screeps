@@ -35,10 +35,15 @@ function createCreep(spawn, creep) {
     var body = roles[memory.role].build(spawn, memory);
     var name = creepNameGenerator(memory.role);
 
-    var result = spawn.createCreep(body, name, memory);
+    var result = spawn.canCreateCreep(body, name, memory);
 
     if (result === OK) {
+        result = spawn.createCreep(body, name, memory);
         console.log('Spawner: Creating ' + name);
+
+        if (typeof result !== "string") {
+            console.log("Unexpected error " + result + ": cannot spawn " + name + " with role " + memory.role);
+        }
     }
 
     return result;
@@ -73,11 +78,12 @@ function spawnAttempt(spawn, queue, priority) {
     for (var i = 0, result; i < max; i++) {
         result = createCreep(spawn, queue[i]);
 
-        switch (result) {
-            case OK:
-                queue.splice(i, 1);
-                return true;
+        if (typeof result === "string") {
+            queue.splice(i, 1);
+            return true;
+        }
 
+        switch (result) {
             case ERR_INVALID_ARGS:
                 console.log('Spawner: Cannot find creep type with parameter' +
                     JSON.stringify(queue[i])
