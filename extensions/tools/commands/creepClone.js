@@ -2,22 +2,26 @@
 
 var _ = require('lodash');
 
-var duplicateCreep = function (creep, priority) {
+var duplicateCreep = function (creep, priority, silence) {
     var spawn;
 
     priority = priority === true ? 'spawnPriorityQueue' : 'spawnQueue';
+    silence = silence === true;
 
     // Find and add to queue
-    if (creep.memory.spawn) {
+    if (typeof creep.memory.spawn === "string") {
         spawn = Game.getObjectById(creep.memory.spawn).name;
     }
 
-    if ((typeof spawn) !== 'string' && creep.pos) {
-        spawn = creep.pos.findClosest(FIND_MY_SPAWNS).name;
-    } else {
+    if (typeof spawn !== 'string') {
         Memory[priority].push({
-            role: creep.role, memory: _.cloneDeep(creep.memory)
+            role: creep.memory.role, memory: _.cloneDeep(creep.memory)
         });
+
+        if (!silence) {
+            console.log("Added " + creep.name + " to global " + priority);
+        }
+
         return;
     }
 
@@ -25,8 +29,12 @@ var duplicateCreep = function (creep, priority) {
     if (!Memory.spawns[spawn][priority]) Memory.spawns[spawn][priority] = [];
 
     Memory.spawns[spawn][priority].push({
-        role: creep.role, memory: _.cloneDeep(creep.memory)
+        role: creep.memory.role, memory: _.cloneDeep(creep.memory)
     });
+
+    if (!silence) {
+        console.log("Added " + creep.name + " to " + priority + " at spawn " + spawn);
+    }
 };
 
 var command = function(flag, parameters) {
@@ -51,8 +59,8 @@ var command = function(flag, parameters) {
     flag.remove();
 };
 
-var native = function(command, creep, priority) {
-    return duplicateCreep(creep, priority);
+var native = function(command, creep, priority, silence) {
+    return duplicateCreep(creep, priority, silence);
 };
 
 module.exports = {
