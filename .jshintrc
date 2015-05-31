@@ -140,6 +140,7 @@
         "STRUCTURE_KEEPER_LAIR": true,
         "STRUCTURE_PORTAL": true,
         "STRUCTURE_CONTROLLER": true,
+        "STRUCTURE_LINK": true,
 
         "CONTROLLER_LEVELS": true,
         "CONTROLLER_SPAWNS": true,
