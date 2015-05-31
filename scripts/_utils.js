@@ -232,7 +232,13 @@ var distance = function(x1, y1, x2, y2) {
         y1 = y1.pos;
     }
 
-    if (x1 instanceof RoomPosition && y1 instanceof RoomPosition) {
+    if (x1 instanceof RoomPosition && y1 instanceof RoomPosition &&
+        x1.roomName !== y1.roomName
+    ) {
+        return ERR_NOT_IN_RANGE;
+    }
+
+    if (x1 instanceof Object && y1 instanceof Object) {
         y2 = y1.y;
         x2 = y1.x;
         y1 = x1.y;
@@ -254,7 +260,13 @@ var manhattenDistance = function(x1, y1, x2, y2) {
         y1 = y1.pos;
     }
 
-    if (x1 instanceof RoomPosition && y1 instanceof RoomPosition) {
+    if (x1 instanceof RoomPosition && y1 instanceof RoomPosition &&
+        x1.roomName !== y1.roomName
+    ) {
+        return ERR_NOT_IN_RANGE;
+    }
+
+    if (x1 instanceof Object && y1 instanceof Object) {
         y2 = y1.y;
         x2 = y1.x;
         y1 = x1.y;
