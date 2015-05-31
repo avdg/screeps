@@ -34,6 +34,28 @@ function get(room, options) {
     return getCache(room);
 }
 
+function filter(creep, options) {
+    options = options || {};
+
+    return {
+        filter: function(obj) {
+            if (obj.id === creep.id) {
+                return false;
+            }
+
+            if (typeof options.distance === "number" && !creep.pos.inRangeTo(obj, options.distance)) {
+                return false;
+            }
+
+            if (obj.pos.findInRange(FIND_HOSTILE_CREEPS, 5)) {
+                return false;
+            }
+
+            return true;
+        }
+    };
+}
+
 function find(options) {
     if (options === undefined) {
         options = {};
@@ -52,5 +74,6 @@ function find(options) {
 
 module.exports = {
     get: get,
+    filter: filter,
     find: find
 };
