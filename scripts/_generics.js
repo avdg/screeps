@@ -54,7 +54,7 @@ var nameParts = [
 var generator = function(options) {
     options = options || {};
     options.min = options.min || 2;
-    options.max = options.max || 8;
+    options.max = options.max || 5;
 
     var name = '',
         i = Math.floor(Math.random() * (options.max - options.min + 1)) + options.min;
