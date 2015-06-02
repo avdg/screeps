@@ -42,8 +42,7 @@ if (timerEnd > AI.settings.roundTimeLimit) {
         "Pre controller  " + AI.getTimeDiff(timerSetup, timerPreController) + " ms",
         "Creeps          " + AI.getTimeDiff(timerPreController, timerCreeps) + " ms",
         "Spawners        " + AI.getTimeDiff(timerCreeps, timerSpawners) + " ms",
-        "Post controller " + AI.getTimeDiff(timerSpawners, timerEnd) + " ms",
-        "After end       " + AI.getTimeDiff(timerEnd, Game.getUsedCpu()) + " ms"
+        "Post controller " + AI.getTimeDiff(timerSpawners, timerEnd) + " ms"
     ];
 
     // Calculate lengths
@@ -73,6 +72,8 @@ if (timerEnd > AI.settings.roundTimeLimit) {
         message += tmp + whitespaces.substr(0, stageMessageEmpty.length - tmp.length);
         message += "   " + (creepMessages[j] || "") + "\n";
     }
+
+    message += "Time to print debug message: " + AI.getTimeDiff(timerEnd, Game.getUsedCpu()) + " ms";
 
     console.log(message);
 }
