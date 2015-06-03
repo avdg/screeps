@@ -75,6 +75,7 @@ Current extension types are:
 - hooks (replaced units)
    - Located at `extensions/<any directory>/hooks/`
    - Events when hooks are called (see `scripts/stage_controller`):
+     - firstTurn: Called when the AI is doing its first turn
      - preController: Called before giving spawns and creepers orders
      - postController: Called before shutting down the AI
 - roles
