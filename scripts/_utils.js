@@ -53,6 +53,50 @@ function countEmptyTilesAround(x, y, room) {
 }
 
 /**
+ * Counts the number of roads, swamps and normal tiles on a given path
+ *
+ * @param path Array
+ * @param room String Name of the room
+ *
+ * @return Object Formatted {normal: x, road: y, swamp: z}
+ */
+function examinePath(path, room) {
+    var conclusion = {
+        normal: 0,
+        road: 0,
+        swamp: 0
+    };
+
+    var tileData;
+    var isSwamp;
+    var isRoad;
+
+    for (var i = 0; i < path.length; i++) {
+        tileData = room.lookAt(path[i]);
+        isSwamp = false;
+        isRoad = false;
+
+        for (var j = 0; j < tileData.length; j++) {
+            if (tileData[j].type === "construction" && tileData[j].structure.type === "road") {
+                isRoad = true; break;
+            } else if (tileData[j].type === "terrain" && tileData[j].terrain === "swamp") {
+                isSwamp = true;
+            }
+        }
+
+        if (isSwamp) {
+            conclusion.swamp++;
+        } else if (isRoad) {
+            conclusion.road++;
+        } else {
+            conclusion.normal++;
+        }
+    }
+
+    return conclusion;
+}
+
+/**
  * Usage Calls command command_<parameter1> to execute its native property if available
  */
 var exec = function() {
@@ -281,6 +325,7 @@ module.exports = {
     countEmptyTilesAround: countEmptyTilesAround,
     distance: distance,
     dontRepeat: dontRepeat,
+    examinePath: examinePath,
     exec: exec,
     getTmp: getTmp,
     getCreepCost: getCreepCost,
