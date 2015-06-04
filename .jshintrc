@@ -92,6 +92,7 @@
         "RAMPART_DECAY_AMOUNT": true,
         "RAMPART_DECAY_TIME": true,
         "RAMPART_HITS": true,
+        "RAMPART_HITS_MAX": true,
 
         "SPAWN_HITS": true,
         "SPAWN_ENERGY_START": true,
@@ -102,12 +103,21 @@
         "ROAD_HITS": true,
 
         "WALL_HITS": true,
+        "WALL_HITS_MAX": true,
 
         "EXTENSION_HITS": true,
         "EXTENSION_ENERGY_CAPACITY": true,
-        "EXTENSION_ENERGY_COST": true,
+
+        "LINK_HITS": true,
+        "LINK_HITS_MAX": true,
 
         "ROAD_WEAROUT": true,
+
+        "CONTROLLER_HITS": true,
+
+        "LINK_CAPACITY": true,
+        "LINK_COOLDOWN": true,
+        "LINK_LOSS_RATIO": true,
 
         "BODYPART_COST": true,
         "CARRY_CAPACITY": true,
