@@ -12,7 +12,22 @@
 // - If you want to prevent a creep from being copied when it dies,
 //   set memory property 'copyOnDeath' to false
 
+var _ = require('lodash');
 var removeQueue = [];
+
+var queueCreep = function(creep, priority) {
+    console.log('Hook deathChecker: Found dead creep ' + creep + '. Copying to ' + (priority ? "priority ":"") + "queue...");
+
+    // Clone creep to spawn queue
+    AI.exec('creepClone', {
+        role: Memory.creeps[creep].role,
+        memory: _.clone(Memory.creeps[creep])
+    }, priority);
+
+    // Mark cloning as done
+    removeQueue.push(creep);
+    Memory.creeps[creep].copyOnDeath = false;
+};
 
 var deathChecker = function() {
 
@@ -27,22 +42,13 @@ var deathChecker = function() {
         ) {
             console.log('Hook deathChecker: Found dead creep ' + i + '. Deleting...');
             removeQueue.push(i);
+
         } else if (AI.settings.deathChecker.copy.indexOf(Memory.creeps[i].role) !== -1) {
-            console.log('Hook deathChecker: Found dead creep ' + i + '. Copying to queue...');
-            AI.exec('creepClone', {
-                /* Fake creep object*/
-                role: Memory.creeps[i].role,
-                memory: Memory.creeps[i]
-            }, false);
-            removeQueue.push(i);
+            queueCreep(i, false);
+
         } else if (AI.settings.deathChecker.copyPriority.indexOf(Memory.creeps[i].role) !== -1) {
-            console.log('Hook deathChecker: Found dead creep ' + i + '. Copying to priority queue...');
-            AI.exec('creepClone', {
-                /* Fake creep object*/
-                role: Memory.creeps[i].role,
-                memory: Memory.creeps[i]
-            }, true);
-            removeQueue.push(i);
+            queueCreep(i, true);
+
         } else {
             console.log('Hook deathChecker: Found dead creep ' + i + '. Dunno what to do...');
         }
