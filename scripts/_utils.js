@@ -1,7 +1,5 @@
 'use strict';
 
-var _ = require('lodash');
-
 /** Counts empty tiles around a certain positions
  *
  * For now, everything that isn't counted as a wall

@@ -18,6 +18,7 @@ function reset() {
         },
         parseCommand: generic.parseCommand
     };
+    global._ = require("lodash");
 }
 
 describe('Tool extensions: Command creepClone', function() {
