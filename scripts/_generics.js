@@ -85,6 +85,15 @@ var parseCommand = function(command) {
     var newPos;
 
     while (pos < command.length) {
+
+        while (command[pos] === " ") {
+            pos++;
+        }
+
+        if (command.length <= pos) {
+            break;
+        }
+
         if (command[pos] === '"' || command[pos] === "'") {
             start = command[pos];
             args.push("");

@@ -84,6 +84,16 @@ describe("Scripts: _generics", function() {
                 ['test', 'mute', 'sound']
             );
         });
+        it('Should be able to handle multiple whitespaces', function() {
+            assert.deepEqual(
+                generics.parseCommand('   '),
+                []
+            );
+            assert.deepEqual(
+                generics.parseCommand('     test 1  2   3'),
+                ['test', '1', '2', '3']
+            )
+        });
     });
 
     describe('priorityStack', function() {
