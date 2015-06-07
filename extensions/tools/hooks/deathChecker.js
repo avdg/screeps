@@ -11,8 +11,6 @@
 //
 // - If you want to prevent a creep from being copied when it dies,
 //   set memory property 'copyOnDeath' to false
-
-var _ = require('lodash');
 var removeQueue = [];
 
 var queueCreep = function(creep, priority) {

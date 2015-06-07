@@ -1,6 +1,5 @@
 'use strict';
 
-var _ = require('lodash');
 var roles = AI.extensions.roles;
 
 function creepNameGenerator(prefix) {

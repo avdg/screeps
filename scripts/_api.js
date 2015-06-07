@@ -1,7 +1,5 @@
 'use strict';
 
-var _ = require('lodash');
-
 function reset() {
 
     // It gets what it gets, otherwise it will digg to get it

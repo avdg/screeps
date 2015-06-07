@@ -1,7 +1,5 @@
 'use strict';
 
-var _ = require('lodash');
-
 var duplicateCreep = function (creep, priority, silence) {
     var spawn;
 

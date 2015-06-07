@@ -9,7 +9,7 @@ function uglify(src) {
 
     var options = {
         compress: {
-
+            screw_ie8: true
         },
         output: {
             indent_level: 2,
