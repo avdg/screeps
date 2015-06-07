@@ -5,6 +5,7 @@
     "globals": {
         "AI": true,
 
+        "_": true,
         "Game": true,
         "Memory": true,
         "console": true,
