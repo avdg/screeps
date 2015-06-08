@@ -92,7 +92,7 @@ describe("Scripts: _generics", function() {
             assert.deepEqual(
                 generics.parseCommand('     test 1  2   3'),
                 ['test', '1', '2', '3']
-            )
+            );
         });
     });
 
