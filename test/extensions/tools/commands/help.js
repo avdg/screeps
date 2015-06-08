@@ -123,4 +123,27 @@ describe('Tool extensions: Command help', function() {
         assert.equal(fn.callCount, 1);
         assert.deepEqual([["Flag command help: Command Foo not found\n\nSimilar commands:\nFooBar\n\nUse \"help &lt;command&gt;\" for more information"]], buffer);
     });
+
+    it('Should provide simular commands for non-existing command if they are available (case insensitive)', function() {
+        AI.extensions.commands.FooBar = {
+            exec: function(flag) { return; },
+            command: 'FooBar'
+        };
+
+        var flag = {
+            name: 'help fOO',
+            remove: function() {}
+        };
+
+        var fn = simple.mock(flag, 'remove');
+        var buffer = [];
+
+        generic.bufferConsole(
+            function() { hookFlags.test.parseFlag(flag); },
+            buffer
+        );
+
+        assert.equal(fn.callCount, 1);
+        assert.deepEqual([["Flag command help: Command fOO not found\n\nSimilar commands:\nFooBar\n\nUse \"help &lt;command&gt;\" for more information"]], buffer);
+    });
 });

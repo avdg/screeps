@@ -1,12 +1,15 @@
 'use strict';
 
+var commandFilter = function(input) {
+    input = input.toLowerCase();
+    return function(command) {
+        command = command.toLowerCase();
+        return command.indexOf(input) !== -1 || input.indexOf(command) !== -1;
+    };
+};
+
 function helpCommand(flag, parameters) {
     var commands = AI.extensions.commands;
-    var commandFilter = function(input) {
-        return function(command) {
-            return command.indexOf(input) !== -1 || input.indexOf(command) !== -1;
-        };
-    };
 
     flag.remove();
 
@@ -47,4 +50,7 @@ module.exports = {
     exec: helpCommand,
     command: "help",
     help: "Description:\n- Shows users how to use a command\n\nUsages:\n- help [&lt;command&gt;]",
+    test: {
+        commandFilter: commandFilter
+    }
 };
