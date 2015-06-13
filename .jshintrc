@@ -169,5 +169,7 @@
         "TERRAIN_MASK_LAVA": true,
 
         "BODYPARTS_ALL": true
-    }
+    },
+
+    "-W100": true
 }
