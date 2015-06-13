@@ -3,11 +3,11 @@
 var assert = require('assert');
 var simple = require('simple-mock');
 
-var generic = require('../../../../scripts/_generics.js');
+var generic = require('../../../../scripts/_generics');
 var hookFlags = require('../../../../extensions/tools/hooks/flags');
 
 reset();
-var commandHelp = require('../../../../extensions/tools/commands/help.js');
+var commandHelp = require('../../../../extensions/tools/commands/help');
 
 function reset() {
     require('../../../../lib/mocks/gameStateStart')();
