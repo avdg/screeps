@@ -89,6 +89,9 @@ Current extension types are:
      - firstTurn: Called when the AI is doing its first turn
      - preController: Called before giving spawns and creepers orders
      - postController: Called before shutting down the AI
+- library
+   - Contains library functions
+   - Module.exports keys are accessible as `AI[key]`
 - roles
    - Located at `extensions/<any directory>/roles/`
    - Gives creeps orders
