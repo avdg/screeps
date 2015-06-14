@@ -10,8 +10,8 @@ var generics = require('../../../scripts/_generics');
 
 var extensionMockLocation = path.join(__dirname, "../../../lib/mocks/extensions/");
 var extensionLocation = path.join(extensionMockLocation, "demo/commands/test.js");
-var extensionContentParsed = "function command(flag, parameters) {\n    console.log(\"Hello world\");\n}\n\nmodule.exports = {\n    exec: command,\n    command: \"test\",\n    native: null, // require('_utils').exec('command');\n    help: 'Description:\\n- Executes Test\\n\\nUsage:\\n- Test',\n};";
-var codegen = "function(){\nGame.extensions = AI.extensions = {\ncommands: {\ntest: (function(){\nvar module = {};(function(){\nfunction command(flag, parameters) {\n    console.log(\"Hello world\");\n}\n\nmodule.exports = {\n    exec: command,\n    command: \"test\",\n    native: null, \/\/ require(\'_utils\').exec(\'command\');\n    help: \'Description:\\n- Executes Test\\n\\nUsage:\\n- Test\',\n};\n}());\n\nreturn module.exports;\n}()),\n},\n};\n}";
+var extensionContentParsed = "function command(flag, parameters) {\n    console.log(\"Hello world\");\n}\n\nmodule.exports = {\n    exec: command,\n    command: \"test\",\n    native: null,\n    help: 'Description:\\n- Executes Test\\n\\nUsage:\\n- Test',\n};";
+var codegen = "function(){\nGame.extensions = AI.extensions = {\ncommands: {\ntest: (function(){\nvar module = {};(function(){\nfunction command(flag, parameters) {\n    console.log(\"Hello world\");\n}\n\nmodule.exports = {\n    exec: command,\n    command: \"test\",\n    native: null,\n    help: \'Description:\\n- Executes Test\\n\\nUsage:\\n- Test\',\n};\n}());\n\nreturn module.exports;\n}()),\n},\n};\n}";
 
 describe('CodeGen: extensions', function() {
     describe('check', function() {
