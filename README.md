@@ -9,33 +9,42 @@
 [![Dependency Status](https://david-dm.org/avdg/screeps.svg)](https://david-dm.org/avdg/screeps)
 [![Dev dependency Status](https://david-dm.org/avdg/screeps/dev-status.svg)](https://david-dm.org/avdg/screeps#info=devDependencies)
 
-> The main goal of this repo is to provide a flexible framework for the ai.
+> The main goal of this project is to provide a flexible framework for the ai.
 
-### Ai rules / Ai constrains
-- All creeps must have a role
+## Install checklists
 
-## Installing
+### First install
 
-- Make sure you've installed [node](https://nodejs.org/) 0.12 (0.10 should currently work fine too).
+- Make sure [node](https://nodejs.org/) 0.12 is installed (0.10 should work fine for now).
 - Open a terminal and install grunt with [npm](https://www.npmjs.com/) like this: `npm install -g grunt-cli`.
+- If you are familiar with [git](https://git-scm.com/), you can clone from `git@github.com:avdg/screeps.git`.
+  - Otherwise you can [get the latest code](https://github.com/avdg/screeps/archive/master.zip) from github.
 - Make now sure the terminal is pointing to this project. Then run `npm install` to install dependencies.
 
 ### Build configuration
+
 - Open `Gruntfile.js` in an editor, look for `screeps: {`, fill in the options and save the file.
 - In a terminal open in a copy of this project: type `grunt deploy`
 - If done properly, this should push the code to screeps.com succesfully.
 
-### Some tricks
+### AI build tricks
 
+- `grunt codegen`: Build generated code
 - `grunt deploy`: Pushes code to screeps.com
-- `grunt codegen`: Generates `_generated` and puts it in `build/deploy/`
+- `grunt run`: Run the bot in a fake and incomplete simulator
 - `grunt test`: To make sure that the code is passing the checks
 - `grunt` is currently set to `grunt test`
+
+- `mocha` is available for testing purposes
 
 ## `Code` structure
 
 `scripts/main.js` is the boot file, its being executed once a tick in the screeps sandbox.
 Please note that not all code of my current ai are included in this repo.
+
+### Ai rules / Ai constrains
+
+- All creeps must have a role
 
 ### AI script files
 
@@ -90,10 +99,12 @@ Current extension types are:
    - `AI.extensions.target.filter` contains customizable filters
 
 #### Ai code
+
 `scripts/main` is the boot file. From there it includes other files in the `script/` directory.
 Most of these scripts (called stages) utilizes code from extensions.
 
 ### Call hierarchy
+
 ```
  `- Start timer
  `- Run stage controllers (stage_*.js)
