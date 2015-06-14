@@ -3,7 +3,7 @@
 var assert = require('assert');
 var lib = require('../../../../extensions/tools/library/priorityStack');
 
-describe('priorityStack', function() {
+describe('Library extensions: priorityStack', function() {
     it('Must accept a function', function() {
         var invalidPriorityStackArgument = function() {
             new lib.priorityStack("blablablaah");
