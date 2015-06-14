@@ -53,12 +53,6 @@ describe("Scripts: _generics", function() {
         });
     });
 
-    describe('generator', function() {
-        it('Should return a string', function() {
-            assert.equal(typeof generics.generator(), "string");
-        });
-    });
-
     describe('getTimeDiff', function() {
         it('Should return a difference', function() {
             assert.equal(generics.getTimeDiff(1, 11), 10);
