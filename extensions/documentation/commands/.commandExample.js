@@ -4,9 +4,13 @@ function command(flag, parameters) {
 
 }
 
+function native(parameter1, parameter2) {
+
+}
+
 module.exports = {
-    exec: command,
-    command: "FOO",
-    native: null, // AI.exec('command');
+    name: "FOO",
+    exec: command, // Usage flag 'command [parameter1 [, ...]]'
+    native: native, // When called by AI.exec('command');
     help: 'Description:\n- Executes Foo\n\nUsage:\n- FOO',
 };
