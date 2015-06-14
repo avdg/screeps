@@ -8,7 +8,7 @@ function setupSpawn(spawn) {
 
 function firstTurn() {
     for (var item in Memory) {
-        if (item === "creeps" && Memory.creeps) {
+        if (item === "creeps") {
             for (var sub in Memory.creeps) {
                 delete Memory.creeps[sub];
             }

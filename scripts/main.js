@@ -30,8 +30,8 @@ var timerEnd = Game.getUsedCpu();
 
 if (timerEnd > AI.settings.roundTimeLimit) {
     var message = '';
-    message += "Round " + Game.time + "\n";
-    message += "Currently " + AI.getTimeDiff(0, timerEnd) + " ms used";
+    message += "🚀 Round " + Game.time + "\n";
+    message += AI.getTimeDiff(0, timerEnd) + " ms used";
     message += Game.cpuLimit === Infinity ? "\n" : " (" + Math.round(timerEnd / Game.cpuLimit * 100) + "% of " + Game.cpuLimit + " ms available)\n";
 
     var stageMessages = [
