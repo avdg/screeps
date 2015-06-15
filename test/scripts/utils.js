@@ -78,22 +78,6 @@ describe("Scripts: _utils", function() {
         });
     });
 
-    describe('getCreepCost', function() {
-        it('Should return a number higher than 0 when giving an array of body parts', function() {
-            var result = utils.getCreepCost([TOUGH]);
-
-            assert.equal(typeof result, "number");
-            assert.equal(result > 0,    true);
-        });
-
-        it('Should return -1 when invalid parts are passed', function() {
-            var result = utils.getCreepCost(["foo"]);
-
-            assert.equal(typeof result, "number");
-            assert.equal(result === -1, true);
-        });
-    });
-
     describe('getTmp', function() {
         beforeEach(includeGenerated);
 
