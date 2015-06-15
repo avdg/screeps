@@ -9,6 +9,14 @@ for (var i in AI.extensions.library) {
     }
 }
 
+AI.reset = function() {
+    for (var i in AI.extensions.library) {
+        if (typeof AI.extensions.library[i] === "function") {
+            AI.extensions.library[i].reset();
+        }
+    }
+};
+
 function setupSpawn(spawn) {
     Memory.spawns[spawn] = {};
     Memory.spawns[spawn].spawnPriorityQueue = [];
