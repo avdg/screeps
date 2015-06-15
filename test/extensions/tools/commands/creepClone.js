@@ -102,8 +102,8 @@ describe('Tool extensions: Command creepClone', function() {
 
         assert.equal(fn.callCount, 1);
         assert.deepEqual(Memory.spawnQueue, ['Meh!', {
-            'role': 'something!',
-            'memory': {
+            role: 'something!',
+            memory: {
                 role: 'something!',
                 test: 'Blaaah!'
             }
@@ -190,8 +190,8 @@ describe('Tool extensions: Command creepClone', function() {
 
         assert.equal(fn.callCount, 1);
         assert.deepEqual(Memory.spawnPriorityQueue, ['Meh!', {
-            'role': 'something!',
-            'memory': {
+            role: 'something!',
+            memory: {
                 role: 'something!',
                 test: 'Blaaah!'
             }
@@ -202,7 +202,7 @@ describe('Tool extensions: Command creepClone', function() {
     it('Should be able to call the native function', function() {
         var creep = {
             memory: {
-                'role': 'medic'
+                role: 'medic'
             },
             name: 'blah'
         };
@@ -219,7 +219,7 @@ describe('Tool extensions: Command creepClone', function() {
 
         assert.deepEqual(Memory.spawnQueue, [{
             memory: {
-                'role': 'medic'
+                role: 'medic'
             },
             role: 'medic'
         }]);
@@ -229,7 +229,7 @@ describe('Tool extensions: Command creepClone', function() {
     it('Should be able to silence output when calling the native function', function() {
         var creep = {
             memory: {
-                'role': 'medic'
+                role: 'medic'
             },
             name: 'blah'
         };
@@ -246,10 +246,68 @@ describe('Tool extensions: Command creepClone', function() {
 
         assert.deepEqual(Memory.spawnQueue, [{
             memory: {
-                'role': 'medic'
+                role: 'medic'
             },
             role: 'medic'
         }]);
         assert.deepEqual(buffer, []);
+    });
+
+    it('Should be able to copy a creep object without name into the spawn queue', function() {
+        var creep = {
+            memory: {
+                role: 'medic'
+            }
+        };
+
+        Memory = {
+            spawnQueue: []
+        };
+        var buffer = [];
+
+        lib.bufferConsole(
+            function() { lib.exec('creepClone', creep); },
+            buffer
+        );
+
+        assert.deepEqual(Memory.spawnQueue, [{
+            memory: {
+                role: 'medic'
+            },
+            role: 'medic'
+        }]);
+        assert.deepEqual(buffer, [["Added medic to global spawnQueue"]]);
+    });
+
+    it('Should be able to copy a creep object without name into a specific spawn queue', function() {
+        var creep = {
+            memory: {
+                role: 'medic',
+                spawn: 'homeSpawnId'
+            }
+        };
+
+        Memory = {
+            spawns: {}
+        };
+        var buffer = [];
+
+        var fn = simple.mock(Game, 'getObjectById').returnWith({name: 'home'});
+
+        lib.bufferConsole(
+            function() { lib.exec('creepClone', creep); },
+            buffer
+        );
+
+        assert.deepEqual(Memory.spawns.home.spawnQueue, [{
+            memory: {
+                role: 'medic',
+                spawn: 'homeSpawnId'
+            },
+            role: 'medic'
+        }]);
+        assert.deepEqual(buffer, [["Added medic to spawnQueue at spawn home"]]);
+        assert.equal(fn.callCount, 1);
+        assert.deepEqual(fn.lastCall.args, ['homeSpawnId']);
     });
 });

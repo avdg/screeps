@@ -17,7 +17,7 @@ var duplicateCreep = function (creep, priority, silence) {
         });
 
         if (!silence) {
-            console.log("Added " + creep.name + " to global " + priority);
+            console.log("Added " + (creep.name || creep.memory.role) + " to global " + priority);
         }
 
         return;
@@ -31,7 +31,7 @@ var duplicateCreep = function (creep, priority, silence) {
     });
 
     if (!silence) {
-        console.log("Added " + creep.name + " to " + priority + " at spawn " + spawn);
+        console.log("Added " + (creep.name || creep.memory.role) + " to " + priority + " at spawn " + spawn);
     }
 };
 
