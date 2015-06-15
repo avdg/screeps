@@ -1,10 +1,14 @@
 'use strict';
 
 var assert = require('assert');
+
+var _ = require('lodash');
 var simple = require('simple-mock');
 
-var generic = require('../../../../scripts/_generics');
-var lib = require('../../../../extensions/tools/library/commands');
+var lib = _.merge(
+    require('../../../../extensions/tools/library/commands'),
+    require('../../../../extensions/tools/library/utils')
+);
 var hookFlags = require('../../../../extensions/tools/hooks/flags');
 
 // Command addQueue has library for both addQueue and addPriorityQueue
@@ -39,7 +43,7 @@ describe('Tool extensions: Command addPriorityQueue and addQueue', function() {
         var fn = simple.mock(flag, 'remove');
         var buffer = [];
 
-        generic.bufferConsole(
+        lib.bufferConsole(
             function() { hookFlags.test.parseFlag(flag); },
             buffer
         );
@@ -57,7 +61,7 @@ describe('Tool extensions: Command addPriorityQueue and addQueue', function() {
         var fn = simple.mock(flag, 'remove');
         var buffer = [];
 
-        generic.bufferConsole(
+        lib.bufferConsole(
             function() { hookFlags.test.parseFlag(flag); },
             buffer
         );
@@ -76,7 +80,7 @@ describe('Tool extensions: Command addPriorityQueue and addQueue', function() {
         var fn = simple.mock(flag, 'remove');
         var buffer = [];
 
-        generic.bufferConsole(
+        lib.bufferConsole(
             function() { hookFlags.test.parseFlag(flag); },
             buffer
         );
@@ -95,7 +99,7 @@ describe('Tool extensions: Command addPriorityQueue and addQueue', function() {
         var fn = simple.mock(flag, 'remove');
         var buffer = [];
 
-        generic.bufferConsole(
+        lib.bufferConsole(
             function() { hookFlags.test.parseFlag(flag); },
             buffer
         );
@@ -114,7 +118,7 @@ describe('Tool extensions: Command addPriorityQueue and addQueue', function() {
         var fn = simple.mock(flag, 'remove');
         var buffer = [];
 
-        generic.bufferConsole(
+        lib.bufferConsole(
             function() { hookFlags.test.parseFlag(flag); },
             buffer
         );

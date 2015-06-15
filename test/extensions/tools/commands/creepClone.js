@@ -1,10 +1,14 @@
 'use strict';
 
 var assert = require('assert');
+
+var _ = require('lodash');
 var simple = require('simple-mock');
 
-var lib = require('../../../../extensions/tools/library/commands');
-var generic = require('../../../../scripts/_generics');
+var lib = _.merge(
+    require('../../../../extensions/tools/library/commands'),
+    require('../../../../extensions/tools/library/utils')
+);
 var hookFlags = require('../../../../extensions/tools/hooks/flags');
 
 var commandCreepClone = require('../../../../extensions/tools/commands/creepClone');
@@ -33,7 +37,7 @@ describe('Tool extensions: Command creepClone', function() {
         var fn = simple.mock(flag, 'remove');
         var buffer = [];
 
-        generic.bufferConsole(
+        lib.bufferConsole(
             function() { hookFlags.test.parseFlag(flag); },
             buffer
         );
@@ -57,7 +61,7 @@ describe('Tool extensions: Command creepClone', function() {
         var fn = simple.mock(flag, 'remove');
         var buffer = [];
 
-        generic.bufferConsole(
+        lib.bufferConsole(
             function() { hookFlags.test.parseFlag(flag); },
             buffer
         );
@@ -91,7 +95,7 @@ describe('Tool extensions: Command creepClone', function() {
         var fn = simple.mock(flag, 'remove');
         var buffer = [];
 
-        generic.bufferConsole(
+        lib.bufferConsole(
             function() { hookFlags.test.parseFlag(flag); },
             buffer
         );
@@ -134,7 +138,7 @@ describe('Tool extensions: Command creepClone', function() {
         var fnGetObject = simple.mock(Game, 'getObjectById').returnWith({name: '007Spawn'});
         var buffer = [];
 
-        generic.bufferConsole(
+        lib.bufferConsole(
             function () { hookFlags.test.parseFlag(flag); },
             buffer
         );
@@ -179,7 +183,7 @@ describe('Tool extensions: Command creepClone', function() {
         var fn = simple.mock(flag, 'remove');
         var buffer = [];
 
-        generic.bufferConsole(
+        lib.bufferConsole(
             function() { hookFlags.test.parseFlag(flag); },
             buffer
         );
@@ -208,7 +212,7 @@ describe('Tool extensions: Command creepClone', function() {
         };
         var buffer = [];
 
-        generic.bufferConsole(
+        lib.bufferConsole(
             function() { lib.exec('creepClone', creep); },
             buffer
         );
@@ -235,7 +239,7 @@ describe('Tool extensions: Command creepClone', function() {
         };
         var buffer = [];
 
-        generic.bufferConsole(
+        lib.bufferConsole(
             function() { lib.exec('creepClone', creep, false, true); },
             buffer
         );

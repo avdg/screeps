@@ -1,10 +1,14 @@
 'use strict';
 
 var assert = require('assert');
+
+var _ = require('lodash');
 var simple = require('simple-mock');
 
-var lib = require('../../../../extensions/tools/library/commands');
-var generic = require('../../../../scripts/_generics');
+var lib = _.merge(
+    require('../../../../extensions/tools/library/commands'),
+    require('../../../../extensions/tools/library/utils')
+);
 var hookFlags = require('../../../../extensions/tools/hooks/flags');
 
 var commandShowPath = require('../../../../extensions/tools/commands/showPath');
@@ -231,7 +235,7 @@ describe('Tool extensions: Command showPath', function() {
 
         var fn = simple.mock(flag, 'remove');
 
-        generic.bufferConsole(
+        lib.bufferConsole(
             function() { commandShowPath.exec(flag, lib.parseCommand(flag.name)); },
             buffer
         );
@@ -265,7 +269,7 @@ describe('Tool extensions: Command showPath', function() {
         ]);
         var fn3 = simple.mock(Game.rooms.test, 'createFlag').returnWith(OK);
 
-        generic.bufferConsole(
+        lib.bufferConsole(
             function() { commandShowPath.exec(flag, lib.parseCommand(flag.name)); },
             buffer
         );
@@ -341,7 +345,7 @@ describe('Tool extensions: Command showPath', function() {
         ]);
         var fn3 = simple.mock(Game.rooms.test, 'createFlag').returnWith(OK);
 
-        generic.bufferConsole(
+        lib.bufferConsole(
             function() { commandShowPath.exec(flag, lib.parseCommand(flag.name)); },
             buffer
         );
@@ -399,7 +403,7 @@ describe('Tool extensions: Command showPath', function() {
 
         var fn = simple.mock(flag, 'remove');
 
-        generic.bufferConsole(
+        lib.bufferConsole(
             function() { hookFlags.test.parseFlag(flag); },
             buffer
         );

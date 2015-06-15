@@ -6,7 +6,7 @@ var path = require('path');
 var _ = require('lodash');
 
 var extensionsCodegen = require('../../../lib/codegen/extensions');
-var generics = require('../../../scripts/_generics');
+var lib = require('../../../extensions/tools/library/utils');
 
 var extensionMockLocation = path.join(__dirname, "../../../lib/mocks/extensions/");
 var extensionLocation = path.join(extensionMockLocation, "demo/commands/test.js");
@@ -27,7 +27,7 @@ describe('CodeGen: extensions', function() {
                 );
             };
 
-            assert.deepEqual(generics.bufferConsole(check, errors), []);
+            assert.deepEqual(lib.bufferConsole(check, errors), []);
             assert.deepEqual(errors, []);
         });
 
@@ -43,7 +43,7 @@ describe('CodeGen: extensions', function() {
                 );
             };
 
-            assert.deepEqual(generics.bufferConsole(check, errors),
+            assert.deepEqual(lib.bufferConsole(check, errors),
                 [
                     {
                         error: "Found foo in a and b, picking content from b",
@@ -69,7 +69,7 @@ describe('CodeGen: extensions', function() {
                 );
             };
 
-            assert.deepEqual(generics.bufferConsole(check, errors),
+            assert.deepEqual(lib.bufferConsole(check, errors),
                 [
                     {
                         error: "Found foo.foobar in a and b, picking content from b",
@@ -94,7 +94,7 @@ describe('CodeGen: extensions', function() {
                 );
             };
 
-            assert.deepEqual(generics.bufferConsole(check, errors),
+            assert.deepEqual(lib.bufferConsole(check, errors),
                 [
                     {
                         error: "Found invalid type for a",
@@ -118,7 +118,7 @@ describe('CodeGen: extensions', function() {
                 );
             };
 
-            assert.deepEqual(generics.bufferConsole(check, errors),
+            assert.deepEqual(lib.bufferConsole(check, errors),
                 [
                     {
                         error: "Found invalid type for a",
@@ -275,7 +275,7 @@ describe('CodeGen: extensions', function() {
             var buffer = [];
 
             assert.deepEqual(
-                generics.bufferConsole(function() {
+                lib.bufferConsole(function() {
                     return extensionsCodegen.test.readExtensionBundle(
                         extensionMockLocation
                     );

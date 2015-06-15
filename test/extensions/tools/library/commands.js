@@ -1,9 +1,12 @@
 'use strict';
 
 var assert = require('assert');
+var _ = require('lodash');
 
-var generic = require('../../../../scripts/_generics');
-var lib = require('../../../../extensions/tools/library/commands');
+var lib = _.merge(
+    require('../../../../extensions/tools/library/commands'),
+    require('../../../../extensions/tools/library/utils')
+);
 
 function includeGenerated() {
     assert.equal(typeof AI === "object" && AI.extensions === "object", false);
@@ -31,7 +34,7 @@ describe('Library extensions: commands', function() {
         it('Should fail when the requested command isn\'t available', function() {
             var buffer = [];
             var executeUnavailableCommand = function() {
-                generic.bufferConsole(lib.exec('notAvailable'), buffer);
+                lib.bufferConsole(lib.exec('notAvailable'), buffer);
             };
             var errorValidator = function(e) {
                 return e instanceof Error &&
@@ -45,7 +48,7 @@ describe('Library extensions: commands', function() {
         it('Should fail when the requested command doesn\'t have a native function', function() {
             var buffer = [];
             var executeNativelessCommand = function() {
-                generic.bufferConsole(lib.exec('test'), buffer);
+                lib.bufferConsole(lib.exec('test'), buffer);
             };
             var errorValidator = function(e) {
                 return e instanceof Error &&
@@ -60,7 +63,7 @@ describe('Library extensions: commands', function() {
             var buffer = [];
 
             assert.equal(
-                generic.bufferConsole(
+                lib.bufferConsole(
                     function() {
                         lib.exec('testWithNative');
                     },
