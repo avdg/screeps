@@ -6,7 +6,6 @@ var simple = require('simple-mock');
 var lib = require('../../../../extensions/tools/library/commands');
 var generic = require('../../../../scripts/_generics');
 var hookFlags = require('../../../../extensions/tools/hooks/flags');
-var utils = require('../../../../scripts/_utils');
 
 var commandCreepClone = require('../../../../extensions/tools/commands/creepClone');
 

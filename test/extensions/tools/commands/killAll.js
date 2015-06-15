@@ -4,7 +4,6 @@ var assert = require('assert');
 var simple = require('simple-mock');
 
 var lib = require('../../../../extensions/tools/library/commands');
-var generic = require('../../../../scripts/_generics');
 var hookFlags = require("../../../../extensions/tools/hooks/flags");
 
 var commandKillAll = require("../../../../extensions/tools/commands/killAll");
