@@ -62,31 +62,4 @@ describe("Scripts: _generics", function() {
             assert.equal(generics.getTimeDiff(1.12345678, 12.23456789), 11.11);
         });
     });
-
-    describe('parseCommand', function() {
-        it('Should parse these given commands without problems', function() {
-            assert.deepEqual(
-                generics.parseCommand('test muted sound'),
-                ['test', 'muted', 'sound']
-            );
-            assert.deepEqual(
-                generics.parseCommand('test "\\\\mute\\"ed" sound'),
-                ['test', '\\mute"ed', 'sound']
-            );
-            assert.deepEqual(
-                generics.parseCommand('test "mute"sound'),
-                ['test', 'mute', 'sound']
-            );
-        });
-        it('Should be able to handle multiple whitespaces', function() {
-            assert.deepEqual(
-                generics.parseCommand('   '),
-                []
-            );
-            assert.deepEqual(
-                generics.parseCommand('     test 1  2   3'),
-                ['test', '1', '2', '3']
-            );
-        });
-    });
 });

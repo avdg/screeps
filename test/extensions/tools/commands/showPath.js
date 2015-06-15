@@ -3,8 +3,8 @@
 var assert = require('assert');
 var simple = require('simple-mock');
 
+var lib = require('../../../../extensions/tools/library/commands');
 var generic = require('../../../../scripts/_generics');
-var util = require('../../../../scripts/_utils');
 var hookFlags = require('../../../../extensions/tools/hooks/flags');
 
 var commandShowPath = require('../../../../extensions/tools/commands/showPath');
@@ -18,8 +18,8 @@ function reset() {
                 showPath: commandShowPath
             }
         },
-        parseCommand: generic.parseCommand,
-        exec: util.exec
+        parseCommand: lib.parseCommand,
+        exec: lib.exec
     };
 }
 
@@ -232,7 +232,7 @@ describe('Tool extensions: Command showPath', function() {
         var fn = simple.mock(flag, 'remove');
 
         generic.bufferConsole(
-            function() { commandShowPath.exec(flag, generic.parseCommand(flag.name)); },
+            function() { commandShowPath.exec(flag, lib.parseCommand(flag.name)); },
             buffer
         );
 
@@ -266,7 +266,7 @@ describe('Tool extensions: Command showPath', function() {
         var fn3 = simple.mock(Game.rooms.test, 'createFlag').returnWith(OK);
 
         generic.bufferConsole(
-            function() { commandShowPath.exec(flag, generic.parseCommand(flag.name)); },
+            function() { commandShowPath.exec(flag, lib.parseCommand(flag.name)); },
             buffer
         );
 
@@ -342,7 +342,7 @@ describe('Tool extensions: Command showPath', function() {
         var fn3 = simple.mock(Game.rooms.test, 'createFlag').returnWith(OK);
 
         generic.bufferConsole(
-            function() { commandShowPath.exec(flag, generic.parseCommand(flag.name)); },
+            function() { commandShowPath.exec(flag, lib.parseCommand(flag.name)); },
             buffer
         );
 

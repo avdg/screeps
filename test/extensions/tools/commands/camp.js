@@ -3,6 +3,7 @@
 var assert = require('assert');
 var simple = require('simple-mock');
 
+var lib = require('../../../../extensions/tools/library/commands');
 var generic = require("../../../../scripts/_generics");
 var hookFlags = require("../../../../extensions/tools/hooks/flags");
 
@@ -15,7 +16,7 @@ function reset() {
                 camp: commandCamp
             }
         },
-        parseCommand: generic.parseCommand
+        parseCommand: lib.parseCommand
     };
 }
 

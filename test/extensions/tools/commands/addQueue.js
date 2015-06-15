@@ -4,6 +4,7 @@ var assert = require('assert');
 var simple = require('simple-mock');
 
 var generic = require('../../../../scripts/_generics');
+var lib = require('../../../../extensions/tools/library/commands');
 var hookFlags = require('../../../../extensions/tools/hooks/flags');
 
 // Command addQueue has library for both addQueue and addPriorityQueue
@@ -21,7 +22,7 @@ function reset() {
                 foo: {}
             }
         },
-        parseCommand: generic.parseCommand
+        parseCommand: lib.parseCommand
     };
     global.Memory = {};
 }

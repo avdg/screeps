@@ -44,47 +44,7 @@ var getTimeDiff = function(start, stop) {
     return Math.round((stop - start) * 100) / 100;
 };
 
-var parseCommand = function(command) {
-    var args = [];
-    var pos = 0;
-    var start;
-    var newPos;
-
-    while (pos < command.length) {
-
-        while (command[pos] === " ") {
-            pos++;
-        }
-
-        if (command.length <= pos) {
-            break;
-        }
-
-        if (command[pos] === '"' || command[pos] === "'") {
-            start = command[pos];
-            args.push("");
-            pos++;
-
-            for (newPos = pos; newPos < command.length; newPos++) {
-                if (start === command[newPos]) {
-                    if (newPos + 1 < command.length && command[newPos + 1] === ' ') newPos++;
-                    break;
-                }
-                if ('\\' === command[newPos] && newPos + 1 < command.length) newPos++;
-                args[args.length - 1] += command[newPos];
-            }
-        } else {
-            newPos = command.indexOf(" ", pos);
-            if (-1 === newPos) newPos = command.length;
-            args.push(command.substr(pos, newPos - pos));
-        }
-        pos = newPos + 1;
-    }
-    return args;
-};
-
 module.exports = {
     bufferConsole: bufferConsole,
     getTimeDiff: getTimeDiff,
-    parseCommand: parseCommand,
 };

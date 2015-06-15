@@ -18,66 +18,6 @@ function includeGenerated() {
 describe("Scripts: _utils", function() {
     beforeEach(reset);
 
-    describe('exec', function() {
-        beforeEach(includeGenerated);
-
-        it('Should fail when no arguments are passed', function() {
-            var executeWithoutParameters = function() {
-                utils.exec();
-            };
-
-            var errorValidator = function(e) {
-                return e instanceof Error &&
-                    e.message === "Expected at least 1 parameter to execute a function";
-            };
-
-            assert.throws(executeWithoutParameters, errorValidator);
-        });
-
-        it('Should fail when the requested command isn\'t available', function() {
-            var buffer = [];
-            var executeUnavailableCommand = function() {
-                generics.bufferConsole(utils.exec('notAvailable'), buffer);
-            };
-            var errorValidator = function(e) {
-                return e instanceof Error &&
-                    e.message === "Command notAvailable doesn't exist";
-            };
-
-            assert.throws(executeUnavailableCommand, errorValidator);
-            assert.deepEqual(buffer, []);
-        });
-
-        it('Should fail when the requested command doesn\'t have a native function', function() {
-            var buffer = [];
-            var executeNativelessCommand = function() {
-                generics.bufferConsole(utils.exec('test'), buffer);
-            };
-            var errorValidator = function(e) {
-                return e instanceof Error &&
-                    e.message === "Can't execute command test natively";
-            };
-
-            assert.throws(executeNativelessCommand, errorValidator);
-            assert.deepEqual(buffer, []);
-        });
-
-        it('Should execute the native function when available', function() {
-            var buffer = [];
-
-            assert.equal(
-                generics.bufferConsole(
-                    function() {
-                        utils.exec('testWithNative');
-                    },
-                    buffer
-                ),
-                undefined
-            );
-            assert.deepEqual(buffer, [["Hello world"]]);
-        });
-    });
-
     describe('getTmp', function() {
         beforeEach(includeGenerated);
 

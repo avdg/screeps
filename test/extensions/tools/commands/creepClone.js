@@ -3,6 +3,7 @@
 var assert = require('assert');
 var simple = require('simple-mock');
 
+var lib = require('../../../../extensions/tools/library/commands');
 var generic = require('../../../../scripts/_generics');
 var hookFlags = require('../../../../extensions/tools/hooks/flags');
 var utils = require('../../../../scripts/_utils');
@@ -16,7 +17,7 @@ function reset() {
                 creepClone: commandCreepClone
             }
         },
-        parseCommand: generic.parseCommand
+        parseCommand: lib.parseCommand
     };
     global._ = require("lodash");
 }
@@ -209,7 +210,7 @@ describe('Tool extensions: Command creepClone', function() {
         var buffer = [];
 
         generic.bufferConsole(
-            function() { utils.exec('creepClone', creep); },
+            function() { lib.exec('creepClone', creep); },
             buffer
         );
 
@@ -236,7 +237,7 @@ describe('Tool extensions: Command creepClone', function() {
         var buffer = [];
 
         generic.bufferConsole(
-            function() { utils.exec('creepClone', creep, false, true); },
+            function() { lib.exec('creepClone', creep, false, true); },
             buffer
         );
 

@@ -3,6 +3,7 @@
 var assert = require('assert');
 var simple = require('simple-mock');
 
+var lib = require('../../../../extensions/tools/library/commands');
 var generic = require('../../../../scripts/_generics.js');
 var hookFlags = require('../../../../extensions/tools/hooks/flags');
 
@@ -22,7 +23,7 @@ describe('Hooks extensions: Flags', function() {
                     }
                 }
             },
-            parseCommand: generic.parseCommand
+            parseCommand: lib.parseCommand
         };
 
         // Flag mocks
@@ -49,7 +50,7 @@ describe('Hooks extensions: Flags', function() {
                     }
                 }
             },
-            parseCommand: generic.parseCommand
+            parseCommand: lib.parseCommand
         };
 
         Game.flags = {
