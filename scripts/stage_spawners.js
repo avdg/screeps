@@ -1,7 +1,5 @@
 'use strict';
 
-var roles = AI.extensions.roles;
-
 function creepNameGenerator(prefix) {
     var name;
     do {
@@ -13,6 +11,7 @@ function creepNameGenerator(prefix) {
 
 function createCreep(spawn, creep) {
     var memory = {};
+    var roles = AI.extensions.roles;
 
     if (typeof creep === "string") {
         memory.role = creep;

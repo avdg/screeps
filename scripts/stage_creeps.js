@@ -1,8 +1,7 @@
 'use strict';
 
-var roles = AI.extensions.roles;
-
 module.exports = function() {
+    var roles = AI.extensions.roles;
     var i, length, role, creeps = AI.get('myCreeps');
     var timer, timers = {};
 
