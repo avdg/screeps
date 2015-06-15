@@ -82,7 +82,7 @@ Current extension types are:
    - Used when called by `extensions/tools/hooks/flags` or `AI.exec(<command>, ...)`
 - hooks (replaced units)
    - Located at `extensions/<any directory>/hooks/`
-   - Events when hooks are called (see `scripts/stage_controller`):
+   - Events when hooks are called:
      - firstTurn: Called when the AI is doing its first turn
      - preController: Called before giving spawns and creepers orders
      - postController: Called before shutting down the AI
@@ -108,10 +108,11 @@ Most of these scripts (called stages) utilizes code from extensions.
 ```
  `- Start timer
  `- Run stage controllers (stage_*.js)
- |   `- stage_setup Prepares game state for AI
- |   `- stage_controller.pre() Triggers firstTurn (if needed) and preControllers in hook extensions
- |   `- stage_creeps() Iterates over every creep (give orders)
- |   `- stage_spawners() Iterates over every spawner (give spawn jobs)
- |   `- stage_controller.post() Shutdown and triggers postController in hook extensions
+ |   `- `stage_setup()` Prepares game state for AI
+ |   `- `AI.emit("firstTurn") Triggers firstTurn hook if current turn reboots the AI
+ |   `- `AI.emit("preController")` Triggers firstTurn hook
+ |   `- `stage_creeps()` Iterates over every creep (give orders)
+ |   `- `stage_spawners()` Iterates over every spawner (give spawn jobs)
+ |   `- `AI.emit("postController")` Shutdown and triggers postController hook
  `- Stop timer
 ```

@@ -4,7 +4,6 @@ var timerStart = Game.getUsedCpu();
 var whitespaces = "                                                                                                    ";
 
 var setup = require('stage_setup');
-var controller = require('stage_controller');
 var creeps = require('stage_creeps');
 var spawners = require('stage_spawners');
 
@@ -13,7 +12,11 @@ var timerRequire = Game.getUsedCpu();
 setup();
 var timerSetup = Game.getUsedCpu();
 
-controller.pre();
+if (AI.isFirstTurn()) {
+    AI.emit("firstTurn");
+}
+
+AI.emit("preController");
 var timerPreController = Game.getUsedCpu();
 
 var creepTimers = creeps();
@@ -22,7 +25,7 @@ var timerCreeps = Game.getUsedCpu();
 spawners();
 var timerSpawners = Game.getUsedCpu();
 
-controller.post();
+AI.emit("postController");
 var timerEnd = Game.getUsedCpu();
 
 if (timerEnd > AI.settings.roundTimeLimit) {
