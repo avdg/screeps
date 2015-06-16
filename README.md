@@ -93,6 +93,12 @@ Current extension types are:
    - Located at `extensions/<any directory>/roles/`
    - Gives creeps orders
    - Called by stage_creeps, the plugin with the corresponding `Creep.memory.role` will be executed
+- routines
+   - Located at `extensions/<any directory>/routines/`
+   - Place to store routines that can be shared to multiple roles of creeps
+   - function routine returns boolean
+     - When true it means it has successfully completed its routine
+     - When false it means it has not been able to do the routine
 - targets
    - Collects or filters to get certain type of objects
    - Usable by `AI.get(target, options)` or `Room.get(target, options)` for getting objects
