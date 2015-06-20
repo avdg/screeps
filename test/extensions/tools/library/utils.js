@@ -49,7 +49,7 @@ describe("Library extensions: utils", function() {
             var backup = console.log;
             var buffer = [];
             var f = function() {
-                throw Error("Error!");
+                throw new Error("Error!");
             };
             var executeBufferConsole = function() {
                 lib.bufferConsole(f, buffer);

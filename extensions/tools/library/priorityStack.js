@@ -10,7 +10,7 @@ var priorityStack = function(f, queue) {
     }
 
     if (typeof f !== 'function') {
-        throw Error("Expected a function as first argument but got " + typeof f);
+        throw new Error("Expected a function as first argument but got " + typeof f);
     }
 
     this.f = f;
