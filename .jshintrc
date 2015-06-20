@@ -1,7 +1,6 @@
 {
     "globalstrict": true,
     "node": true,
-    "mocha": true,
     "globals": {
         "AI": true,
 
