@@ -21,6 +21,7 @@ var base91Chars = "!#$%&'()*+,./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`
 function getCustomBase(options) {
     var chars;
     var negative;
+    var map = {};
 
     if (!options) {
         options = {};
@@ -29,8 +30,11 @@ function getCustomBase(options) {
     chars = options.chars || jsonSafe;
     negative = options.negative !== undefined ? options.negative : (chars === jsonSafe ? "\\" : "-");
 
-    if (chars.indexOf(negative) !== -1) {
-        throw new Error("Found negative sign " + negative + " in chars " + JSON.stringify(chars));
+    for (var i = 0; i < chars.length; i++) {
+        map[chars[i]] = i;
+        if (chars[i] === negative) {
+            throw new Error("Found negative sign " + negative + " in chars " + JSON.stringify(chars));
+        }
     }
 
     function encode(number) {
@@ -66,7 +70,7 @@ function getCustomBase(options) {
 
         for (var i = isNegative ? 1 : 0; i < encoded.length; i++) {
             result *= chars.length;
-            result += chars.indexOf(encoded[i]);
+            result += map[encoded[i]];
         }
 
         return isNegative ? -result : result;
