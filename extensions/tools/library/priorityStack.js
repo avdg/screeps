@@ -35,12 +35,16 @@ priorityStack.prototype.push = function(items) {
     // Merge sorted lists
     var i = 0, j = 0;
     while (i < this.queue.length && j < items.length) {
-        while(i < this.queue.length && this.f(this.queue[i], items[j]) <= 0) {
+        while (i < this.queue.length && this.f(this.queue[i], items[j]) <= 0) {
             newQueue.push(this.queue[i]);
             i++;
         }
 
-        while(j < items.length && this.f(this.queue[i], items[j]) > 0) {
+        if (i >= this.queue.length) {
+            break;
+        }
+
+        while (j < items.length && this.f(this.queue[i], items[j]) > 0) {
             newQueue.push(items[j]);
             j++;
         }

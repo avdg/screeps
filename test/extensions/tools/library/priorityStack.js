@@ -112,4 +112,14 @@ describe('Library extensions: priorityStack', function() {
         stack.modify(f);
         assert.deepEqual(stack.toArray(), [5, 4, 3]);
     });
+
+    it('Should run this without problems', function() {
+        var f = function(a, b) {
+            return a.value - b.value;
+        };
+
+        var stack = new lib.priorityStack(f);
+        stack.push({value: 1});
+        stack.push({value: 7});
+    });
 });
