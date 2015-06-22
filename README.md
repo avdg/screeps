@@ -109,6 +109,15 @@ Current extension types are:
 `scripts/main` is the boot file. From there it includes other files in the `script/` directory.
 Most of these scripts (called stages) utilizes code from extensions.
 
+#### Bonus: run code after turn
+Set `global.run` with a function at wish, and it will be executed after the turn.
+
+For example, this code can be typed or pasted in to the console:
+
+```javascript
+global.run = function() { console.log(JSON.stringify(Object.keys(AI))); }
+```
+
 ### Call hierarchy
 
 ```

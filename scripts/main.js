@@ -28,6 +28,11 @@ var timerSpawners = Game.getUsedCpu();
 AI.emit("postController");
 var timerEnd = Game.getUsedCpu();
 
+if (typeof global.run === "function") {
+    global.run();
+    global.run = undefined;
+}
+
 if (timerEnd > AI.settings.roundTimeLimit) {
     var message = '';
     message += "🚀 Round " + Game.time + "\n";
