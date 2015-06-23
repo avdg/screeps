@@ -17,7 +17,7 @@ function reset() {
 }
 
 module.exports = {
-    resetApi: reset
+    reset: reset
 };
 
 reset();
