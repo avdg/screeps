@@ -1,7 +1,7 @@
 'use strict';
 
 var timerStart = Game.getUsedCpu();
-var whitespaces = "                                                                                                    ";
+const whitespaces = "                                                                                                    ";
 
 var setup = require('stage_setup');
 var creeps = require('stage_creeps');
