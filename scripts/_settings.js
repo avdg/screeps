@@ -12,6 +12,9 @@ var settings = {
         'copy': [],
         'copyPriority': [],
     },
+
+    // Statistics
+    'noStats': true,
 };
 
 module.exports = {

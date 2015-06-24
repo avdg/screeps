@@ -47,7 +47,7 @@ var updateStats = function() {
     };
 
     var previous;
-    if (Memory.stats) {
+    if (Memory.stats && !AI.settings.noStats) {
         storeStats(Memory.stats.time, Memory.stats);
         previous = Memory.stats;
 
