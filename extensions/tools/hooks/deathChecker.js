@@ -24,27 +24,53 @@ var queueCreep = function(creep, priority) {
 
     // Mark cloning as done
     removeQueue.push(creep);
-    Memory.creeps[creep].copyOnDeath = false;
+    Memory.creeps[creep].copyOnDeath = "ignore";
 };
 
 var deathChecker = function() {
 
+    // Precompile checklist
+    var action = {};
+    var addToAction = function(type) {
+        return function(key) {
+            action[key] = type;
+        };
+    };
+
+    AI.settings.deathChecker.ignore.forEach(addToAction("ignore"));
+    AI.settings.deathChecker.copy.forEach(addToAction("copy"));
+    AI.settings.deathChecker.copyPriority.forEach(addToAction("copyPriority"));
+
+    var mode;
     for (var i in Memory.creeps) {
 
+        // Ignore when creep is found alive
         if (Game.creeps[i]) {
-            continue; // Ignore when creep is found alive
+            continue;
         }
 
-        if (AI.settings.deathChecker.ignore.indexOf(Memory.creeps[i].role) !== -1 ||
-            ("copyOnDeath" in Memory.creeps[i] && Memory.creeps[i].copyOnDeath === false)
+        mode = undefined;
+
+        // Check creep memory
+        if (Memory.creeps[i].copyOnDeath !== undefined &&
+            [false, 'ignore', 'copy', 'copyPriority'].indexOf(Memory.creeps[i].copyOnDeath) !== -1
         ) {
+            mode = Memory.creeps[i].copyOnDeath === false ? 'ignore' : Memory.creeps[i].copyOnDeath;
+        }
+
+        // Use role default when no value found
+        if (mode === undefined) {
+            mode = action[Memory.creeps[i].role];
+        }
+
+        if (mode === "ignore") {
             console.log('Hook deathChecker: Found dead creep ' + i + '. Deleting...');
             removeQueue.push(i);
 
-        } else if (AI.settings.deathChecker.copy.indexOf(Memory.creeps[i].role) !== -1) {
+        } else if (mode === "copy") {
             queueCreep(i, false);
 
-        } else if (AI.settings.deathChecker.copyPriority.indexOf(Memory.creeps[i].role) !== -1) {
+        } else if (mode === "copyPriority") {
             queueCreep(i, true);
 
         } else {
@@ -70,5 +96,10 @@ function postController() {
 
 module.exports = {
     preController: preController,
-    postController: postController
+    postController: postController,
+    test: {
+        get removeQueue() { return removeQueue; },
+        set removeQueue(value) { removeQueue = value; },
+        queueCreep: queueCreep
+    }
 };
