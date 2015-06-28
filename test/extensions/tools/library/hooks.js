@@ -47,7 +47,6 @@ describe('Library extensions: hooks', function() {
 
         var fn1 = simple.mock(AI.extensions.hooks.test, 'callHook');
 
-        debugger;
         assert.strictEqual(lib.emit('callHook', 1, 2, 3), undefined);
 
         assert.equal(fn1.callCount, 1);

@@ -2,7 +2,6 @@
 
 function emit(f) {
     var args = Array(arguments.length - 1);
-    console.log(args);
 
     var i = 0;
     while (++i < arguments.length) {
