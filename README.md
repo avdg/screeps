@@ -86,6 +86,9 @@ Current extension types are:
      - firstTurn: Called when the AI is doing its first turn
      - preController: Called before giving spawns and creepers orders
      - postController: Called before shutting down the AI
+     - noSpawn: Called when a spawn has nothing to spawn
+       - First parameter is spawn
+       - Second parameter is a function to spawn something, simply pass a type or a creep memory object
 - library
    - Contains library functions
    - Module.exports keys are accessible as `AI[key]`

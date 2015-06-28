@@ -119,8 +119,8 @@ function spawner(spawn) {
     if (spawnAttempt(spawn, Memory.spawnPriorityQueue, true) !== undefined) return;
     if (spawnAttempt(spawn, Memory.spawnQueue, false)) return;
 
-    // TODO Insert here what to spawn on default if wanted
-    // createCreep(spawn, 'FOO');
+    // Nothing to spawn - notify hooks
+    AI.emit("noSpawn", spawn, function(creep) { return createCreep(spawn, creep); });
 }
 
 module.exports = function() {
