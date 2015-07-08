@@ -1,5 +1,45 @@
 'use strict';
 
+function hasWall(list, returnValueDefaultsTrue) {
+    if (!Array.isArray(list)) {
+        return returnValueDefaultsTrue === undefined ? true : returnValueDefaultsTrue;
+    }
+
+    for (var i = 0; i < list.length; i++) {
+        if (list[i].type === "terrain" && (
+            list[i].terrain === "wall" || list[i].terrain === "lava"
+        )) {
+            return true;
+        }
+
+        if (list[i].type === "structure") {
+            switch(list[i].structureType) {
+                case STRUCTURE_CONTROLLER:
+                case STRUCTURE_EXTENSION:
+                case STRUCTURE_KEEPER_LAIR:
+                case STRUCTURE_LINK:
+                case STRUCTURE_PORTAL:
+                case STRUCTURE_WALL:
+                    return true;
+
+                case STRUCTURE_RAMPART:
+                    if (list[i].my === false) {
+                        return true;
+                    }
+                    break;
+
+                case STRUCTURE_ROAD:
+                    break;
+
+                default:
+                    throw Error('Unknown structure type ' + list[i].structureType);
+            }
+        }
+    }
+
+    return false;
+}
+
 /** Counts empty tiles around a certain positions
  *
  * For now, everything that isn't counted as a wall
@@ -12,16 +52,6 @@
  * @return Number The number of empty tiles
  */
 function countEmptyTilesAround(x, y, room) {
-    var hasWall = function(list) {
-        for (var i = 0; i < list.length; i++) {
-            if (list[i].type === "terrain" && list[i].terrain === "wall") {
-                return true;
-            }
-        }
-
-        return false;
-    };
-
     if (typeof x === "object" &&
         typeof x.x === "number" &&
         typeof x.y === "number" &&
@@ -32,7 +62,7 @@ function countEmptyTilesAround(x, y, room) {
         x = x.x;
     }
 
-    if (x < 1 || x > 48 || y < 1 || y > 49)
+    if (x < 0 || x > 49 || y < 0 || y > 49)
         return;
 
     var tiles = Game.rooms[room].lookAtArea(y - 1, x - 1, y + 1, x + 1);
@@ -96,5 +126,6 @@ function examinePath(path, room) {
 
 module.exports = {
     countEmptyTilesAround: countEmptyTilesAround,
-    examinePath: examinePath
+    examinePath: examinePath,
+    hasWall: hasWall
 };
