@@ -205,8 +205,8 @@ describe('Library extensions: room', function() {
             };
         };
 
-        for (var test of tests) {
-            it(test.test, run(test));
+        for (var i = 0; i < tests.length; i++) {
+            it(tests[i].test, run(tests[i]));
         }
     });
 });
