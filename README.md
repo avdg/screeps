@@ -11,6 +11,9 @@
 
 > The main goal of this project is to provide a flexible framework for the ai.
 
+## Don't know anything about screeps?
+Go to [screeps.com](https://screeps.com) or you could try [🍕💩.ws/🐯🔮👊🍋😜🐱🍩🐰](http://🍕💩.ws/🐯🔮👊🍋😜🐱🍩🐰)
+
 ## Install checklists
 
 ### First install
