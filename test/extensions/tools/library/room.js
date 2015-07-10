@@ -64,6 +64,45 @@ describe('Library extensions: room', function() {
 
         it('Should return undefined when a an edge position is given', function() {
             assert.strictEqual(lib.countEmptyTilesAround(-1, 3, 'test'), undefined);
+            assert.strictEqual(lib.countEmptyTilesAround(50, 3, 'test'), undefined);
+            assert.strictEqual(lib.countEmptyTilesAround(0, -1, 'test'), undefined);
+            assert.strictEqual(lib.countEmptyTilesAround(0, 50, 'test'), undefined);
+        });
+
+        it('Should return 3 if there are no walls and position is a corner', function() {
+            Game.rooms.test = {};
+
+            var fn = simple.mock(Game.rooms.test, 'lookAtArea').returnWith({
+                0: {
+                    0: [],
+                    1: []
+                },
+                1: {
+                    0: [],
+                    1: []
+                }
+            });
+
+            assert.equal(lib.countEmptyTilesAround({x: 0, y: 0, roomName: 'test'}), 3);
+            assert.equal(fn.callCount, 1);
+        });
+
+        it('Should return 3 if there are no walls and position is a corner (2)', function() {
+            Game.rooms.test = {};
+
+            var fn = simple.mock(Game.rooms.test, 'lookAtArea').returnWith({
+                48: {
+                    48: [],
+                    49: []
+                },
+                49: {
+                    48: [],
+                    49: []
+                }
+            });
+
+            assert.equal(lib.countEmptyTilesAround({x: 49, y: 49, roomName: 'test'}), 3);
+            assert.equal(fn.callCount, 1);
         });
     });
 

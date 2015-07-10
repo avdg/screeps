@@ -68,6 +68,9 @@ function countEmptyTilesAround(x, y, room) {
     var tiles = Game.rooms[room].lookAtArea(y - 1, x - 1, y + 1, x + 1);
     var spaces = 0;
 
+    if (typeof tiles[y - 1] !== "object") tiles[y - 1] = {};
+    if (typeof tiles[y + 1] !== "object") tiles[y + 1] = {};
+
     if (!hasWall(tiles[y - 1][x - 1])) spaces++;
     if (!hasWall(tiles[y - 1][x]))     spaces++;
     if (!hasWall(tiles[y - 1][x + 1])) spaces++;
