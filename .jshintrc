@@ -114,8 +114,6 @@
 
         "ROAD_WEAROUT": true,
 
-        "CONTROLLER_HITS": true,
-
         "LINK_CAPACITY": true,
         "LINK_COOLDOWN": true,
         "LINK_LOSS_RATIO": true,
@@ -153,9 +151,7 @@
         "STRUCTURE_CONTROLLER": true,
         "STRUCTURE_LINK": true,
 
-        "CONTROLLER_LEVELS": true,
-        "CONTROLLER_SPAWNS": true,
-        "CONTROLLER_EXTENSIONS": true,
+        "CONTROLLER_STRUCTURES": true,
         "GCL_POW": true,
         "GCL_MULTIPLY": true,
 
