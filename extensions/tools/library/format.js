@@ -7,7 +7,7 @@ var align = {
     },
     center: function(message, length) {
         var spaces = length - message.length;
-        var spacesFront = spaces >> 1;
+        var spacesFront = spaces >>> 1;
 
         return getWhiteSpace(spacesFront) + message + getWhiteSpace(spaces - spacesFront);
     },
