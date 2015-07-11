@@ -30,10 +30,10 @@ function uglify(src) {
 module.exports = function(grunt) {
     grunt.registerTask('screepsCodeGenerator', 'Generates code to set up ai environment, also sets up the AI API', function() {
         var options = this.options({
-            'extensions': path.join(__dirname, "../extensions"),
-            'scripts': path.join(__dirname, "../scripts"),
-            'output': path.join(__dirname, "../build/deploy/_generated.js"),
-            'minify': false
+            extensions: path.join(__dirname, "../extensions"),
+            scripts: path.join(__dirname, "../scripts"),
+            output: path.join(__dirname, "../build/deploy/_generated.js"),
+            minify: false
         });
 
         var code = codeGenerator.generate(options);
