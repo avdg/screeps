@@ -35,50 +35,64 @@ if (typeof global.run === "function") {
 
 if (timerEnd > AI.settings.roundTimeLimit) {
     var message = '';
-    message += "🚀 Round " + Game.time + "\n";
+    message += "🚀 Round " + Game.time + " * ";
     message += AI.getTimeDiff(0, timerEnd) + " ms used";
-    message += Game.cpuLimit === Infinity ? "\n" : " (" + Math.round(timerEnd / Game.cpuLimit * 100) + "% of " + Game.cpuLimit + " ms available)\n";
 
+    if (typeof Game.cpuLimit === "number")
+        message += " (" + Math.round(timerEnd / Game.cpuLimit * 100) + "% of " + Game.cpuLimit + " ms available)";
+
+    message += "\n";
+
+    // Set up table data
     var stageMessages = [
-        "Main timers:",
-        "Start           " + AI.getTimeDiff(0, timerStart) + " ms",
-        "Requiring       " + AI.getTimeDiff(timerStart, timerRequire) + " ms",
-        "Setup           " + AI.getTimeDiff(timerRequire, timerSetup) + " ms",
-        "Pre controller  " + AI.getTimeDiff(timerSetup, timerPreController) + " ms",
-        "Creeps          " + AI.getTimeDiff(timerPreController, timerCreeps) + " ms",
-        "Spawners        " + AI.getTimeDiff(timerCreeps, timerSpawners) + " ms",
-        "Post controller " + AI.getTimeDiff(timerSpawners, timerEnd) + " ms"
+        "Main timers",
+        "Start",
+        "Requiring",
+        "Setup",
+        "Pre controller",
+        "Creeps",
+        "Spawners",
+        "Post controller"
     ];
 
-    // Calculate lengths
-    var tmpFunc = function(a, b) { return Math.max(a, b.length); };
-    var stageMessagesLength = [0].concat(stageMessages).reduce(tmpFunc);
-    var roleMessageLength = [0].concat(Object.keys(creepTimers)).reduce(tmpFunc);
+    var stageTimers = [
+        "⌛",
+        AI.getTimeDiff(0,                  timerStart        ).toFixed(2) + " ms",
+        AI.getTimeDiff(timerStart,         timerRequire      ).toFixed(2) + " ms",
+        AI.getTimeDiff(timerRequire,       timerSetup        ).toFixed(2) + " ms",
+        AI.getTimeDiff(timerSetup,         timerPreController).toFixed(2) + " ms",
+        AI.getTimeDiff(timerPreController, timerCreeps       ).toFixed(2) + " ms",
+        AI.getTimeDiff(timerCreeps,        timerSpawners     ).toFixed(2) + " ms",
+        AI.getTimeDiff(timerSpawners,      timerEnd          ).toFixed(2) + " ms"
+    ];
 
-    // Default message for stage
-    var stageMessageEmpty = whitespaces.substr(0, stageMessagesLength);
-
-    // Prepare messages for roles
-    var creepMessages = Object.keys(creepTimers).length > 0 ? ["Creep timers:"] : [];
-    var time;
+    var creepRoleMessages = Object.keys(creepTimers).length > 0 ? ["Creep timers"] : [];
+    var creepRoleTime     = Object.keys(creepTimers).length > 0 ? ["⌛"] : [];
+    var creepTimeMessages = Object.keys(creepTimers).length > 0 ? [""] : [];
     var tmp;
+
     for (var i in creepTimers) {
-        time = AI.getTimeDiff(0, creepTimers[i].totalTime);
-        tmp = i + stageMessageEmpty.substr(0, roleMessageLength - i.length) + " " + time + " ms   ";
+        creepRoleMessages.push(i);
+        creepRoleTime.push(AI.getTimeDiff(0, creepTimers[i].totalTime).toFixed(2) + " ms");
+
+        // Format: <number of creeps> - <creepTimer1> - <creepTimer2> - etc...
+        tmp = Object.keys(creepTimers[i].timers).length;
         for (var creep in creepTimers[i].timers) {
-            tmp += " - " + creep + " " + creepTimers[i].timers[creep] + " ms";
+            tmp += " - " + creep + " " + creepTimers[i].timers[creep].toFixed(2) + " ms ";
         }
-        creepMessages.push(tmp);
+        creepTimeMessages.push(tmp);
     }
 
-    // Assemble the message
-    for (var j = 0, k = Math.max(stageMessages.length, creepMessages.length); j < k; j++) {
-        tmp = (stageMessages[j] || stageMessageEmpty);
-        message += tmp + whitespaces.substr(0, stageMessageEmpty.length - tmp.length);
-        message += "   " + (creepMessages[j] || "") + "\n";
-    }
+    var displayData = [
+        stageTimers,
+        stageMessages,
+        creepRoleTime,
+        creepRoleMessages,
+        creepTimeMessages
+    ];
 
-    message += "Time to print debug message: " + AI.getTimeDiff(timerEnd, Game.getUsedCpu()) + " ms";
+    message += AI.alignColumns(displayData, {glue: " ", align: ["right", "left", "right", "left", "left"]});
+    message += "Time to print debug message: " + AI.getTimeDiff(timerEnd, Game.getUsedCpu()).toFixed(2) + " ms";
 
     console.log(message);
 }

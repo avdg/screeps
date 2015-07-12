@@ -10,7 +10,7 @@ function reset() {
     require('../../../../lib/mocks/gameStateStart')();
 }
 
-describe('Hooks extensions: Flags', function() {
+describe('Hook extensions: Flags', function() {
     beforeEach(reset);
 
     it('preController should iterate through all flags', function() {

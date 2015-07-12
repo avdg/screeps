@@ -104,11 +104,11 @@ describe("Library extensions: utils", function() {
 
     describe('getTimeDiff', function() {
         it('Should return a difference', function() {
-            assert.equal(lib.getTimeDiff(1, 11), 10);
+            assert.strictEqual(lib.getTimeDiff(1, 11), 10);
         });
 
         it ('Should cut off decimals to 2 digits precision', function() {
-            assert.equal(lib.getTimeDiff(1.12345678, 12.23456789), 11.11);
+            assert.strictEqual(lib.getTimeDiff(1.12345678, 12.23456789) - 11.11 < 0.1, true);
         });
     });
 

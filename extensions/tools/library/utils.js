@@ -79,7 +79,7 @@ var dontRepeat = function(msg, namespace) {
  * @return Number Time difference
  */
 var getTimeDiff = function(start, stop) {
-    return Math.round((stop - start) * 100) / 100;
+    return stop - start;
 };
 
 /**
