@@ -12,7 +12,7 @@ var lib = _.merge(
 var hookDeathChecker = require('../../../../extensions/tools/hooks/deathChecker');
 
 function reset() {
-    require('../../../../lib/mocks/gameStateStart')();
+    require('../../../../lib/mocks/gameStateGlobals')();
 }
 
 function eliminateDuplicates(a, b, e) {
