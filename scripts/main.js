@@ -1,7 +1,6 @@
 'use strict';
 
 var timerStart = Game.getUsedCpu();
-var whitespaces = "                                                                                                    ";
 
 var setup = require('stage_setup');
 var creeps = require('stage_creeps');
@@ -38,7 +37,7 @@ if (timerEnd > AI.settings.roundTimeLimit) {
     message += "🚀 Round " + Game.time + " * ";
     message += AI.getTimeDiff(0, timerEnd) + " ms used";
 
-    if (typeof Game.cpuLimit === "number")
+    if (Number.isFinite(Game.cpuLimit))
         message += " (" + Math.round(timerEnd / Game.cpuLimit * 100) + "% of " + Game.cpuLimit + " ms available)";
 
     message += "\n";
