@@ -40,49 +40,6 @@ function hasWall(list, returnValueDefaultsTrue) {
     return false;
 }
 
-/** Counts empty tiles around a certain positions
- *
- * For now, everything that isn't counted as a wall
- * as in terrain object is counted as free space.
- *
- * @param Number|Object x An object containing x, y and roomName or x position
- * @param Number|undefined y Y position if x is not an object
- * @param String|undefined room Room name if x is not an object
- *
- * @return Number The number of empty tiles
- */
-function countEmptyTilesAround(x, y, room) {
-    if (typeof x === "object" &&
-        typeof x.x === "number" &&
-        typeof x.y === "number" &&
-        typeof x.roomName === "string"
-    ) {
-        room = x.roomName;
-        y = x.y;
-        x = x.x;
-    }
-
-    if (x < 0 || x > 49 || y < 0 || y > 49)
-        return;
-
-    var tiles = Game.rooms[room].lookAtArea(y - 1, x - 1, y + 1, x + 1);
-    var spaces = 0;
-
-    if (typeof tiles[y - 1] !== "object") tiles[y - 1] = {};
-    if (typeof tiles[y + 1] !== "object") tiles[y + 1] = {};
-
-    if (!hasWall(tiles[y - 1][x - 1])) spaces++;
-    if (!hasWall(tiles[y - 1][x]))     spaces++;
-    if (!hasWall(tiles[y - 1][x + 1])) spaces++;
-    if (!hasWall(tiles[y][x - 1]))     spaces++;
-    if (!hasWall(tiles[y][x + 1]))     spaces++;
-    if (!hasWall(tiles[y + 1][x - 1])) spaces++;
-    if (!hasWall(tiles[y + 1][x]))     spaces++;
-    if (!hasWall(tiles[y + 1][x + 1])) spaces++;
-
-    return spaces;
-}
-
 /**
  * Counts the number of roads, swamps and plain tiles on a given path
  *
@@ -128,7 +85,6 @@ function examinePath(path, room) {
 }
 
 module.exports = {
-    countEmptyTilesAround: countEmptyTilesAround,
     examinePath: examinePath,
     hasWall: hasWall
 };
