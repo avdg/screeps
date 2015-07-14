@@ -35,7 +35,7 @@ if (typeof global.run === "function") {
 if (timerEnd > AI.settings.roundTimeLimit) {
     var message = '';
     message += "🚀 Round " + Game.time + " * ";
-    message += AI.getTimeDiff(0, timerEnd) + " ms used";
+    message += AI.getTimeDiff(0, timerEnd).toFixed(2) + " ms used";
 
     if (Number.isFinite(Game.cpuLimit))
         message += " (" + Math.round(timerEnd / Game.cpuLimit * 100) + "% of " + Game.cpuLimit + " ms available)";
