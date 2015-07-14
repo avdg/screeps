@@ -77,7 +77,7 @@ if (timerEnd > AI.settings.roundTimeLimit) {
         // Format: <number of creeps> - <creepTimer1> - <creepTimer2> - etc...
         tmp = Object.keys(creepTimers[i].timers).length;
         for (var creep in creepTimers[i].timers) {
-            tmp += " - " + creep + " " + creepTimers[i].timers[creep].toFixed(2) + " ms ";
+            tmp += " - " + creep + " " + creepTimers[i].timers[creep].toFixed(2) + " ms";
         }
         creepTimeMessages.push(tmp);
     }
