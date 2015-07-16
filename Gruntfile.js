@@ -1,5 +1,7 @@
 'use strict';
 
+var path = require("path");
+
 module.exports = function(grunt) {
 
     grunt.loadTasks('tasks');
@@ -87,6 +89,11 @@ module.exports = function(grunt) {
             },
             dist: {
                 src: ['build/deploy/*.js']
+            }
+        },
+        screepsCodeGenerator: {
+            options: {
+                output: path.join(__dirname, '/build/deploy/main.js')
             }
         }
     });
