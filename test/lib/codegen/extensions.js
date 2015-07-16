@@ -9,9 +9,11 @@ var extensionsCodegen = require('../../../lib/codegen/extensions');
 var lib = require('../../../extensions/tools/library/utils');
 
 var extensionMockLocation = path.join(__dirname, "../../../lib/mocks/extensions/");
+var extensionScriptsMockLocation = path.join(__dirname, "../../../lib/mocks/scriptExtensions/");
 var extensionLocation = path.join(extensionMockLocation, "demo/commands/test.js");
 var extensionContentParsed = "function command(flag, parameters) {\n    console.log(\"Hello world\");\n}\n\nmodule.exports = {\n    exec: command,\n    command: \"test\",\n    native: null,\n    help: 'Description:\\n- Executes Test\\n\\nUsage:\\n- Test',\n};";
 var codegen = "function(){\nGame.extensions = AI.extensions = {\ncommands: {\ntest: (function(){\nvar module = {};(function(){\nfunction command(flag, parameters) {\n    console.log(\"Hello world\");\n}\n\nmodule.exports = {\n    exec: command,\n    command: \"test\",\n    native: null,\n    help: \'Description:\\n- Executes Test\\n\\nUsage:\\n- Test\',\n};\n}());\n\nreturn module.exports;\n}()),\n},\n};\n}";
+var scriptCodeGen = "function(){\nGame.extensions = AI.extensions = {\nscripts: {\nmain: (function(){\nvar module = {};(function(){\nfunction test() {\n    // Do something usefull\n}\n\nmodule.exports = function() {\n    test();\n};\n}());\n\nreturn module.exports;\n}()),\n},\n};\nGame.extensions.scripts.main();\n}";
 
 describe('CodeGen: extensions', function() {
     describe('check', function() {
@@ -267,6 +269,14 @@ describe('CodeGen: extensions', function() {
             });
 
             assert.equal(result, codegen);
+        });
+
+        it('Should add a boot hook if module scripts/main', function() {
+            var result = extensionsCodegen.parse({
+                extensions: extensionScriptsMockLocation
+            });
+
+            assert.equal(result, scriptCodeGen);
         });
     });
 
