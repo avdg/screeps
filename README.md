@@ -109,6 +109,10 @@ Current extension types are:
    - Collects or filters to get certain type of objects
    - Usable by `AI.get(target, options)` or `Room.get(target, options)` for getting objects
    - `AI.extensions.target.filter` contains customizable filters
+- scripts
+   - Used to store scripts, allowing them to be executed later
+   - module.exports expects to be a function
+   - `AI.extensions.scripts.main` will be executed unless `extensionsBootstrap` is set to `false` at the code generator
 
 #### Ai code
 
