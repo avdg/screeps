@@ -14,7 +14,7 @@ describe('Codegen: generator', function() {
         });
 
         it ('Should be able to wrap some assigned code', function() {
-            var expected = "'use strict';\n\nvar generated = {\ntest: function(){console.log('test');}\n};\n\nvar exec = module.exports = function(){\n    if (typeof global === 'undefined') AI = {}; else global.AI = {};\n    for (var i in generated) {generated[i]();}\n};\nexec();";
+            var expected = "'use strict';\n\nvar generated = {\ntest: function(){console.log('test');}\n};\n\nvar exec = module.exports = function(){\n    if (typeof global === 'undefined') AI = {}; else global.AI = {};\n    var run = [];\n    for (var i in generated) {var result = generated[i](); if (typeof result === 'function') { run.push(result); } }\n    for (var j in run) { run[j](); }\n};\nexec();";
             var code = generator.generate(undefined, {
                 test: {
                     generate: function() {
