@@ -11,6 +11,7 @@ var lib = require('../../../extensions/tools/library/utils');
 var extensionMockLocation = path.join(__dirname, "../../../lib/mocks/extensions/");
 var extensionScriptsMockLocation = path.join(__dirname, "../../../lib/mocks/scriptExtensions/");
 var extensionLocation = path.join(extensionMockLocation, "demo/commands/test.js");
+var badExtensionLocation = path.join(__dirname, "../../../lib/mocks/badExtensionFile.js");
 var extensionContentParsed = "function command(flag, parameters) {\n    console.log(\"Hello world\");\n}\n\nmodule.exports = {\n    exec: command,\n    command: \"test\",\n    native: null,\n    help: 'Description:\\n- Executes Test\\n\\nUsage:\\n- Test',\n};";
 var codegen = "function(){\nGame.extensions = AI.extensions = {\ncommands: {\ntest: (function(){\nvar module = {};(function(){\nfunction command(flag, parameters) {\n    console.log(\"Hello world\");\n}\n\nmodule.exports = {\n    exec: command,\n    command: \"test\",\n    native: null,\n    help: \'Description:\\n- Executes Test\\n\\nUsage:\\n- Test\',\n};\n}());\n\nreturn module.exports;\n}()),\n},\n};\n}";
 var scriptCodeGen = "function(){\nGame.extensions = AI.extensions = {\nscripts: {\nmain: (function(){\nvar module = {};(function(){\nfunction test() {\n    // Do something usefull\n}\n\nmodule.exports = function() {\n    test();\n};\n}());\n\nreturn module.exports;\n}()),\n},\n};\nreturn Game.extensions.scripts.main;\n}";
@@ -325,6 +326,21 @@ describe('CodeGen: extensions', function() {
                 extensionsCodegen.test.readExtension(extensionLocation),
                 extensionContentParsed
             );
+        });
+
+        it('Should throw an error if a file contains syntax error', function() {
+            var run = function() {
+                extensionsCodegen.test.readExtension(badExtensionLocation);
+            };
+
+            var testSyntaxError = function(e) {
+                console.log(e.message);
+
+                return e instanceof Error &&
+                    /^Error in parsing [^\n]*badExtensionFile\.js:\n.*Unexpected token }\n(\n.*)+$/.test(e.message);
+            };
+
+            assert.throws(run, testSyntaxError);
         });
     });
 
