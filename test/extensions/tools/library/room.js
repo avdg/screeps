@@ -153,5 +153,18 @@ describe('Library extensions: room', function() {
         for (var i = 0; i < tests.length; i++) {
             it(tests[i].test, run(tests[i]));
         }
+
+        it('Should throw an error if an unvalid structure type has been detected', function() {
+            var run = function() {
+                lib.hasWall([{type: 'structure', structureType: 'notExistingStructure'}]);
+            };
+
+            var testUnknownStructureException = function(e) {
+                return e instanceof Error &&
+                    e.message === "Unknown structure type notExistingStructure";
+            };
+
+            assert.throws(run, testUnknownStructureException);
+        });
     });
 });
