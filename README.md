@@ -55,16 +55,15 @@ Please note that not all code of my current ai are included in this repo.
 
 #### AI Object
 
-When including `_generated` it will expose the AI global.
+When `_generated` gets required in a javascript environment, it will expose an `AI` object in global scope.
 
-The AI object has `_settings` included, so there is no need to include these files.
-Simply use the AI object to access their functions.
+The AI object has `_settings` included as `AI.settings`, so there is no need to include this file.
 It also includes code from extensions accessible from `AI.extensions`.
 
 `_generated` is a generated file that only exists in the `build/deploy`
 folder when using `grunt deploy` or `grunt codegen`
 
-### Extensions
+### Extensions folder structure
 
 After using `require('_generated')` it will expose the extensions as
 `AI.extensions.<type>.<plugin>`.
