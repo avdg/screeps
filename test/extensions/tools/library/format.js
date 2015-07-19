@@ -230,4 +230,15 @@ describe("Library extension: format", function() {
             assert.equal(lib.alignColumns(data, {align: ["center", "left", "right", customAlign]}), output);
         });
     });
+
+    describe("getWhiteSpace", function() {
+        var lengths = [1, 10, 11, 100, 101, 93, 327, 1325];
+
+        for (var i = 0; i < lengths.length; i++) {
+            var result = lib.test.getWhiteSpace(lengths[i]);
+
+            assert.strictEqual(/^[ ]*$/.test(result), true);
+            assert.equal(result.length, lengths[i]);
+        }
+    });
 });

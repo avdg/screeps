@@ -17,7 +17,7 @@ var align = {
 };
 
 function getWhiteSpace(length) {
-    if (length > whitespaces.length) {
+    while (length > whitespaces.length) {
         whitespaces += whitespaces;
     }
 
@@ -100,6 +100,7 @@ function alignColumns(data, options) {
 module.exports = {
     alignColumns: alignColumns,
     test: {
-        align: align
+        align: align,
+        getWhiteSpace: getWhiteSpace
     }
 };
