@@ -60,6 +60,10 @@ var dontRepeat = function(msg, namespace) {
         Memory.dontRepeat.time = Game.time;
     }
 
+    if (typeof namespace !== "string") {
+        namespace = "";
+    }
+
     // Get key
     var key = namespace.replace('_', '') + '_' + msg;
 

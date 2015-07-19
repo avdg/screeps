@@ -100,6 +100,18 @@ describe("Library extensions: utils", function() {
             assert.strictEqual(lib.dontRepeat('Spam!', 'test'), undefined);
             assert.strictEqual(lib.dontRepeat('Spam!', 'test'), undefined);
         });
+
+        it('Should be able to be used without namespace', function() {
+            assert.strictEqual(lib.dontRepeat('Spam!'), true);
+
+            // Move 2 game ticks further
+            Game.time++;
+            Game.time++;
+
+            assert.strictEqual(lib.dontRepeat('Spam!'), true);
+            assert.strictEqual(lib.dontRepeat('Spam!'), undefined);
+            assert.strictEqual(lib.dontRepeat('Spam!'), undefined);
+        });
     });
 
     describe('getTimeDiff', function() {
