@@ -334,8 +334,6 @@ describe('CodeGen: extensions', function() {
             };
 
             var testSyntaxError = function(e) {
-                console.log(e.message);
-
                 return e instanceof Error &&
                     /^Error in parsing [^\n]*badExtensionFile\.js:\n.*Unexpected token }\n(\n.*)+$/.test(e.message);
             };
