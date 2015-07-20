@@ -87,5 +87,7 @@ module.exports = function() {
         message += "Time to print debug message: " + AI.getTimeDiff(timerEnd, Game.getUsedCpu()).toFixed(2) + " ms";
 
         console.log(message);
+    } else if (AI.dontRepeat("Fast round!") === true) {
+        console.log("Round " + Game.time + " went fast! (¯`•¸•´¯)");
     }
 };
