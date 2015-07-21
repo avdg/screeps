@@ -1,12 +1,14 @@
 'use strict';
 
+var defaultCompare = function(a, b) {
+    if (a > b) return 1;
+    if (a < b) return -1;
+    return 0;
+};
+
 var priorityStack = function(f, queue) {
     if (f === undefined) {
-        f = function(a, b) {
-            if (a > b) return 1;
-            if (a < b) return -1;
-            return 0;
-        };
+        f = defaultCompare;
     }
 
     if (typeof f !== 'function') {
@@ -78,5 +80,8 @@ priorityStack.prototype.toArray = function() {
 };
 
 module.exports = {
-    priorityStack: priorityStack
+    priorityStack: priorityStack,
+    test: {
+        defaultCompare: defaultCompare
+    }
 };
