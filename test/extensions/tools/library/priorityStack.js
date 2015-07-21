@@ -14,7 +14,7 @@ describe('Library extensions: priorityStack', function() {
         function runTest(test) {
             return function() {
                 it("Should return " + test[2] + " if inputs are " + test[0] + " and " + test[1], function() {
-                    assert.strictEqual(lib.test.defaultCompare(test[0], test[1]), test[2]);
+                    assert.strictEqual(lib.defaultCompare(test[0], test[1]), test[2]);
                 });
             };
         }

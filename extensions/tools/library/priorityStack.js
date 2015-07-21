@@ -81,7 +81,5 @@ priorityStack.prototype.toArray = function() {
 
 module.exports = {
     priorityStack: priorityStack,
-    test: {
-        defaultCompare: defaultCompare
-    }
+    defaultCompare: defaultCompare
 };
