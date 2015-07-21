@@ -134,6 +134,21 @@ describe('Library extensions: priorityStack', function() {
             assert.deepEqual(stack.toArray(), [5, 4, 3]);
         });
 
+        it('Should be not able to modify itself if passed parameter is not a function', function() {
+            var stack = new lib.priorityStack(undefined, [1, 2, 3]);
+
+            var invalidModifyArgument = function() {
+                stack.modify("This is not a function");
+            };
+            var check = function(e) {
+                return e instanceof Error &&
+                    e.message === "Expected a function as first argument but got string";
+            };
+
+            assert.throws(invalidModifyArgument, check);
+
+        });
+
         it('Should run this without problems', function() {
             var f = function(a, b) {
                 return a.value - b.value;

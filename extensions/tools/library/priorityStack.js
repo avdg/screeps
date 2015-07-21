@@ -71,6 +71,10 @@ priorityStack.prototype.peek = function(f) {
 };
 
 priorityStack.prototype.modify = function(f) {
+    if (typeof f !== 'function') {
+        throw new Error("Expected a function as first argument but got " + typeof f);
+    }
+
     this.f = f;
     this.queue = this.queue.sort(this.f);
 };
