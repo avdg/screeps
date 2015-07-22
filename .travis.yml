@@ -6,9 +6,8 @@ git:
   depth: 1
 language: node_js
 node_js:
-  - "0.10"
   - "0.12"
-  - "iojs"
+  - "iojs-v2.4.0"
 
 before_install:
   - npm install -g grunt-cli
