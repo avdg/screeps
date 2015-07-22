@@ -18,7 +18,7 @@ Go to [screeps.com](https://screeps.com) or you could try [🍕💩.ws/🐯🔮�
 
 ### First install
 
-- Make sure [node](https://nodejs.org/) 0.12 is installed (0.10 should work fine for now).
+- Make sure [node](https://nodejs.org/) 0.12 or later or [iojs](https://iojs.org/) 2.4 or later is installed.
 - Open a terminal and install grunt with [npm](https://www.npmjs.com/) like this: `npm install -g grunt-cli`.
 - If you are familiar with [git](https://git-scm.com/), you can clone from `git@github.com:avdg/screeps.git`.
   - Otherwise you can [get the latest code](https://github.com/avdg/screeps/archive/master.zip) from github.
