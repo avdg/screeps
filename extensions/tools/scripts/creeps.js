@@ -2,11 +2,11 @@
 
 module.exports = function() {
     var roles = AI.extensions.roles;
-    var i, length, role, creeps = AI.get('myCreeps');
+    var i, length, role;
     var timer, timers = {};
 
-    for (i = 0, length = creeps.length; i < length; i++) {
-        var creep = creeps[i];
+    for (i in Game.creeps) {
+        var creep = Game.creeps[i];
 
         if (typeof creep.memory.role !== "string") {
             console.log('Warning: Creep without role at ' + creep.pos.x + "," + creep.pos.y);
