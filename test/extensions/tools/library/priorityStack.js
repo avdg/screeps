@@ -77,6 +77,34 @@ describe('Library extensions: priorityStack', function() {
             assert.deepEqual(stack.toArray(), [1, 3, 6, 7, 8, 9, 10, 11, 12, 13, 17, 23, 24, 25, 36, 43, 57, 57, 103]);
         });
 
+        it('Should be able to have a lot of items pushed', function() {
+            var stack = new lib.priorityStack();
+
+            stack.push(5);
+            assert.deepEqual(stack.toArray(), [5]);
+
+            stack.push(7);
+            assert.deepEqual(stack.toArray(), [5, 7]);
+
+            stack.push(98);
+            assert.deepEqual(stack.toArray(), [5, 7, 98]);
+
+            stack.push(76);
+            assert.deepEqual(stack.toArray(), [5, 7, 76, 98]);
+
+            stack.push(3);
+            assert.deepEqual(stack.toArray(), [3, 5, 7, 76, 98]);
+
+            stack.push(21);
+            assert.deepEqual(stack.toArray(), [3, 5, 7, 21, 76, 98]);
+
+            stack.push(42);
+            assert.deepEqual(stack.toArray(), [3, 5, 7, 21, 42, 76, 98]);
+
+            stack.push(33);
+            assert.deepEqual(stack.toArray(), [3, 5, 7, 21, 33, 42, 76, 98]);
+        });
+
         it('Should be able to provide the correct length', function() {
             var stack = new lib.priorityStack();
             assert.equal(0, stack.length);
@@ -92,6 +120,8 @@ describe('Library extensions: priorityStack', function() {
 
             stack.push(6);
             assert.equal(4, stack.length);
+
+            assert.deepEqual(stack.toArray(), [3, 4, 5, 6]);
 
             assert.equal(stack.pop(), 6);
             assert.equal(3, stack.length);

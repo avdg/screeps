@@ -32,32 +32,42 @@ priorityStack.prototype.push = function(items) {
         items = [items];
     }
 
+    if (this.queue.length === 0) {
+        this.queue = items;
+        return;
+    }
+
     var newQueue = [];
 
-    // Merge sorted lists
-    var i = 0, j = 0;
-    while (i < this.queue.length && j < items.length) {
-        while (i < this.queue.length && this.f(this.queue[i], items[j]) <= 0) {
-            newQueue.push(this.queue[i]);
-            i++;
-        }
+    var queuePos = 0; // Minimum position to insert item
+    var itemsPos = 0; // Position in items
 
-        if (i >= this.queue.length) {
+    while (itemsPos < items.length) {
+        var newQueuePos = _.sortedIndex(this.queue, items[itemsPos]);
+
+        // Simply concat leftovers from this.queue, then leftovers items to newQueue
+        // if the items should be behind this.queue
+        if (newQueuePos >= this.queue.length) {
+            newQueue = newQueue.concat(
+                this.queue.slice(queuePos),
+                items.slice(itemsPos)
+            );
+
+            queuePos = this.queue.length;
             break;
         }
 
-        while (j < items.length && this.f(this.queue[i], items[j]) > 0) {
-            newQueue.push(items[j]);
-            j++;
-        }
+        // Add elements to new queue
+        newQueue = newQueue.concat(this.queue.slice(queuePos, newQueuePos));
+        newQueue.push(items[itemsPos]);
+
+        // Update positions
+        queuePos = newQueuePos;
+        itemsPos++;
     }
 
-    // Merge remaining
-    if (i < this.queue.length) {
-        newQueue = newQueue.concat(this.queue.slice(i));
-    } else if (j < items.length) {
-        newQueue = newQueue.concat(items.slice(j));
-    }
+    // Append left-overs
+    newQueue = newQueue.concat(this.queue.slice(queuePos));
 
     this.queue = newQueue;
 };
