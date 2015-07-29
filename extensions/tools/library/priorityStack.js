@@ -32,16 +32,17 @@ priorityStack.prototype.push = function(items) {
         items = [items];
     }
 
+    // If queue is empty, the list is just the sorted items
     if (this.queue.length === 0) {
         this.queue = items;
         return;
     }
 
-    var newQueue = [];
+    var newQueue = []; // Add all elements to this new queue
+    var queuePos = 0;  // Minimum position to insert item
+    var itemsPos = 0;  // Position in items
 
-    var queuePos = 0; // Minimum position to insert item
-    var itemsPos = 0; // Position in items
-
+    // Add elements to newQueue
     while (itemsPos < items.length) {
         var newQueuePos = _.sortedIndex(this.queue, items[itemsPos]);
 
