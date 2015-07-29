@@ -151,8 +151,6 @@ describe('Library extensions: priorityStack', function() {
 
         it('Should run this without problems', function() {
             var f = function(a, b) {
-                assert.strictEqual(typeof a.value, "number");
-                assert.strictEqual(typeof b.value, "number");
                 return a.value - b.value;
             };
 
