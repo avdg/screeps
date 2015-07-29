@@ -32,32 +32,61 @@ priorityStack.prototype.push = function(items) {
         items = [items];
     }
 
+    if (this.queue.length === 0) {
+        this.queue = items;
+        return;
+    }
+
     var newQueue = [];
 
-    // Merge sorted lists
-    var i = 0, j = 0;
-    while (i < this.queue.length && j < items.length) {
-        while (i < this.queue.length && this.f(this.queue[i], items[j]) <= 0) {
-            newQueue.push(this.queue[i]);
-            i++;
-        }
+    var min = 0; // Minimum position to insert item
+    var max;     // Maximum position to insert item
+    var pos = 0; // Position in items
 
-        if (i >= this.queue.length) {
+    while (pos < items.length) {
+        max = this.queue.length - 1; // Max position where item can be
+        var oldMin = min;
+
+        // Do bisect (illustration added for pointing device purposes to aid insertion algorithm understanding)
+        // +---+---+---+---+---+---+
+        // | 1 | 2 | 3 | 5 | 7 | 9 |
+        // +---+---+---+---+---+---+
+
+        // Check if item can be inserted at the last position, so pivot doesn't overflow this.queue
+        if (this.f(this.queue[max], items[pos]) < 0) {
+            newQueue = newQueue.concat(
+                this.queue.slice(min),
+                items.slice(pos)
+            );
+
+            min = this.queue.length;
             break;
         }
 
-        while (j < items.length && this.f(this.queue[i], items[j]) > 0) {
-            newQueue.push(items[j]);
-            j++;
+        // Locate insertion position
+        while (min !== max) {
+            var pivot = Math.ceil((min + max) / 2);
+
+            // Raise minimum at pivot (new insert position) if queue at pivot is smaller or equal
+            if (this.f(this.queue[pivot], items[pos]) <= 0) {
+                min = pivot;
+
+            // Lower maximum below pivot if queue at pivot is bigger than item to insert
+            // (max refers to max position the item possibly can take)
+            } else {
+                max = pivot - 1;
+            }
         }
+
+        // Add elements to new queue
+        newQueue = newQueue.concat(this.queue.slice(oldMin, min - oldMin));
+        newQueue.push(items[pos]);
+
+        pos++;
     }
 
-    // Merge remaining
-    if (i < this.queue.length) {
-        newQueue = newQueue.concat(this.queue.slice(i));
-    } else if (j < items.length) {
-        newQueue = newQueue.concat(items.slice(j));
-    }
+    // Append left-overs
+    newQueue = newQueue.concat(this.queue.slice(min));
 
     this.queue = newQueue;
 };
