@@ -65,6 +65,18 @@ describe('Library extensions: priorityStack', function() {
             assert.deepEqual(stack.toArray(), [3, 4]);
         });
 
+        it('Should be able to accept an array when priorityStack already has some items', function() {
+            var stack = new lib.priorityStack();
+            stack.push([1, 6, 8, 10, 12, 13, 25, 103]);
+            assert.deepEqual(stack.toArray(), [1, 6, 8, 10, 12, 13, 25, 103]);
+
+            stack.push([7, 9, 11, 24, 36, 43, 57]);
+            assert.deepEqual(stack.toArray(), [1, 6, 7, 8, 9, 10, 11, 12, 13, 24, 25, 36, 43, 57, 103]);
+
+            stack.push([17, 23, 3, 57]);
+            assert.deepEqual(stack.toArray(), [1, 3, 6, 7, 8, 9, 10, 11, 12, 13, 17, 23, 24, 25, 36, 43, 57, 57, 103]);
+        });
+
         it('Should be able to provide the correct length', function() {
             var stack = new lib.priorityStack();
             assert.equal(0, stack.length);
@@ -151,6 +163,8 @@ describe('Library extensions: priorityStack', function() {
 
         it('Should run this without problems', function() {
             var f = function(a, b) {
+                assert.strictEqual(typeof a.value, "number");
+                assert.strictEqual(typeof b.value, "number");
                 return a.value - b.value;
             };
 
