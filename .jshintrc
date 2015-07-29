@@ -109,14 +109,18 @@
         "EXTENSION_HITS": true,
         "EXTENSION_ENERGY_CAPACITY": true,
 
+        "ROAD_WEAROUT": true,
+        "ROAD_DECAY_AMOUNT": true,
+        "ROAD_DECAY_TIME": true,
+
         "LINK_HITS": true,
         "LINK_HITS_MAX": true,
-
-        "ROAD_WEAROUT": true,
-
         "LINK_CAPACITY": true,
         "LINK_COOLDOWN": true,
         "LINK_LOSS_RATIO": true,
+
+        "STORAGE_CAPACITY": true,
+        "STORAGE_HITS": true,
 
         "BODYPART_COST": true,
         "CARRY_CAPACITY": true,
@@ -150,6 +154,7 @@
         "STRUCTURE_PORTAL": true,
         "STRUCTURE_CONTROLLER": true,
         "STRUCTURE_LINK": true,
+        "STRUCTURE_STORAGE": true,
 
         "CONTROLLER_STRUCTURES": true,
         "GCL_POW": true,
