@@ -1,5 +1,35 @@
 'use strict';
 
+var binarySearch = function(input, value, cmp, thisArg, min, max) {
+    if (typeof min !== "number") {
+        min = 0;
+    }
+
+    if (typeof max !== "number") {
+        max = input.length;
+    }
+
+    if (typeof cmp !== "function") {
+        cmp = defaultCompare;
+    }
+
+    var piv;
+
+    while (min !== max) {
+        piv = (min + max) >> 1;
+        if (cmp.call(thisArg, input[piv], value) > 0) {
+            max = piv;
+        } else {
+            min = piv + 1;
+        }
+    }
+
+    return min;
+};
+
+/**
+ * Default compare function
+ */
 var defaultCompare = function(a, b) {
     if (a > b) return 1;
     if (a < b) return -1;
@@ -44,7 +74,7 @@ priorityStack.prototype.push = function(items) {
 
     // Add elements to newQueue
     while (itemsPos < items.length) {
-        var newQueuePos = _.sortedIndex(this.queue, items[itemsPos]);
+        var newQueuePos = binarySearch(this.queue, items[itemsPos], this.f, undefined, itemsPos);
 
         // Simply concat leftovers from this.queue, then leftovers items to newQueue
         // if the items should be behind this.queue
@@ -95,6 +125,7 @@ priorityStack.prototype.toArray = function() {
 };
 
 module.exports = {
-    priorityStack: priorityStack,
-    defaultCompare: defaultCompare
+    binarySearch: binarySearch,
+    defaultCompare: defaultCompare,
+    priorityStack: priorityStack
 };

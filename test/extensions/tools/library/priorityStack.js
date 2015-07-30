@@ -4,6 +4,44 @@ var assert = require('assert');
 var lib = require('../../../../extensions/tools/library/priorityStack');
 
 describe('Library extensions: priorityStack', function() {
+    describe('binarySearch', function() {
+        var tests = [
+            [[1, 2, 3], 4, 3],
+            [[3, 5, 6], 2, 0],
+            [[5, 6, 9], 7, 2],
+            [[3, 7, 9], 7, 2]
+        ];
+
+        var runBinarySearchTest = function(input) {
+            return function() {
+                assert.equal(lib.binarySearch(input[0], input[1]), input[2]);
+            };
+        };
+
+        for (var i in tests) {
+            it("Should return " + tests[i][2] + " with input " + tests[i][0] + " to find the position for " + tests[i][2], runBinarySearchTest(tests[i]));
+        }
+
+        it("Should be able to accept a function", function() {
+            var f = function(a, b) {
+                if (a > b) return -1;
+                if (a < b) return 1;
+                return 0;
+            };
+
+            var tests = [
+                [[3, 2, 1], 4, 0],
+                [[6, 5, 3], 2, 3],
+                [[9, 6, 5], 7, 1],
+                [[9, 7, 3], 7, 2]
+            ];
+
+            for (var i in tests) {
+                assert.equal(lib.binarySearch(tests[i][0], tests[i][1], f), tests[i][2]);
+            }
+        });
+    });
+
     describe('defaultCompare', function() {
         var testCases = [
             [1, 3, -1],
@@ -103,6 +141,40 @@ describe('Library extensions: priorityStack', function() {
 
             stack.push(33);
             assert.deepEqual(stack.toArray(), [3, 5, 7, 21, 33, 42, 76, 98]);
+        });
+
+        it('Should be able to have a lot of items pushed with a custom function', function() {
+            var f = function(a, b) {
+                if (a > b) return -1;
+                if (a < b) return 1;
+                return 0;
+            };
+
+            var stack = new lib.priorityStack(f);
+
+            stack.push(5);
+            assert.deepEqual(stack.toArray(), [5]);
+
+            stack.push(7);
+            assert.deepEqual(stack.toArray(), [7, 5]);
+
+            stack.push(98);
+            assert.deepEqual(stack.toArray(), [98, 7, 5]);
+
+            stack.push(76);
+            assert.deepEqual(stack.toArray(), [98, 76, 7, 5]);
+
+            stack.push(3);
+            assert.deepEqual(stack.toArray(), [98, 76, 7, 5, 3]);
+
+            stack.push(21);
+            assert.deepEqual(stack.toArray(), [98, 76, 21, 7, 5, 3]);
+
+            stack.push(42);
+            assert.deepEqual(stack.toArray(), [98, 76, 42, 21, 7, 5, 3]);
+
+            stack.push(33);
+            assert.deepEqual(stack.toArray(), [98, 76, 42, 33, 21, 7, 5, 3]);
         });
 
         it('Should be able to provide the correct length', function() {
