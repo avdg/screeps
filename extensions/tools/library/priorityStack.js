@@ -13,6 +13,10 @@ var binarySearch = function(input, value, cmp, thisArg, min, max) {
         cmp = defaultCompare;
     }
 
+    return binarySearchInternal(input, value, cmp, thisArg, min, max);
+};
+
+var binarySearchInternal = function(input, value, cmp, thisArg, min, max) {
     var piv;
 
     while (min !== max) {
@@ -74,7 +78,7 @@ priorityStack.prototype.push = function(items) {
 
     // Add elements to newQueue
     while (itemsPos < items.length) {
-        var newQueuePos = binarySearch(this.queue, items[itemsPos], this.f, undefined, itemsPos);
+        var newQueuePos = binarySearchInternal(this.queue, items[itemsPos], this.f, undefined, itemsPos, this.queue.length);
 
         // Simply concat leftovers from this.queue, then leftovers items to newQueue
         // if the items should be behind this.queue
