@@ -20,6 +20,7 @@ function hasWall(list, returnValueDefaultsTrue) {
                 case STRUCTURE_LINK:
                 case STRUCTURE_PORTAL:
                 case STRUCTURE_WALL:
+                case STRUCTURE_STORAGE:
                     return true;
 
                 case STRUCTURE_RAMPART:
