@@ -85,7 +85,8 @@ module.exports = function(grunt) {
         screeps: {
             options: {
                 email: null,
-                password: null
+                password:  null,
+                branch: 'default'
             },
             dist: {
                 src: ['build/deploy/*.js']
