@@ -70,7 +70,8 @@ module.exports = function() {
             // Format: <number of creeps> - <creepTimer1> - <creepTimer2> - etc...
             tmp = Object.keys(creepTimers[i].timers).length;
             for (var creep in creepTimers[i].timers) {
-                tmp += " - " + creep + " " + creepTimers[i].timers[creep].toFixed(2) + " ms";
+                var creepDisplayName = creep.substr(creep.indexOf(" ") + 1); // Hides role name
+                tmp += " - " + creepDisplayName + " " + creepTimers[i].timers[creep].toFixed(2) + " ms";
             }
             creepTimeMessages.push(tmp);
         }
