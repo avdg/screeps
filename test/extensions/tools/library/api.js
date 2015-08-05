@@ -34,9 +34,10 @@ describe('Library extension: api', function() {
             var fn = simple.mock(AI.extensions.routines.test, 'routine');
 
             var creep = new Creep();
-            assert.strictEqual(creep.do("test"), true);
+            assert.strictEqual(creep.do("test", {}), true);
 
             assert.equal(fn.callCount, 1);
+            assert.deepEqual(fn.lastCall.args, [creep, {}]);
         });
 
         it("Should give error if the routine doesn't exist", function() {

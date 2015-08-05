@@ -2,14 +2,14 @@
 
 function reset() {
 
-    Creep.prototype.do = function(action) {
+    Creep.prototype.do = function(action, options) {
         var routines = AI.extensions.routines[action];
 
         if (typeof routines !== "object" || typeof routines.routine !== "function") {
             throw Error("Cannot find routine " + action);
         }
 
-        return routines.routine();
+        return routines.routine(this, options);
     };
 
     // It gets what it gets, otherwise it will digg to get it
