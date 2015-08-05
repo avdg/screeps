@@ -12,7 +12,7 @@ function build(spawn) {
 /**
  * Executed after ant being spawned
  */
-function init(name) {
+function spawning(creep) {
 
 }
 
@@ -36,7 +36,7 @@ function turn(creep) {
 module.exports = {
     role: 'FOO',
     build: build,
-    init: init,
+    spawning: spawning,
     turn: turn,
     endTurn: endTurn,
 };
