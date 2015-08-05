@@ -2,6 +2,16 @@
 
 function reset() {
 
+    Creep.prototype.do = function(action) {
+        var routines = AI.extensions.routines[action];
+
+        if (typeof routines !== "object" || typeof routines.routine !== "function") {
+            throw Error("Cannot find routine " + action);
+        }
+
+        return routines.routine();
+    };
+
     // It gets what it gets, otherwise it will digg to get it
     Room.prototype.get = function(type, options) {
         if (typeof AI.extensions.targets[type] === "object" &&

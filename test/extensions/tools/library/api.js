@@ -20,6 +20,62 @@ var lib = require('../../../../extensions/tools/library/api');
 describe('Library extension: api', function() {
     beforeEach(reset);
 
+    describe('Creep.prototype.do', function() {
+        it("Should be able to execute the given routine", function() {
+            AI.extensions.routines = {
+                test: {
+                    routine: function() {
+                        return true;
+                    }
+                }
+            };
+
+            lib.reset();
+            var fn = simple.mock(AI.extensions.routines.test, 'routine');
+
+            var creep = new Creep();
+            assert.strictEqual(creep.do("test"), true);
+
+            assert.equal(fn.callCount, 1);
+        });
+
+        it("Should give error if the routine doesn't exist", function() {
+            AI.extensions.routines = {};
+
+            var f = function() {
+                lib.reset();
+                var creep = new Creep();
+                creep.do("thisDoesntExist");
+            };
+            var validator = function(e) {
+                return e instanceof Error &&
+                    e.message === "Cannot find routine thisDoesntExist";
+            };
+
+            assert.throws(f, validator);
+        });
+
+        it("Should give error if the routine is not a function", function() {
+            AI.extensions.routines = {
+                notAFunction: {
+                    routine: "test"
+                }
+            };
+
+            var f = function() {
+                lib.reset();
+                var creep = new Creep();
+                creep.do("notAFunction");
+            };
+            var validator = function(e) {
+                return e instanceof Error &&
+                    e.message === "Cannot find routine notAFunction";
+            };
+
+            assert.throws(f, validator);
+        });
+    });
+
     describe('Room.prototype.get', function() {
         it('Should be able to call the target getter', function() {
             AI.extensions.targets.testTarget = {
