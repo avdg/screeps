@@ -93,52 +93,75 @@ describe('Library extensions: room', function() {
             },
             {
                 test: 'Any structure that represents a controller should be avoided',
-                input: [[{type: 'structure', structureType: STRUCTURE_CONTROLLER}]],
+                input: [[{type: 'structure', structure: {
+                    structureType: STRUCTURE_CONTROLLER}
+                }]],
                 output: true
             },
             {
                 test: 'Any structure that represents an extension should be avoided',
-                input: [[{type: 'structure', structureType: STRUCTURE_EXTENSION}]],
+                input: [[{type: 'structure', structure: {
+                    structureType: STRUCTURE_EXTENSION
+                }}]],
                 output: true
             },
             {
                 test: 'Any structure that represents a keeper lair should be avoided',
-                input: [[{type: 'structure', structureType: STRUCTURE_KEEPER_LAIR}]],
+                input: [[{type: 'structure', structure: {
+                    structureType: STRUCTURE_KEEPER_LAIR
+                }}]],
                 output: true
             },
             {
                 test: 'Any structure that represents a link should be avoided',
-                input: [[{type: 'structure', structureType: STRUCTURE_LINK}]],
+                input: [[{type: 'structure', structure: {
+                    structureType: STRUCTURE_LINK
+                }}]],
                 output: true
             },
             {
                 test: 'Any structure that represents a portal should be avoided',
-                input: [[{type: 'structure', structureType: STRUCTURE_PORTAL}]],
+                input: [[{type: 'structure', structure: {
+                    structureType: STRUCTURE_PORTAL
+                }}]],
                 output: true
             },
             {
                 test: 'Any structure that represents a wall should be avoided',
-                input: [[{type: 'structure', structureType: STRUCTURE_WALL}]],
+                input: [[{type: 'structure', structure: {
+                    structureType: STRUCTURE_WALL
+                }}]],
                 output: true
             },
             {
                 test: 'Any structure that represents a hostile rampart should be avoided',
-                input: [[{type: 'structure', structureType: STRUCTURE_RAMPART, my: false}]],
+                input: [[{type: 'structure', structure: {
+                    structureType: STRUCTURE_RAMPART,
+                    my: false
+                }}]],
                 output: true
             },
             {
                 test: 'Any structure that represents a friendly rampart or road should not represent walls',
                 input: [[
-                    {type: 'structure', structureType: STRUCTURE_RAMPART, my: true},
-                    {type: 'structure', structureType: STRUCTURE_ROAD}
+                    {type: 'structure', structure: {
+                        structureType: STRUCTURE_RAMPART, my: true
+                    }},
+                    {type: 'structure', structure: {
+                        structureType: STRUCTURE_ROAD
+                    }}
                 ]],
                 output: false
             },
             {
                 test: 'Just for some good measure',
                 input: [[
-                    {type: 'structure', structureType: STRUCTURE_CONTROLLER},
-                    {type: 'structure', structureType: STRUCTURE_LINK}
+                    {type: 'structure', structure: {
+                        structureType: STRUCTURE_CONTROLLER
+                    }},
+                    {type: 'structure', structure: {
+                        structureType: STRUCTURE_LINK
+                    }}
                 ]],
                 output: true
             }
@@ -156,7 +179,9 @@ describe('Library extensions: room', function() {
 
         it('Should throw an error if an unvalid structure type has been detected', function() {
             var run = function() {
-                lib.hasWall([{type: 'structure', structureType: 'notExistingStructure'}]);
+                lib.hasWall([{type: 'structure', structure: {
+                    structureType: 'notExistingStructure'
+                }}]);
             };
 
             var testUnknownStructureException = function(e) {

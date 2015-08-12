@@ -13,7 +13,7 @@ function hasWall(list, returnValueDefaultsTrue) {
         }
 
         if (list[i].type === "structure") {
-            switch(list[i].structureType) {
+            switch(list[i].structure.structureType) {
                 case STRUCTURE_CONTROLLER:
                 case STRUCTURE_EXTENSION:
                 case STRUCTURE_KEEPER_LAIR:
@@ -24,7 +24,7 @@ function hasWall(list, returnValueDefaultsTrue) {
                     return true;
 
                 case STRUCTURE_RAMPART:
-                    if (list[i].my === false) {
+                    if (list[i].structure.my === false) {
                         return true;
                     }
                     break;
@@ -33,7 +33,7 @@ function hasWall(list, returnValueDefaultsTrue) {
                     break;
 
                 default:
-                    throw Error('Unknown structure type ' + list[i].structureType);
+                    throw Error('Unknown structure type ' + list[i].structure.structureType);
             }
         }
     }
