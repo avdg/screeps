@@ -28,7 +28,7 @@ var distance = function(x1, y1, x2, y2) {
     );
 };
 
-var manhattenDistance = function(x1, y1, x2, y2) {
+var manhattanDistance = function(x1, y1, x2, y2) {
     if (x1 instanceof Object && x1.pos instanceof RoomPosition) {
         x1 = x1.pos;
     }
@@ -55,5 +55,5 @@ var manhattenDistance = function(x1, y1, x2, y2) {
 
 module.exports = {
     distance: distance,
-    manhattenDistance: manhattenDistance
+    manhattanDistance: manhattanDistance
 };
