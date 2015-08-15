@@ -83,11 +83,7 @@ module.exports = function(grunt) {
             }
         },
         screeps: {
-            options: {
-                email: null,
-                password:  null,
-                branch: 'default'
-            },
+            options: grunt.file.readJSON(".screeps-creds"),
             dist: {
                 src: ['build/deploy/*.js']
             }
