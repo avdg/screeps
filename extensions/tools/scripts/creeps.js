@@ -10,6 +10,7 @@ module.exports = function() {
 
         if (typeof creep.memory.role !== "string") {
             console.log('Warning: Creep without role at ' + creep.pos.x + "," + creep.pos.y);
+            creep.memory.role = creep.name.split(' ')[0];
             continue;
         }
 
