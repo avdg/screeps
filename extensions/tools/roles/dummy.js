@@ -23,6 +23,12 @@ function spawning(creep) {
  */
 function turn(creep) {
 
+    // Always drop when dying
+    if (creep.do("deadCheck", {}) === true) {
+        return;
+    }
+
+    // Do other stuff...
 }
 
 /**
