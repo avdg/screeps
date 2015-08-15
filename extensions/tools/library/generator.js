@@ -23,12 +23,13 @@ var generator = function(options) {
     options = options || {};
     options.min = options.min || 2;
     options.max = options.max || 5;
+    options.parts = options.parts || nameParts;
 
     var name = '',
         i = Math.floor(Math.random() * (options.max - options.min + 1)) + options.min;
 
     for (; i > 0; i--) {
-        name += nameParts[Math.floor(Math.random() * (nameParts.length))];
+        name += options.parts[Math.floor(Math.random() * (options.parts.length))];
     }
 
     return name;
