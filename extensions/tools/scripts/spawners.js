@@ -37,7 +37,7 @@ function createCreep(spawn, creep) {
 
     if (result === OK) {
         result = spawn.createCreep(body, name, memory);
-        console.log('Spawner: Creating ' + name);
+        console.log('Spawner: Creating ' + name + " : " + JSON.stringify(body));
 
         if (typeof result !== "string") {
             console.log("Unexpected error " + result + ": cannot spawn " + name + " with role " + memory.role);
@@ -83,7 +83,7 @@ function spawnAttempt(spawn, queue, priority) {
 
         switch (result) {
             case ERR_INVALID_ARGS:
-                console.log('Spawner: Cannot find creep type with parameter' +
+                console.log('Spawner: Cannot find creep type with parameter ' +
                     JSON.stringify(queue[i])
                 );
                 break;
