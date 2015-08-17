@@ -62,7 +62,7 @@ module.exports = function(grunt) {
             test: {
                 src: 'test/**/*.js',
                 options: {
-                    slow: 20
+                    slow: 10
                 }
             },
             coverage: {
