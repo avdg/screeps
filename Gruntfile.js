@@ -64,6 +64,7 @@ module.exports = function(grunt) {
             coverage: {
                 expand: true,
                 src: ['test/**', 'lib/mocks/**'],
+                dot: true,
                 dest: 'lib-cov/'
             },
             deploy: {
