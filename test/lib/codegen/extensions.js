@@ -281,6 +281,27 @@ describe('CodeGen: extensions', function() {
         });
     });
 
+    describe('quote', function() {
+        var tests = [
+            ["Should keep normal names as it it", "test", "test"],
+            ["Should replace double quotes and backslashes", "\\\"test\"\\", "\"\\\\\\\"test\\\"\\\\\""],
+            ["Should replace control characters by their unicode notation", "\u0000\u001f\u0020", "\"\\u0000\\u001f \""],
+            ["Should put inputs with characters higher than code point 127 between quotes", "€", "\"€\""]
+        ];
+
+        var runQuoteTest = function(test) {
+            return function() {
+                it(test[0], function() {
+                    assert.strictEqual(extensionsCodegen.test.quotify(test[1]), test[2]);
+                });
+            };
+        };
+
+        for (var i in tests) {
+            runQuoteTest(tests[i])();
+        }
+    });
+
     describe('readExtensionBundle', function() {
         it('Should read the extensions/ folder and put it into an object', function() {
             var buffer = [];
