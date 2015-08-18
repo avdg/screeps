@@ -14,7 +14,7 @@ var getPrivateSettings = function(grunt) {
         "        options: {\n" +
         "            email: null,\n" +
         "            settings: null,\n" +
-        "            banch: null\n" +
+        "            branch: \"default\"\n" +
         "        }\n" +
         "    }\n" +
         "};";
