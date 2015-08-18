@@ -1,5 +1,6 @@
 # Generated build files
 build/
+settings.js
 .eslintrc
 
 # Logs
