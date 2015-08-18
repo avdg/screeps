@@ -1,5 +1,6 @@
 # Generated build files
 build/
+settings.js
 .eslintrc
 
 # Logs
@@ -30,5 +31,3 @@ node_modules
 
 # Users Environment Variables
 .lock-wscript
-
-.screeps-creds

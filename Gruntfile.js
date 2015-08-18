@@ -1,6 +1,29 @@
 'use strict';
 
+var fs = require("fs");
 var path = require("path");
+
+var getPrivateSettings = function(grunt) {
+    var location = "./settings.js";
+    if (!grunt.file.exists(location)) {
+        console.log("Can't find ./settings.js, setting up...");
+
+        var settingsFile =
+        "module.exports = {\n" +
+        "    screeps: {\n" +
+        "        options: {\n" +
+        "            email: null,\n" +
+        "            settings: null,\n" +
+        "            banch: null\n" +
+        "        }\n" +
+        "    }\n" +
+        "};";
+
+        grunt.file.write(location, settingsFile);
+    } else {
+        return require(location);
+    }
+};
 
 module.exports = function(grunt) {
 
@@ -62,7 +85,7 @@ module.exports = function(grunt) {
             test: {
                 src: 'test/**/*.js',
                 options: {
-                    slow: 20
+                    slow: 10
                 }
             },
             coverage: {
@@ -83,7 +106,7 @@ module.exports = function(grunt) {
             }
         },
         screeps: {
-            options: grunt.file.readJSON(".screeps-creds"),
+            options: {},
             dist: {
                 src: ['build/deploy/*.js']
             }
@@ -94,6 +117,8 @@ module.exports = function(grunt) {
             }
         }
     });
+
+    grunt.config.merge(getPrivateSettings(grunt));
 
     grunt.task.registerTask('codegen', [
         'clean:deploy',
