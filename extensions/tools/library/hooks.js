@@ -1,7 +1,8 @@
 'use strict';
 
 function emit(f) {
-    var args = Array(arguments.length - 1);
+    var args = new Array(arguments.length - 1);
+    var results = [];
 
     var i = 0;
     while (++i < arguments.length) {
@@ -10,9 +11,11 @@ function emit(f) {
 
     for (var hook in AI.extensions.hooks) {
         if (typeof AI.extensions.hooks[hook][f] === "function") {
-            AI.extensions.hooks[hook][f].apply(undefined, args);
+            results.push(AI.extensions.hooks[hook][f].apply(undefined, args));
         }
     }
+
+    return results;
 }
 
 module.exports = {
