@@ -80,7 +80,7 @@ These files are coming from the `extensions/` directory with a structure as
 `extensions/<package>/<type>/<plugin>`.
 
 These include all files ending with `.js`, excluding the files starting with a `.`
-like `.thisFileWillBeIgnoredAnyway.js`.
+like `.thisFileWillBeIgnoredAnyway.js` or located in directories starting with a '.'.
 
 When generating the extensions, all packages are virtually merged into a single package.
 This is how it ends up using the `AI.extensions.<type>.<plugin>` format.
