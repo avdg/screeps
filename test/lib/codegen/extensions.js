@@ -136,6 +136,30 @@ describe('CodeGen: extensions', function() {
         });
     });
 
+    describe("ExtensionCodeGenerator", function() {
+        it("Should be able to parse extensions and output code", function() {
+            var extensions = {
+                test: {
+                    something: function() {}
+                }
+            };
+            var output = "function(){\nGame.extensions = AI.extensions = {\ntest: {\nsomething: (function(){\nvar module = {};(function(){\nfunction () {}\n}());\n\nreturn module.exports;\n}()),\n},\n};\n}";
+
+            assert.equal(extensionsCodegen.test.extensionsCodeGenerator(extensions), output);
+        });
+
+        it("Should be able to quote keys if necessary", function() {
+            var extensions = {
+                "test something": {
+                    "with quotes": function() {}
+                }
+            };
+            var output = "function(){\nGame.extensions = AI.extensions = {\n\"test something\": {\n\"with quotes\": (function(){\nvar module = {};(function(){\nfunction () {}\n}());\n\nreturn module.exports;\n}()),\n},\n};\n}";
+
+            assert.equal(extensionsCodegen.test.extensionsCodeGenerator(extensions), output);
+        });
+    });
+
     describe('extensionIterator', function() {
         var testObject = {
             foo: {
