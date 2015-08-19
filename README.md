@@ -26,7 +26,7 @@ Go to [screeps.com](https://screeps.com) or you could try [🍕💩.ws/🐯🔮�
 
 ### Build configuration
 
-- Open `Gruntfile.js` in an editor, look for `screeps: {`, fill in the options and save the file.
+- Open `settings.js` in an editor (if the file is not available, run `grunt` in console), fill in the options and save the file.
 - In a terminal open in a copy of this project: type `grunt deploy`
 - If done properly, this should push the code to screeps.com succesfully.
 
@@ -59,7 +59,7 @@ The private ai code I deploy are just other extensions.
 
 ### AI script files
 
-- `_settings.js` Drain for global settings.
+- `_settings.js` Drain for global AI settings.
 
 #### AI Object
 
