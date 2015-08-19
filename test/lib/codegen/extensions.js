@@ -283,10 +283,17 @@ describe('CodeGen: extensions', function() {
 
     describe('quote', function() {
         var tests = [
-            ["Should keep normal names as it it", "test", "test"],
+            ["Should keep normal names as it it", "Atestz", "Atestz"],
             ["Should replace double quotes and backslashes", "\\\"test\"\\", "\"\\\\\\\"test\\\"\\\\\""],
             ["Should replace control characters by their unicode notation", "\u0000\u001f\u0020", "\"\\u0000\\u001f \""],
-            ["Should put inputs with characters higher than code point 127 between quotes", "€", "\"€\""]
+            ["Should put inputs with characters higher than code point 127 between quotes", "€", "\"€\""],
+            ["Should put inputs starting with digits between quotes", "0test", "\"0test\""],
+            ["Should put inputs with characters below ascii code 48 (0) between quotes unless these characters are $", "!test", "\"!test\""],
+            ["Should not put inputs with $ between quotes", "$test", "$test"],
+            ["Should put inputs with characters above ascii code 122 (z) between quotes", "{test", "\"{test\""],
+            ["Should put inputs with characters between 90 (Z) and 97 (a) between quotes unless these characters are _", "[test", "\"[test\""],
+            ["Should not put inputs with _ between quotes", "_test", "_test"],
+            ["Should put inputs with characters between 57 (9) and 65 (A) between quotes", ":@test", "\":@test\""]
         ];
 
         var runQuoteTest = function(test) {
