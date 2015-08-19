@@ -136,30 +136,6 @@ describe('CodeGen: extensions', function() {
         });
     });
 
-    describe("ExtensionCodeGenerator", function() {
-        it("Should be able to parse extensions and output code", function() {
-            var extensions = {
-                test: {
-                    something: function() {}
-                }
-            };
-            var output = "function(){\nGame.extensions = AI.extensions = {\ntest: {\nsomething: (function(){\nvar module = {};(function(){\nfunction () {}\n}());\n\nreturn module.exports;\n}()),\n},\n};\n}";
-
-            assert.equal(extensionsCodegen.test.extensionsCodeGenerator(extensions), output);
-        });
-
-        it("Should be able to quote keys if necessary", function() {
-            var extensions = {
-                "test something": {
-                    "with quotes": function() {}
-                }
-            };
-            var output = "function(){\nGame.extensions = AI.extensions = {\n\"test something\": {\n\"with quotes\": (function(){\nvar module = {};(function(){\nfunction () {}\n}());\n\nreturn module.exports;\n}()),\n},\n};\n}";
-
-            assert.equal(extensionsCodegen.test.extensionsCodeGenerator(extensions), output);
-        });
-    });
-
     describe('extensionIterator', function() {
         var testObject = {
             foo: {
@@ -249,6 +225,30 @@ describe('CodeGen: extensions', function() {
         });
     });
 
+    describe("extensionCodeGenerator", function() {
+        it("Should be able to parse extensions and output code", function() {
+            var extensions = {
+                test: {
+                    something: function() {}
+                }
+            };
+            var output = "function(){\nGame.extensions = AI.extensions = {\ntest: {\nsomething: (function(){\nvar module = {};(function(){\nfunction () {}\n}());\n\nreturn module.exports;\n}()),\n},\n};\n}";
+
+            assert.equal(extensionsCodegen.test.extensionsCodeGenerator(extensions), output);
+        });
+
+        it("Should be able to quote keys if necessary", function() {
+            var extensions = {
+                "test something": {
+                    "with quotes": function() {}
+                }
+            };
+            var output = "function(){\nGame.extensions = AI.extensions = {\n\"test something\": {\n\"with quotes\": (function(){\nvar module = {};(function(){\nfunction () {}\n}());\n\nreturn module.exports;\n}()),\n},\n};\n}";
+
+            assert.equal(extensionsCodegen.test.extensionsCodeGenerator(extensions), output);
+        });
+    });
+
     describe('merge', function() {
         it('Should merge different trees with ease', function() {
             assert.deepEqual(
@@ -333,6 +333,28 @@ describe('CodeGen: extensions', function() {
         }
     });
 
+    describe('readExtension', function() {
+        it('Should read the test extension', function() {
+            assert.equal(
+                extensionsCodegen.test.readExtension(extensionLocation),
+                extensionContentParsed
+            );
+        });
+
+        it('Should throw an error if a file contains syntax error', function() {
+            var run = function() {
+                extensionsCodegen.test.readExtension(badExtensionLocation);
+            };
+
+            var testSyntaxError = function(e) {
+                return e instanceof Error &&
+                    /^Error in parsing [^\n]*badExtensionFile\.js:\n.*Unexpected token }\n(\n.*)+$/.test(e.message);
+            };
+
+            assert.throws(run, testSyntaxError);
+        });
+    });
+
     describe('readExtensionBundle', function() {
         it('Should read the extensions/ folder and put it into an object', function() {
             var buffer = [];
@@ -369,28 +391,6 @@ describe('CodeGen: extensions', function() {
                 ),
                 {test: extensionContentParsed}
             );
-        });
-    });
-
-    describe('readExtension', function() {
-        it('Should read the test extension', function() {
-            assert.equal(
-                extensionsCodegen.test.readExtension(extensionLocation),
-                extensionContentParsed
-            );
-        });
-
-        it('Should throw an error if a file contains syntax error', function() {
-            var run = function() {
-                extensionsCodegen.test.readExtension(badExtensionLocation);
-            };
-
-            var testSyntaxError = function(e) {
-                return e instanceof Error &&
-                    /^Error in parsing [^\n]*badExtensionFile\.js:\n.*Unexpected token }\n(\n.*)+$/.test(e.message);
-            };
-
-            assert.throws(run, testSyntaxError);
         });
     });
 
