@@ -8,14 +8,37 @@ module.exports = function() {
     for (i in Game.creeps) {
         var creep = Game.creeps[i];
 
-        if (typeof creep.memory.role !== "string") {
-            console.log('Warning: Creep without role at ' + creep.pos.x + "," + creep.pos.y);
-            continue;
+        if (typeof creep.memory.role !== "string" || roles[creep.memory.role] === undefined) {
+            // Trigger hook and hope we get a result;
+            var results = AI.emit("noRole");
+
+            // Check results
+            for (var j = 0; j < results.length; j++) {
+                if (typeof results[j] === "string") {
+                    if (role === undefined) {
+                        role = results[j];
+                    } else {
+                        role = null;
+                    }
+                }
+            }
+
+            // Make sure all hooks agree on a single solution, undefined means the vote is withheld
+            if (typeof role !== "string") {
+                if (role === undefined) {
+                    console.log("Warning: Creep " + creep.name + " without role at " + creep.pos.x + "," + creep.pos.y + " in room " + creep.pos.roomName);
+                } else if (role === null) {
+                    console.log("Warning: Creep " + creep.name + " has been assigned with multiple roles");
+                }
+                continue;
+            }
+        } else {
+            role = creep.memory.role;
         }
 
         if (creep.spawning === true) {
-            if (typeof roles[creep.memory.role].spawning === "function") {
-                roles[creep.memory.role].spawning(creep);
+            if (typeof roles[role].spawning === "function") {
+                roles[role].spawning(creep);
             }
 
             continue;
@@ -23,20 +46,20 @@ module.exports = function() {
 
         // Bench function
         timer = Game.getUsedCpu();
-        roles[creep.memory.role].turn(creep);
+        roles[role].turn(creep);
         timer = AI.getTimeDiff(timer, Game.getUsedCpu());
 
         // Keep records of all times
-        if (timers[creep.memory.role] === undefined) {
-            timers[creep.memory.role] = {
+        if (timers[role] === undefined) {
+            timers[role] = {
                 totalTime: timer,
                 timers: {}
             };
         } else {
-            timers[creep.memory.role].totalTime += timer;
+            timers[role].totalTime += timer;
         }
 
-        timers[creep.memory.role].timers[creep.name] = timer;
+        timers[role].timers[creep.name] = timer;
     }
 
     for (role in roles) {
