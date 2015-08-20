@@ -55,7 +55,7 @@ The private ai code I deploy are just other extensions.
 
 ### Ai rules / Ai constrains
 
-- All creeps must have a role
+- All creeps must have a role, or receive a role after being triggered by the `noRole` event
 
 ### AI script files
 
@@ -93,10 +93,14 @@ Current extension types are:
 - hooks (replaced units)
    - Located at `extensions/<any directory>/hooks/`
    - Events when hooks are called:
-     - firstTurn: Called when the AI is doing its first turn
-     - preController: Called before giving spawns and creepers orders
-     - postController: Called before shutting down the AI
-     - noSpawn: Called when a spawn has nothing to spawn
+     - `firstTurn`: Called when the AI is doing its first turn
+     - `preController`: Called before giving spawns and creepers orders
+     - `postController`: Called before shutting down the AI
+     - `noRole`: Called when a creep has no role
+       - First parameter is creep name
+       - Accepts a return value
+       - Since an event can trigger multiple hooks, the new role will only be accepted when the received role is non-conflicting (multiple hooks returning the same result is fine, undefined means withold, all undefined means no role).
+     - `noSpawn`: Called when a spawn has nothing to spawn
        - First parameter is spawn
        - Second parameter is a function to spawn something, simply pass a type or a creep memory object
 - library
