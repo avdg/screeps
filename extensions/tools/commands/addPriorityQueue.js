@@ -7,5 +7,5 @@ function command(flag, parameters) {
 module.exports = {
     exec: command,
     command: "addPriorityQueue",
-    help: 'Description:\n- Adds an ant to a spawnPriorityQueue\n\nUsage:\n- addPriorityQueue &lt;role&gt;',
+    help: 'Description:\n- Adds an ant to a spawnPriorityQueue\n\nUsage:\n- addPriorityQueue &lt;role&gt; [spawn]',
 };
