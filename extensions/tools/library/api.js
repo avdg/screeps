@@ -1,5 +1,8 @@
 'use strict';
 
+var spawnEnergyCache = {};
+var extensionsEnergyCache = {};
+
 function reset() {
 
     Creep.prototype.do = function(action, options) {
@@ -17,6 +20,22 @@ function reset() {
         if (typeof AI.extensions.targets[type] === "object" &&
             typeof AI.extensions.targets[type].get === "function"
         ) return AI.extensions.targets[type].get(this, options);
+    };
+
+    Room.prototype.getExtensionEnergy = function() {
+        var self = this;
+        if (extensionsEnergyCache[this.name] === undefined) {
+            extensionsEnergyCache[this.name] = 0;
+            this.find(FIND_MY_STRUCTURES, {
+                filter: function(obj) {
+                    if (obj.structureType === STRUCTURE_EXTENSION) {
+                        extensionsEnergyCache[self.name] += obj.energy;
+                    }
+                }
+            });
+        }
+
+        return extensionsEnergyCache[this.name];
     };
 
     /** Counts empty tiles around a certain positions
@@ -51,6 +70,38 @@ function reset() {
         return spaces;
     };
 
+    Spawn.prototype.getAvailableEnergy = function() {
+        if (spawnEnergyCache[this.name] === undefined) {
+            spawnEnergyCache[this.name] = this.energy;
+        }
+
+        var extensionsEnergy = this.room.getExtensionEnergy();
+        var energy = spawnEnergyCache[this.name] + extensionsEnergy;
+
+        return energy;
+    };
+
+    Spawn.prototype.subtractEnergy = function(energy) {
+        if (energy > this.getAvailableEnergy()) {
+            return false;
+        }
+
+        // First subtract energy from spawn
+        var leftOver = energy - spawnEnergyCache[this.name];
+
+        // Check if spawn has more energy than we need
+        if (leftOver < 0) {
+            spawnEnergyCache[this.name] -= energy;
+            return true;
+        }
+
+        // Subtract energy from spawns and extensions
+        spawnEnergyCache[this.name] = 0;
+        extensionsEnergyCache[this.room.name] -= leftOver;
+
+        return true;
+    };
+
     AI.get = function(type, options) {
         if (typeof AI.extensions.targets[type] === "object" &&
             typeof AI.extensions.targets[type].get === "function"
@@ -58,8 +109,16 @@ function reset() {
     };
 }
 
+function resetState() {
+    spawnEnergyCache = {};
+    extensionsEnergyCache = {};
+}
+
 module.exports = {
-    reset: reset
+    reset: reset, // Resets api
+    test: {
+        reset: resetState // Resets memory state
+    }
 };
 
 reset();
