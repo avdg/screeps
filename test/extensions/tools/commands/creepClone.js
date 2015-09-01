@@ -22,6 +22,10 @@ function reset() {
         },
         parseCommand: lib.parseCommand
     };
+    global.Game = {
+        spawns: {}
+    };
+    global.Spawn = function(){};
     global._ = require("lodash");
 }
 
@@ -122,12 +126,17 @@ describe('Tool extensions: Command creepClone', function() {
                     name: 'guard 007'
                 }
             },
-            getObjectById: function() {}
+            getObjectById: function() {},
+            spawns: {
+                "007Spawn": new Spawn()
+            }
         };
 
         Memory = {
             spawns: {}
         };
+
+        Game.spawns["007Spawn"].name = "007Spawn";
 
         var flag = {
             name: 'creepClone "guard 007"',
@@ -135,7 +144,7 @@ describe('Tool extensions: Command creepClone', function() {
         };
 
         var fn = simple.mock(flag, 'remove');
-        var fnGetObject = simple.mock(Game, 'getObjectById').returnWith({name: '007Spawn'});
+        var fnGetObject = simple.mock(Game, 'getObjectById').returnWith(Game.spawns["007Spawn"]);
         var buffer = [];
 
         lib.bufferConsole(
@@ -287,12 +296,19 @@ describe('Tool extensions: Command creepClone', function() {
             }
         };
 
+        Game = {
+            spawns: {
+                home: new Spawn()
+            }
+        };
+        Game.spawns.home.name = "home";
+
         Memory = {
             spawns: {}
         };
         var buffer = [];
 
-        var fn = simple.mock(Game, 'getObjectById').returnWith({name: 'home'});
+        var fn = simple.mock(Game, 'getObjectById').returnWith(Game.spawns.home);
 
         lib.bufferConsole(
             function() { lib.exec('creepClone', creep); },

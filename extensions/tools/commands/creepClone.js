@@ -8,10 +8,10 @@ var duplicateCreep = function (creep, priority, silence) {
 
     // Find and add to queue
     if (typeof creep.memory.spawn === "string") {
-        spawn = Game.getObjectById(creep.memory.spawn).name;
+        spawn = Game.getObjectById(creep.memory.spawn);
     }
 
-    if (typeof spawn !== 'string') {
+    if (!(spawn instanceof Spawn)) {
         Memory[priority].push({
             role: creep.memory.role, memory: _.cloneDeep(creep.memory)
         });
@@ -23,15 +23,15 @@ var duplicateCreep = function (creep, priority, silence) {
         return;
     }
 
-    if (!Memory.spawns[spawn]) Memory.spawns[spawn] = {};
-    if (!Memory.spawns[spawn][priority]) Memory.spawns[spawn][priority] = [];
+    if (!Memory.spawns[spawn.name]) Memory.spawns[spawn.name] = {};
+    if (!Memory.spawns[spawn.name][priority]) Memory.spawns[spawn.name][priority] = [];
 
-    Memory.spawns[spawn][priority].push({
+    Memory.spawns[spawn.name][priority].push({
         role: creep.memory.role, memory: _.cloneDeep(creep.memory)
     });
 
     if (!silence) {
-        console.log("Added " + (creep.name || creep.memory.role) + " to " + priority + " at spawn " + spawn);
+        console.log("Added " + (creep.name || creep.memory.role) + " to " + priority + " at spawn " + spawn.name);
     }
 };
 
