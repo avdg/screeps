@@ -6,7 +6,7 @@
 // deathChecker.copyPriority = ['FOOBAR'] Roles in this array should be replaced quickly
 //
 // Notes:
-// - If a role has been found death and has not been found in either arrays
+// - If a role has been found dead and has not been found in either arrays
 //   the chat might spam because the deathChecker doesn't know what to do
 //
 // - If you want to prevent a creep from being copied when it dies,

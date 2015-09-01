@@ -12,7 +12,8 @@ var getPrivateSettings = function(grunt) {
         "module.exports = {\n" +
         "    screeps: {\n" +
         "        options: {\n" +
-        "            email: null,\n" +
+        "            email: \"INVALID\",\n" +
+        "            password: \"INVALID\",\n" +
         "            settings: null,\n" +
         "            branch: \"default\"\n" +
         "        }\n" +
