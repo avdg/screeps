@@ -7,23 +7,23 @@
  */
 function build(spawn) {
     return [
-        TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, MOVE
+        WORK, CARRY, MOVE, MOVE
     ];
 }
 
 /**
- * Executed after ant being spawned
+ * Executed each tick while creep is being spawned.
  */
 function spawning(creep) {
 
 }
 
 /**
- * Executed each turn
+ * Executed each tick after creep is spawned.
  */
 function turn(creep) {
 
-    // Always drop when dying
+    // Use routines to abstract and share behaviors between creeps.
     if (creep.do("deadCheck", {}) === true) {
         return;
     }
