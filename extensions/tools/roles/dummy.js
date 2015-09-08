@@ -12,18 +12,18 @@ function build(spawn) {
 }
 
 /**
- * Executed after ant being spawned
+ * Executed after each tick while creep is being spawned.
  */
 function spawning(creep) {
 
 }
 
 /**
- * Executed each turn
+ * Executed each non-spawning turn
  */
 function turn(creep) {
 
-    // Always drop when dying
+    // Always drop when dying. Uses a routine to simplify code reuse between multiple creep roles.
     if (creep.do("deadCheck", {}) === true) {
         return;
     }
