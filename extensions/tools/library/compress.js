@@ -1,12 +1,5 @@
 "use strict";
 
-// Node 0.10 compatibility
-Number.isInteger = Number.isInteger || function(value) {
-    return typeof value === "number" &&
-           isFinite(value) &&
-           Math.floor(value) === value;
-};
-
 // // Script to get all characters that are not escaped using json
 // for (var result = [], char, i = 0, j; i < 128; i++) {
 //     char = JSON.stringify(String.fromCharCode(i));
