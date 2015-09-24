@@ -115,6 +115,12 @@ function spawner(spawn) {
         newSpawn(spawn);
     }
 
+    // Room specific
+    if (Memory.rooms[spawn.room.name]) {
+        if (spawnAttempt(spawn, Memory.rooms[spawn.room.name].spawnPriorityQueue, true) !== undefined) return;
+        if (spawnAttempt(spawn, Memory.rooms[spawn.room.name].spawnQueue, false)) return;
+    }
+
     // Global
     if (spawnAttempt(spawn, Memory.spawnPriorityQueue, true) !== undefined) return;
     if (spawnAttempt(spawn, Memory.spawnQueue, false)) return;
