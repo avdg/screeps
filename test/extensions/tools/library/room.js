@@ -43,8 +43,8 @@ describe("Library extensions: room", function() {
             };
 
             var room = {
-                lookAt: function(obj) {
-                    return grid[obj.x][obj.y];
+                lookAt: function(x, y) {
+                    return grid[x][y];
                 }
             };
 

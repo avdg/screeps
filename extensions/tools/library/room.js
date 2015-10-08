@@ -20,7 +20,7 @@ function examinePath(path, room) {
     var isRoad;
 
     for (var i = 0; i < path.length; i++) {
-        tileData = room.lookAt(path[i]);
+        tileData = room.lookAt(path[i].x, path[i].y);
         isSwamp = false;
         isRoad = false;
 
