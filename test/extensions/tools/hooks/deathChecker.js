@@ -109,10 +109,10 @@ describe('Hook extensions: deathChecker', function() {
 
         assert.deepEqual(hookDeathChecker.test.removeQueue, expectedDeaths);
 
-        for (var i = 0; i < fn1.calls.length; i++) {
+        for (let i = 0; i < fn1.calls.length; i++) {
             calls.push(fn1.calls[i].args);
         }
-        for (var i = 0; i < fn2.calls.length; i++) {
+        for (let i = 0; i < fn2.calls.length; i++) {
             notifications.push(fn2.calls[i].args);
         }
 
