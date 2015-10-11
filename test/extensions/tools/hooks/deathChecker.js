@@ -65,16 +65,18 @@ describe('Hook extensions: deathChecker', function() {
             native: function() {}
         };
 
-        var fn = simple.mock(AI.extensions.commands.creepClone, 'native');
+        var fn1 = simple.mock(AI.extensions.commands.creepClone, 'native');
+        var fn2 = simple.mock(Game, 'notify');
+
         var fail = function(unfound, items) {
             console.log(items);
             assert.fail(undefined, unfound, "Value " + JSON.stringify(unfound) + " not found");
         };
 
-        var expectedDeaths = ['bar', 'guard007', 'builders'];
+        var expectedDeaths = ['Foo', 'bar', 'guard007', 'builders'];
         var expectedBuffer = [
             ["Hook deathChecker: Found dead creep bar. Copying to priority queue..."],
-            ["Hook deathChecker: Found dead creep Foo. Dunno what to do..."],
+            ["Hook deathChecker: Found dead creep Foo. Deleting..."],
             ["Hook deathChecker: Found dead creep guard007. Copying to queue..."],
             ["Hook deathChecker: Found dead creep builders. Deleting..."]
         ];
@@ -92,7 +94,12 @@ describe('Hook extensions: deathChecker', function() {
                 }
             }, false]
         ];
+        var expectedNotifications = [
+            ["Found dead creep Foo without role. Deleting..."]
+        ];
         var buffer = [];
+        var calls = [];
+        var notifications = [];
 
         hookDeathChecker.test.removeQueue = [];
         lib.bufferConsole(
@@ -102,12 +109,18 @@ describe('Hook extensions: deathChecker', function() {
 
         assert.deepEqual(hookDeathChecker.test.removeQueue, expectedDeaths);
 
-        var calls = [];
-        for (var i = 0; i < fn.calls.length; i++) {
-            calls.push(fn.calls[i].args);
+        for (var i = 0; i < fn1.calls.length; i++) {
+            calls.push(fn1.calls[i].args);
         }
+        for (var i = 0; i < fn2.calls.length; i++) {
+            notifications.push(fn2.calls[i].args);
+        }
+
+        assert.strictEqual(fn2.callCount, expectedNotifications.length);
+
         eliminateDuplicates(expectedCalls, calls, fail);
         eliminateDuplicates(expectedBuffer, buffer, fail);
+        eliminateDuplicates(expectedNotifications, notifications, fail);
 
         assert.deepEqual(expectedBuffer, []);
         assert.deepEqual(expectedCalls, []);
