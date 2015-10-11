@@ -60,7 +60,12 @@ var deathChecker = function() {
 
         // Use role default when no value found
         if (mode === undefined) {
-            mode = action[Memory.creeps[i].role];
+            if (typeof action[Memory.creeps[i].role] === "string") {
+                mode = action[Memory.creeps[i].role];
+            } else {
+                Game.notify("Found dead creep " + i + " without role. Deleting...");
+                mode = "ignore";
+            }
         }
 
         if (mode === "ignore") {
