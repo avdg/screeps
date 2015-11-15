@@ -13,15 +13,15 @@
   "dependencies": {
     "grunt": "0.4.x",
     "grunt-cli": "0.1.x",
-    "grunt-blanket": "0.0.8",
-    "grunt-codeclimate-reporter": "1.1.x",
-    "grunt-contrib-clean": "0.6.x",
+    "grunt-blanket": "0.0.10",
+    "grunt-codeclimate-reporter": "1.2.x",
+    "grunt-contrib-clean": "0.7.x",
     "grunt-contrib-copy": "0.8.x",
     "grunt-coveralls": "1.0.x",
     "grunt-mocha-test": "0.12.x",
     "grunt-screeps": "1.1.x",
     "lodash": "3.10.x",
-    "uglify-js": "2.5.x"
+    "uglify-js": "2.6.x"
   },
   "devDependencies": {
     "mocha": "2.3.x",
