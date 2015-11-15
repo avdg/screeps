@@ -93,7 +93,7 @@ module.exports = function(grunt) {
                 src: 'lib-cov/test/**/*.js',
                 options: {
                     reporter: 'mocha-lcov-reporter',
-                    quiet: true,
+                    quiet: false,
                     captureFile: 'coverage/lcov.info'
                 }
             },
