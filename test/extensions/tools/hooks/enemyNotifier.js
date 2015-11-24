@@ -29,6 +29,10 @@ describe("Hook extensions: enemyNotifier", function() {
             {
                 owner: {
                     username: "evil"
+                },
+                pos: {
+                    x: 6,
+                    y: 15
                 }
             }
         ];
@@ -47,7 +51,7 @@ describe("Hook extensions: enemyNotifier", function() {
         });
 
         assert.deepEqual(buffer, [
-            ["Found enemy evil at round 1234 in room test"]
+            ["Round 1234: Found enemy evil in room test, first spotted at 6,15"]
         ]);
 
         assert.equal(fnNotify.callCount, 1);
@@ -174,11 +178,19 @@ describe("Hook extensions: enemyNotifier", function() {
             {
                 owner: {
                     username: "muhahaa"
+                },
+                pos: {
+                    x: 3,
+                    y: 45,
                 }
             },
             {
                 owner: {
                     username: "dr. evil"
+                },
+                pos: {
+                    x: 3,
+                    y: 21
                 }
             }
         ];
@@ -198,8 +210,8 @@ describe("Hook extensions: enemyNotifier", function() {
         });
 
         assert.deepEqual(buffer, [
-            ["Found enemy muhahaa at round 1 in room test"],
-            ["Found enemy dr. evil at round 1 in room test"]
+            ["Round 1: Found enemy muhahaa in room test, first spotted at 3,45"],
+            ["Round 1: Found enemy dr. evil in room test, first spotted at 3,21"]
         ]);
         assert.equal(fnNotify.callCount, 2);
         assert.equal(fn1.callCount, 1);

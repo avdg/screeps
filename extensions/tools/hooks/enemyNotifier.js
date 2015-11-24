@@ -28,7 +28,9 @@ function checkEnemies() {
             continue;
         }
 
-        var message = "Found enemy " + enemies[i].owner.username + " at round " + Game.time + " in room " + room;
+        var message = "Round " + Game.time + ": Found enemy " + enemies[i].owner.username +
+            " in room " + room + ", first spotted at " + enemies[i].pos.x + "," + enemies[i].pos.y;
+
         Game.notify(message);
         console.log(message);
         Memory.permanent.enemies[enemies[i].owner.username] = Game.time;
