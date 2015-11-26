@@ -159,6 +159,6 @@ global.run = () => {console.log(JSON.stringify(Object.keys(AI))); }
 ### Notes
 
 - Current tools don't allow es6 features for deployable code.
-    * UglifyJS2 simply doesn't support es6
+    * UglifyJS2 simply doesn't support es6 just yet
     * Blanket isn't upgraded to a version with es6 support
-    * Note that test cases and live code can be written using the new es6 syntax as they don't depend on these tools
+    * Note that test cases and live code can be written using the new es6 syntax as they aren't processed by these tools
