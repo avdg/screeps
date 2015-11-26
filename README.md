@@ -137,6 +137,9 @@ For example, this code can be typed or pasted in to the console:
 
 ```javascript
 global.run = function() { console.log(JSON.stringify(Object.keys(AI))); }
+
+// Or using the es6 arrow syntax
+global.run = () => {console.log(JSON.stringify(Object.keys(AI))); }
 ```
 
 ### Call hierarchy
@@ -152,3 +155,10 @@ global.run = function() { console.log(JSON.stringify(Object.keys(AI))); }
  |   `- `AI.emit("postController")` Shutdown and triggers postController hook
  `- Stop timer
 ```
+
+### Notes
+
+- Current tools don't allow es6 features for deployable code.
+    * UglifyJS2 simply doesn't support es6
+    * Blanket isn't upgraded to a version with es6 support
+    * Note that test cases and live code can be written using the new es6 syntax as they don't depend on these tools
