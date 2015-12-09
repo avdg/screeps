@@ -40,6 +40,8 @@
         "FIND_CONSTRUCTION_SITES": true,
         "FIND_MY_SPAWNS": true,
         "FIND_HOSTILE_SPAWNS": true,
+        "FIND_MY_CONSTRUCTION_SITES": true,
+        "FIND_HOSTILE_CONSTRUCTION_SITES": true,
 
         "TOP": true,
         "TOP_RIGHT": true,
@@ -57,6 +59,7 @@
         "ERR_BUSY": true,
         "ERR_NOT_FOUND": true,
         "ERR_NOT_ENOUGH_ENERGY": true,
+        "ERR_NOT_ENOUGH_RESOURCES": true,
         "ERR_INVALID_TARGET": true,
         "ERR_FULL": true,
         "ERR_NOT_IN_RANGE": true,
@@ -124,8 +127,8 @@
         "STORAGE_HITS": true,
 
         "BODYPART_COST": true,
-        "CARRY_CAPACITY": true,
 
+        "CARRY_CAPACITY": true,
         "HARVEST_POWER": true,
         "REPAIR_POWER": true,
         "BUILD_POWER": true,
@@ -156,8 +159,44 @@
         "STRUCTURE_CONTROLLER": true,
         "STRUCTURE_LINK": true,
         "STRUCTURE_STORAGE": true,
+        "STRUCTURE_TOWER": true,
+        "STRUCTURE_OBSERVER": true,
+        "STRUCTURE_POWER_BANK": true,
+        "STRUCTURE_POWER_SPAWN": true,
 
+        "CONTROLLER_LEVELS": true,
         "CONTROLLER_STRUCTURES": true,
+        "CONTROLLER_DOWNGRADE": true,
+        "CONTROLLER_RESERVE": true,
+        "CONTROLLER_RESERVE_MAX": true,
+        "CONTROLLER_RESERVE_COST": true,
+        "CONTROLLER_MAX_UPGRADE_PER_TICK": true,
+
+        "TOWER_HITS": true,
+        "TOWER_CAPACITY": true,
+        "TOWER_ENERGY_COST": true,
+        "TOWER_POWER_ATTACK": true,
+        "TOWER_POWER_HEAL": true,
+        "TOWER_POWER_REPAIR": true,
+        "TOWER_OPTIMAL_RANGE": true,
+        "TOWER_FALLOF_RANGE": true,
+        "TOWER_FALLOF": true,
+
+        "OBSERVER_HITS": true,
+        "OBSERVER_RANGE": true,
+
+        "POWER_BANK_HITS": true,
+        "POWER_BANK_CAPACITY_MAX": true,
+        "POWER_BANK_CAPACITY_MIN": true,
+        "POWER_BANK_CAPACITY_CRIT": true,
+        "POWER_BANK_DECAY": true,
+        "POWER_BANK_HIT_BACK": true,
+
+        "POWER_SPAWN_HITS": true,
+        "POWER_SPAWN_ENERGY_CAPACITY": true,
+        "POWER_SPAWN_POWER_CAPACITY": true,
+        "POWER_SPAWN_ENERGY_RATIO": true,
+
         "GCL_POW": true,
         "GCL_MULTIPLY": true,
 
@@ -169,6 +208,12 @@
         "TERRAIN_MASK_WALL": true,
         "TERRAIN_MASK_SWAMP": true,
         "TERRAIN_MASK_LAVA": true,
+
+        "MAX_CONSTRUCTION_SITES": true,
+        "MAX_CREEP_SIZE": true,
+
+        "RESOURCE_ENERGY": true,
+        "RESOURCE_POWER": true,
 
         "BODYPARTS_ALL": true
     },
