@@ -33,6 +33,7 @@
         "FIND_SOURCES_ACTIVE": true,
         "FIND_SOURCES": true,
         "FIND_DROPPED_ENERGY": true,
+        "FIND_DROPPED_RESOURCES": true,
         "FIND_STRUCTURES": true,
         "FIND_MY_STRUCTURES": true,
         "FIND_HOSTILE_STRUCTURES": true,
