@@ -5,19 +5,27 @@ var simple = require('simple-mock');
 
 var routineDeadCheck = require('../../../../extensions/tools/routines/deadCheck');
 
+function reset() {
+    require('../../../../lib/mocks/gameStateStart')();
+}
+
 describe('Routine extensions: deadCheck', function() {
-    it('Should call dropEnergy when a creep has 1 tick to live', function() {
+    beforeEach(reset);
+
+    it('Should drop when a creep has 1 tick to live', function() {
         var creep = {
             ticksToLive: 1,
-            dropEnergy: function() {},
+            drop: function() {},
             say: function() {}
         };
 
-        var fn1 = simple.mock(creep, 'dropEnergy');
+        var fn1 = simple.mock(creep, 'drop');
         var fn2 = simple.mock(creep, 'say');
 
         assert.equal(routineDeadCheck.routine(creep), true);
-        assert.equal(fn1.callCount, 1);
+        assert.equal(fn1.callCount, 2);
+        assert.equal(fn1.calls[0].args[0], RESOURCE_ENERGY);
+        assert.equal(fn1.calls[1].args[0], RESOURCE_POWER);
         assert.equal(fn2.callCount, 0);
     });
 
