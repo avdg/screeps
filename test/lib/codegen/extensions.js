@@ -328,7 +328,7 @@ describe('CodeGen: extensions', function() {
             };
         };
 
-        for (var i in tests) {
+        for (var i = 0; i < tests.length; i++) {
             runQuoteTest(tests[i])();
         }
     });

@@ -18,7 +18,7 @@ describe('Library extensions: priorityStack', function() {
             };
         };
 
-        for (var i in tests) {
+        for (var i = 0; i < tests.length; i++) {
             it("Should return " + tests[i][2] + " with input " + tests[i][0] + " to find the position for " + tests[i][2], runBinarySearchTest(tests[i]));
         }
 
@@ -36,7 +36,7 @@ describe('Library extensions: priorityStack', function() {
                 [[9, 7, 3], 7, 2]
             ];
 
-            for (var i in tests) {
+            for (var i = 0; i < tests.length; i++) {
                 assert.equal(lib.binarySearch(tests[i][0], tests[i][1], f), tests[i][2]);
             }
         });

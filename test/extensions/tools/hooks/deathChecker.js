@@ -85,7 +85,7 @@ function eliminateDuplicates(a, b, e) {
             return compare(i, e);
         };
     };
-    for (var i in b) {
+    for (var i = 0; i < b.length; i++) {
         var j = a.findIndex(filter(b[i]));
 
         if (j > -1) {
