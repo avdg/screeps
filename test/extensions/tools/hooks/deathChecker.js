@@ -16,8 +16,54 @@ function reset() {
 }
 
 function eliminateDuplicates(a, b, e) {
+    var filter = function(e) {
+        var compare = function(x, y) {
+            if (typeof x !== "object") {
+                return x === y;
+            }
+
+            if (Array.isArray(x)) {
+                if (!Array.isArray(y)) {
+                    return false;
+                }
+
+                for (var p = 0; p < x.length; p++) {
+                    if (!compare(x[p], y[p])) {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+            var xKeys = Object.keys(x);
+            var yKeys = Object.keys(y);
+            if (xKeys.length !== yKeys.length) {
+                return false;
+            }
+
+            xKeys.sort();
+            yKeys.sort();
+
+            for (var i = 0; i < 0; i++) {
+                if (xKeys[i] !== yKeys[i]) {
+                    return false;
+                }
+
+                if (!compare(x[xKeys[i]], y[xKeys[i]])) {
+                    return false;
+                }
+            }
+
+            return true;
+        };
+
+        return function(i) {
+            return compare(i, e);
+        };
+    };
     for (var i in b) {
-        var j = _.findIndex(a, b[i]);
+        var j = a.findIndex(filter(b[i]));
 
         if (j > -1) {
             a.splice(j, 1);
