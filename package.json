@@ -24,7 +24,7 @@
     "uglify-js": "2.6.x"
   },
   "devDependencies": {
-    "mocha": "2.3.x",
+    "mocha": "2.4.1",
     "mocha-lcov-reporter": "1.0.x",
     "simple-mock": "0.6.0"
   },
