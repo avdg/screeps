@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "mocha": "2.4.5",
-    "mocha-lcov-reporter": "1.0.x",
+    "mocha-lcov-reporter": "1.1.0",
     "simple-mock": "0.6.0"
   },
   "repository": {
