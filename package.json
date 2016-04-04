@@ -20,7 +20,7 @@
     "grunt-coveralls": "1.0.x",
     "grunt-mocha-test": "0.12.x",
     "grunt-screeps": "1.2.x",
-    "lodash": "4.7.0",
+    "lodash": "4.8.1",
     "uglify-js": "2.6.x"
   },
   "devDependencies": {
