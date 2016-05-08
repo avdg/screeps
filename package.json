@@ -11,7 +11,7 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "grunt": "0.4.x",
+    "grunt": "1.0.0",
     "grunt-cli": "1.2.0",
     "grunt-blanket": "0.0.9",
     "grunt-codeclimate-reporter": "1.2.x",
